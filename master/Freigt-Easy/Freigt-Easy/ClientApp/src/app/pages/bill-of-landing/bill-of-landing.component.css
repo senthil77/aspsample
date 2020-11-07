@@ -1,0 +1,69 @@
+body {
+    background-color: #e9ebee;
+}
+
+.card {
+    margin-top: 1em;
+}
+
+/* IMG displaying */
+.person-card {
+    margin-top: 5em;
+    padding-top: 5em;
+}
+.person-card .card-title{
+    text-align: center;
+}
+.person-card .person-img{
+    width: 10em;
+    position: absolute;
+    top: -5em;
+    left: 50%;
+    margin-left: -5em;
+    border-radius: 100%;
+    overflow: hidden;
+    background-color: white;
+}
+
+.header {
+    background-color: rgb(6, 90, 146);
+    
+    color: white;
+  }
+.header label{
+
+        
+    color: white;
+}
+
+
+
+.form-group {
+    margin-top: 20px;
+    font-size: smaller;
+}
+
+.first {
+    margin-top: 0 !important
+}
+
+.form-control {
+    border-radius: 0
+}
+
+
+
+ 
+
+.form-group span {
+    color: rgb(255, 0, 0)
+}
+
+.form-control:focus {
+    border: 1.5px solid #adb5bd;
+    border-radius: 0;
+    box-shadow: none;
+    background: #ff000012;
+    letter-spacing: 1px;
+    color: #000
+} 

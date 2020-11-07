@@ -1,0 +1,305 @@
+
+     <div id="detail-content-sticky-nav-05" class="container-fluid" *ngIf="data.length>0"> 
+ 
+
+      <h4 class="heading-title"></h4>
+
+  
+    
+
+
+    
+      
+     
+      <div class="mb-20"></div>
+      
+      <div class="item-text-long-wrapper">
+         
+    
+          <div class="item-heading text-muted">
+          
+            <div class="row d-none d-sm-flex brand-color text-white ml-1 mr-1">
+              
+                  <div class="col-12 col-sm-12 col-md-3">
+                    
+                      <div class="row align-items-center ">
+                          
+                          <div class="col-md-3 col-sm-3">
+                              <span class="font-sm"> <strong>S.No </strong></span>
+                            </div>
+                          <div class="col-9 col-sm-9">
+                      
+                            <span class="font-sm"> <strong>Vessel Name </strong></span>
+                          </div>
+                         
+                      </div>
+                  </div>
+             
+    
+                  <div class="col-12 col-sm-12 col-md-9">
+                      <div class="row align-items-center">
+                  <div class="col-12 col-sm-7">
+                  
+                     
+                      
+                          <div class="row">
+                          
+                              <div class="col-5">
+                                  
+                                  <span class="font-sm"> <strong>From</strong></span>
+                              </div>
+                              
+                              <div class="col-2">
+                                   
+                                <span class="font-sm"> <strong>Transits</strong></span>
+                              </div>
+                              
+                              <div class="col-5 text-sm-center">
+                                      
+                                <span class="font-sm"> <strong>To</strong></span>
+                              </div>
+                              
+                          </div>
+                      
+                    
+                  
+                  </div>
+                  
+                  <div class="col-12 col-sm-3">
+                  
+                      <div class="col-inner">
+                      
+                          <div class="row gap-10">
+                          
+                              <div class="col-6 text-sm-center">
+                                <span class="font-sm"> <strong>  Local Charges</strong></span>
+                                
+                              </div>
+                              
+                              <div class="col-6 text-left">
+                            
+                                  <span class="font-sm"> <strong>  Fright Charges</strong></span>
+                              </div>
+                              
+                          </div>
+                          
+                      </div>
+                      
+                  </div>
+                  </div>
+                  </div>
+                  
+                  
+              </div>
+          
+          </div>
+           
+        <div *ngFor="let item of data;let index = index;">
+          <div class="item-text-long">
+             
+              <div class="row align-items-center">
+                  <div class="col-12 col-sm-12 col-md-3 text-center">
+                      <div class="row align-items-center ">
+                          <div class="col-md-3 col-sm-3">
+                         
+                              <span class="badge">{{index +1 }}</span>
+                            </div>
+                          <div class="col-9 col-sm-9 text-center brand-fore-color"><h5> <strong>{{item.vesselSchedule.vesselName}}</strong></h5>
+                            <p class="list-group-item-text"> {{item.vesselSchedule.voyageNo}}</p>
+                          </div>
+                         
+                      </div>
+                  </div>
+                  <div class="col-12 col-md-9">
+                      <div class="row align-items-center">
+                          <div class="col-12 col-sm-7">
+                  
+                              <div class="col-inner mb-10 mb-sm-0">
+                              
+                                  <div class="row gap-10 align-items-center">
+                                  
+                                      <div class="col-4">
+                                       <strong class="d-block brand-fore-color">  <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}</strong> 
+                                        <strong class="d-block"> {{item.originPort.portDescription}}</strong>
+                                        <span class="font-sm brand-sec-fore-color"><strong>{{item.originPort.portCode}}</strong> </span>
+
+             
+                                      </div>
+                                      
+                                      <div class="col-4 text-sm-center">
+
+                                       
+
+
+                                          <span class="day-count mt-3">{{utils.calculateDiff(item.endDate,item.startDate)}} <br>days</span>
+                                         <hr>
+                                         <span class="font-sm">  {{getTransits(item).tranMessage}}<br>
+                                          {{getTransits(item).tranPorts}}</span>
+                                      </div>
+                                      
+                                      <div class="col-4">
+
+                                        <strong class="d-block brand-fore-color">  <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</strong>
+                                        <strong class="d-block">{{item.destinationPort.portDescription}}</strong>
+                                        <span class="font-sm brand-sec-fore-color"><strong>{{item.destinationPort.portCode}}</strong></span>
+
+
+                                                                        </div>
+                                      
+                                  </div>
+                              
+                              </div>
+                          
+                          </div>
+                          
+                          <div class="col-8 col-sm-3">
+                          
+                              <div class="col-inner">
+                              
+                                  <div class="row gap-10 align-items-center">
+                                  
+                                      <div class="col-6 text-left text-sm-center">
+                                          <span class="font-sm">Local charges </span>
+                                          <span class="font-sm d-block text-danger"><strong>{{item.charges.originCharges |currency: item.charges.originCurrency.currencyCode}}</strong></span>
+                                      </div>
+                                  
+                                      <div class="col-6 text-left  text-sm-left">
+                                          <span class="font-sm d-block text-danger"><strong>{{item.chargeAmount*searchvalues.qty |currency: item.currency.currencyCode}}</strong></span>
+                                          <span class="font-micro">{{item.chargedAt.name}}</span>
+                                      </div>
+                                      
+                                  </div>
+                                  
+                              </div>
+                              
+                          </div>
+                          
+                          <div class="col-3 col-sm-2 flex-nowrap align-items-right">
+                            
+                            <button   class="btn btn-solid btn-sm mt-0 btn-secondary font-sm" (click) = "showVesselSchedule($event)" data-toggle="collapse" attr.data-target="#demo{{item.id}}">Details<i class="fa fa-ellipsis-v"></i></button><br>
+                            <button  class="btn btn-solid btn-sm mt-0 btn-secondary font-sm"  (click) = "viewFares(item)">Fares<i class="fa fa-arrow-right"></i></button>
+                             
+                                
+                           
+
+                            </div>
+
+                              
+                              
+ 
+                          </div>
+
+                          
+                      </div>
+                  </div>
+                
+                  
+              </div>
+ 
+        
+          <div class="card-body p-0">
+    
+            <!-- <article class="card">
+                <div class="card-body row">
+                    <div class="col-md-2 origin"> <strong>{{item.startDate |date:'mediumDate'}}</strong><br>{{item.originPort.longDescription}}<br>{{item.originPort.portCode}}  </div>
+                    <div class="col"> <strong>{{calculateDiff(item.endDate,item.startDate)}}</strong> <br> <div class="line">
+                      <hr>
+                  </div> day(s) </div>
+                    <div class="col-md-2 origin"> <strong>{{item.endDate |date:'mediumDate'}}</strong> <br> {{item.destinationPort.longDescription}}<br>{{item.destinationPort.portCode}} </div>
+                    <div class="col"> <strong>Starting from:</strong> <br>{{item.partner.originPortCharges.currency.currencyCode}} <br> {{item.partner.originPortCharges.payableSum}} 
+                      <br>{{item.partner.destinationPortCharge.currency.currencyCode}} <br> {{item.partner.destinationPortCharge.receivableSum}}
+                  </div>
+                    <div class="col"> <strong>Frieght</strong> <br>{{item.currency.currencyCode}}<br><strong> {{item.chargeAmount}}</strong> </div>
+                   
+                </div>
+        
+            </article>
+          
+ 
+  
+            <div class="d-flex flex-row justify-content-between">
+               
+             
+                <button class="bnt btn-sm btn-primary"  (click) = "showVesselSchedule($event)" data-toggle="collapse" attr.data-target="#demo{{item.id}}"><i class="fa fa-plus"></i> View Details </button>
+               
+                <button class="bnt btn-sm btn-success pull-right " (click) = "viewFares(item)"> <i class="fa fa-check"></i>  View Fares </button>
+                  
+              
+            </div> -->
+           
+            
+            <div id="demo{{item.id}}" class="collapse">
+           
+              <div class="track">
+  
+              
+                <div class="{{item.vesselSchedule.originPort.portCode == item.originPort.portCode? 'step active': 'step'}}"> <span class="icon"> <i class="fa fa-ship"></i> </span> <span class="text">{{item.vesselSchedule.originPort.portCode}}</span> </div>
+              
+                 <div   *ngFor="let detail of item.vesselSchedule.details | sortBy:'asc':'expDeparture'" class="{{detail.transitPort.portCode ==item.originPort.portCode || detail.transitPort.portCode ==item.destinationPort.portCode ? 'step active': 'step'}}" ><span class="icon"> <i class="fa fa-ship"></i> </span> <span class="text"> {{detail.transitPort.portCode}}</span> </div>
+                
+                
+                <div class="{{item.vesselSchedule.destinationPort.portCode ==item.destinationPort.portCode? 'step active': 'step'}}"> <span class="icon"> <i class="fa fa-ship"></i> </span> <span class="text">{{item.vesselSchedule.destinationPort.portCode}}</span> </div>
+            </div>
+
+           
+            
+            <ul class="row">
+              <li class="col-md-4">
+                <figure class="itemside mb-3">
+                   
+                    <figcaption class="info align-self-center">
+                        <p class="title">Origin city : {{item.vesselSchedule.originPort.cityDescription}} <br>Origin Port :{{item.vesselSchedule.originPort.portDescription}}
+                        <br>Origin Country : {{item.vesselSchedule.originPort.countryDescription}}</p>
+                        <span class="text-muted">Arrival Date : {{item.vesselSchedule.estArrOriDate |date:'mediumDate'}} <br>
+                         Berth Date:{{item.vesselSchedule.estBerthDate |date:'mediumDate'}}<br>
+                         CutOff Date :{{item.vesselSchedule.estCutOffDate |date:'mediumDate'}}</span>
+                        <p class="title">Departure Date:{{item.vesselSchedule.estDepDate |date:'mediumDate'}}</p>
+  
+                    </figcaption>
+                </figure>
+            </li>
+          
+                <li class="col-md-4" *ngFor="let detail of item.vesselSchedule.details | sortBy:'asc':'expDeparture'">
+                    <figure class="itemside mb-3" >
+                        <figcaption class="info align-self-center">
+                            <p class="title">Transit City : {{detail.transitPort.cityDescription}}<br> Transit Port : {{detail.transitPort.portDescription}}
+                            <br>Transit Country : {{detail.transitPort.countryDescription}}
+                            </p> <span class="text-muted">Arrival Date: {{detail.expArrival |date:'mediumDate'}} </span>
+                            <p class="title">Departure Date:{{detail.expDeparture |date:'mediumDate'}}</p>
+                        </figcaption>
+                    </figure>
+                </li>
+               
+                <li class="col-md-4">
+                    <figure class="itemside mb-3">
+   
+                        <figcaption class="info align-self-center">
+                          <p class="title">Destination city : {{item.vesselSchedule.destinationPort.cityDescription}} <br>
+                            Destination Port : {{item.vesselSchedule.destinationPort.portDescription}}<br>
+                            Destination Country : {{item.vesselSchedule.destinationPort.countryDescription}}</p>
+                       
+                            <p class="title">Arrival Date:{{item.vesselSchedule.estArrDestDate  |date:'mediumDate'}}</p>
+                        </figcaption>
+                    </figure>
+                </li>
+              
+            </ul>
+
+             
+
+            </div>
+          
+        </div>
+      
+      </div>
+    </div>
+      <div class="mb-50"></div>
+      
+    </div>
+    
+     
+  
+
+
+          
+ 

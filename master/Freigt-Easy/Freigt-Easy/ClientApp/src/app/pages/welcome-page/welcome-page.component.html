@@ -1,0 +1,26 @@
+<div class="container pt-5  bg-white">
+
+    <div *ngIf="signUp==true; else templateName">
+ 
+        <h5>Welcome</h5> <h3><span>{{userData.firstName}} {{userData.lastName}}</span></h3>
+        <p>An Email has been sent to your {{userData.email}} </p> 
+        <p>you can Activate your account by clicking the link that is Provided in your email and fill the Company Details</p>
+        <p>Mean while you can see a demo how this system works for you?</p>
+    </div>
+
+    <ng-template #templateName >                  
+        <div>
+          
+            <h5>Welcome</h5> <h3><span>  
+                {{userData.contact1}}
+                </span></h3>
+                <p>Your Company: <strong>{{userData.partnerName}} </strong>   is asscociate now with your email ID : {{userData.email1}} </p>
+                 <p> Wait till our customer support allows you in</p><br>
+                    <h2>Easy Freighting!!</h2>
+             
+              
+              
+          
+        </div>
+    </ng-template>
+</div>

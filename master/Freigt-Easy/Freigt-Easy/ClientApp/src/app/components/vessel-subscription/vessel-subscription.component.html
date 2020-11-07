@@ -1,0 +1,189 @@
+ 
+ 
+      
+
+                <div class="container-fluid pt-3 phone">
+                    <div class="phone__screen">
+                      <div class="phone__scroll-cont">
+                         
+                          <section *ngFor="let card of data |  sortBy:'asc':'id'; let index = index;;" 
+                                   class="card theme transparent"
+                                   >
+                            
+                            <section class="card__part card__part-1">
+                              <div class="card__part__inner">
+                                <header class="card__header">
+                                  <div class="card__header__close-btn"></div>
+                                  <span class="card__header__id"># {{card.schedule.vesselName}}</span>
+                                  <span class="card__header__price">${{card.schedule.vesselRoute}}</span>
+                                </header>
+                                <div class="card__stats">
+                                  <div class="card__stats__item card__stats__item--req">
+                                    <p class="card__stats__type">Requests</p>
+                                    <span class="card__stats__value">{{card.requests}}</span>
+                                  </div>
+                                  <div class="card__stats__item card__stats__item--pledge">
+                                    <p class="card__stats__type">Pledge</p>
+                                    <span class="card__stats__value">${{card.pledge}}</span>
+                                  </div>
+                                  <div class="card__stats__item card__stats__item--weight">
+                                    <p class="card__stats__type">Weight</p>
+                                    <span class="card__stats__value">{{card.weight}} oz</span>
+                                  </div>
+                                  <div class="card__stats__item card__stats__item--weight">
+                                    <p class="card__stats__type">Weight</p>
+                                    <span class="card__stats__value">{{card.weight}} oz</span>
+                                  </div>
+                
+                                  
+                                </div>
+                              </div>
+                            </section>
+                            <section class="card__part card__part-2">
+                     
+                              <div class="card__part__side m--back">               
+                                   
+                  <div class="row pb-0 mt-3 ml-1 text-header">
+                    <div class="col-md-1 text-center">
+                        <h4>    {{index +1 }}</h4>
+                      </div>
+                    <div class="col-md-2 text-center">
+                        <h5 class="list-group-item-heading"> {{card.schedule.vesselName}}</h5>
+                        <p class="list-group-item-text"> {{card.schedule.voyageNo}}</p>
+                      </div> 
+                      <div class="col text-center">  
+                        <h6> <i class="fa fa-calendar"></i> {{card.startDate |date:'mediumDate'}}</h6>
+                 
+                        <p class="list-group-item-text"> {{card.originPort.portDescription}}</p>
+                        <p> <span class="summaryTitle">{{card.originPort.portCode}}</span></p>
+              
+                 
+                      </div>
+                      <div class="col text-center">
+                        <h6>{{calculateDiff(card.startDate,card.endDate )}}</h6>
+                        <svg height="5" width="125">
+                          <line x1="0" y1="0" x2="120" y2="0" style="stroke:#6190b0;stroke-width:4" />
+                        </svg>
+                       
+                        <p class="list-group-item-text">
+                          <small> <i>days</i>
+                  
+                              <!-- {{ this.transitsLong.length > 0 ? this.transitsLong.toString() : "No Transits"}} -->
+                             </small>
+                        </p>
+                      </div>
+                      <div class="col text-center">  
+                          <h6> <i class="fa fa-calendar"></i> {{card.endDate |date:'mediumDate'}}</h6>
+                   
+                          <p class="list-group-item-text"> {{card.destinationPort.portDescription}}</p>
+                          <p> <span class="summaryTitle">{{card.destinationPort.portCode}}</span></p>
+                
+                   
+                        </div>
+
+                      
+                     
+                 
+                          <div class="col-md-4 xs-12 text-center">
+                            <h6> Subscribe for Packages</h6>
+                     
+                          </div>
+                   
+                    
+                  </div>
+                 
+                           
+                                 
+                
+                
+                         
+                              </div>
+                              <div class="card__part__side m--front">
+                                <div class="card__sender">
+                                  <h4 class="card__sender__heading">Sender</h4>
+                                  <div class="card__sender__img-cont">
+                                    <div class="card__sender__img-cont__inner">
+                                      <img ng-src="{{card.senderImg}}" class="card__sender__img" />
+                                    </div>
+                                  </div>
+                                  <div class="card__sender__name-and-rating">
+                                    <p class="card__sender__name">{{card.sender}}</p>
+                                    <p class="card__sender__rating card__sender__rating-{{card.rating}}">
+                                      <span class="card__sender__rating__star">&#9733;</span>
+                                      <span class="card__sender__rating__star">&#9733;</span>
+                                      <span class="card__sender__rating__star">&#9733;</span>
+                                      <span class="card__sender__rating__star">&#9733;</span>
+                                      <span class="card__sender__rating__star">&#9733;</span>
+                                      <span class="card__sender__rating__count">({{card.ratingCount}})</span>
+                                    </p>
+                                    <p class="card__sender__address">
+                                      {{card.fromStreet}}, {{card.fromCity}}
+                                    </p>
+                                  </div>
+                                  <div class="card__receiver">
+                                    <div class="card__receiver__inner">
+                                      <div class="card__sender__img-cont">
+                                        <div class="card__sender__img-cont__inner">
+                                          <img ng-src="{{card.senderImg}}" class="card__sender__img" />
+                                        </div>
+                                      </div>
+                                      <div class="card__sender__name-and-rating">
+                                        <p class="card__sender__name">{{card.sender}}</p>
+                                        <p class="card__sender__address">
+                                          {{card.toStreet}}, {{card.toCity}}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="card__path-big"></div>
+                                </div>
+                                <div class="card__from-to text-left">
+                                  <div class="card__from-to__inner">
+                                    <div class="card__text card__text--left">
+                                      <p class="card__text__heading">From</p>
+                                      <p class="card__text__middle">{{card.fromStreet}}</p>
+                                      <p class="card__text__bottom">{{card.fromCity}}</p>
+                                    </div>
+                                    <div class="card__text card__text--right">
+                                      <p class="card__text__heading">To</p>
+                                      <p class="card__text__middle">{{card.toStreet}}</p>
+                                      <p class="card__text__bottom">{{card.toCity}}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <section class="card__part card__part-3">
+                                  <div class="card__part__side m--back"></div>
+                                  <div class="card__part__side m--front">
+                                    <div class="card__timings text-left">
+                                      <div class="card__timings__inner">
+                                        <div class="card__text card__text--left">
+                                          <p class="card__text__heading">Delivery Date</p>
+                                          <p class="card__text__middle">{{card.delivTime}}</p>
+                                          <p class="card__text__bottom">{{card.delivTime}}</p>
+                                        </div>
+                                        <div class="card__text card__text--right">
+                                          <p class="card__text__heading">Request Deadline</p>
+                                          <p class="card__text__middle">{{card.reqDl}}</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="card__timer">60 min 00 sec</div>
+                                    <section class="card__part card__part-4">
+                                      <div class="card__part__side m--back"></div>
+                                      <div class="card__part__side m--front">
+                                        <button type="button" class="card__request-btn">
+                                          <span class="card__request-btn__text-1">Request</span>
+                                          <span class="card__request-btn__text-2">Start</span>
+                                        </button>
+                                 
+                                      </div>
+                                    </section>
+                                  </div>
+                                </section>
+                              </div>
+                            </section>
+                          </section>
+                   
+                      </div>
+                    </div>
+                  </div>

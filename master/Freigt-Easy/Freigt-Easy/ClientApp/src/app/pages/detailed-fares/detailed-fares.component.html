@@ -1,0 +1,252 @@
+<div class="container mt-5 mb-5 pr-6 bg-white">
+ <hr>
+    <div class="row g-0">
+
+       
+        <div class="col-md-8 p-3">
+          <div class="row border border-default">
+	
+            <div class="bg-secondary text-center p-2 col-md-12">
+              <p class=" text-white">Fare(s) Details</p>
+            </div>
+  
+     
+            
+            <div class="brand-color text-white p-2 mb-3 col-6 text-center d-block d-sm-none small">
+              <p class=" text-white">Payable AT</p>
+            </div>
+            
+            <div class="brand-color text-white p-2 mb-3 col-3 text-center d-block d-sm-none small">
+              <p class=" text-white">Origin</p>
+            </div>
+            
+            <div class="brand-color text-white p-2 mb-3 col-3 text-center d-block d-sm-none small">
+              <p class=" text-white">Destination</p>
+            </div>
+          
+          
+           
+            <div class="py-2 col-3 text-center d-block d-sm-none small">
+              <p>Pol</p>
+            </div>
+            <div class="py-2 odd col-3 text-center">
+              <p>{{itemData.originPort.cityDescription}} </p>
+            </div>
+            <div class="py-2 odd col-3 text-center">
+              <p>Pod</p>
+            </div>
+            <div class="py-2 odd col-3 text-center">
+              <p>{{itemData.destinationPort.cityDescription}}</p>
+            </div>
+          
+
+            
+            <div class="py-2 col-3 text-center d-block d-sm-none small">
+              <p>No of Containers</p>
+            </div>
+            <div class="py-2 odd col-3 text-center">
+              <p>{{searchParams.qty}}</p>
+            </div>
+            <div class="py-2 odd col-3 text-center">
+              <p>Size</p>
+            </div>
+            <div class="py-2 odd col-3 text-center">
+              <p>{{itemData.package.packageName}}</p>
+            </div>
+            
+            <div class="py-2 col-3 text-center d-block d-sm-none small">
+              <p>Exchange Rate -{{itemData.charges.originCurrency.currencyCode}}</p>
+            </div>
+            <div class="py-2 odd col-3 text-center">
+              <p  class="text-danger">{{oriFxVal|currency:itemData.charges.originCurrency.currencyCode}} </p>
+            </div>
+           
+            <div class="py-2 col-3 text-center d-block d-sm-none small">
+              <p>Exchange Rate -{{itemData.charges.destinationCurrency.currencyCode}}</p>
+            </div>
+            <div class="py-2  col-3 text-center">
+              <p  class="text-danger">{{destFxVal |currency: itemData.charges.destinationCurrency.currencyCode}}</p>
+            </div>
+          </div>
+          
+          <div class="row border border-default">
+           
+            <div class="py-2 bg-secondary  text-white col-6 text-center d-block d-sm-none">
+              <p class=" text-white">{{itemData.originPort.cityDescription}} Charges</p>
+            </div>
+            <div class="py-2  bg-secondary  text-white col-3 text-center">
+              <p class=" text-white">{{itemData.charges.originCurrency.currencyCode}} </p>
+            </div>
+            <div class="py-2 bg-secondary  text-white even col-3 text-center">
+              <p class=" text-white">USD</p>
+            </div>                          
+        
+          
+          
+            </div>
+
+
+            <div class="row border border-default" *ngFor="let charge of originSummary">
+              
+              <div class="py-2 col-6 text-left d-block d-sm-none">
+                <p class=" text-black">{{charge.chargeDetail.name}}</p>
+              </div>
+              <div class="py-2 odd col-3 text-center">
+                <div *ngIf="charge.chargeDetail.name == blFee ;else templateName"> 
+                  <span class="font-sm d-block text-danger"><strong>{{charge.chargeAmount* searchParams.blCount |currency : itemData.charges.originCurrency.currencyCode}} </strong></span>
+                </div>
+                <ng-template #templateName>    
+                  <span class="font-sm d-block text-danger"><strong>{{charge.chargeAmount* searchParams.qty |currency : itemData.charges.originCurrency.currencyCode}} </strong></span>
+                </ng-template>
+             
+              </div>
+              <div class="py-2 even col-3 text-center">
+                <div *ngIf="charge.chargeDetail.name == blFee ;else templateNameTotal"> 
+                <span class="font-sm d-block text-danger"><strong>{{(charge.chargeAmount* searchParams.blCount)/oriFxVal |currency}}</strong></span>
+                </div>
+                <ng-template #templateNameTotal>    
+                  <span class="font-sm d-block text-danger"><strong>{{(charge.chargeAmount* searchParams.qty)/oriFxVal |currency}}</strong></span>
+                </ng-template>
+
+              </div>
+            
+            
+             
+          
+            
+            
+            </div>
+
+            <div class="row border border-default">
+              
+              <div class="py-2 brand-color  text-white col-6 text-center d-block d-sm-none">
+                <p class=" text-white">Total</p>
+              </div>
+              <div class="py-2 brand-color  text-white col-3 text-center">
+                <span class="font-sm text-white"><strong>{{itemData.charges.originCharges | currency : itemData.charges.originCurrency.currencyCode}}</strong> </span>
+              </div>
+              <div class="py-2 brand-color  text-white col-3 text-center">
+                <span class="font-sm text-white"><strong>{{itemData.charges.originCharges/oriFxVal|  currency}}</strong></span>
+
+              </div>
+            
+            </div>
+                 
+         
+
+            <div class="row border border-default">
+             
+              <div class="py-2 bg-secondary  text-white col-6 text-center d-block d-sm-none">
+                <p class=" text-white">{{itemData.destinationPort.cityDescription}} Charges</p>
+              </div>
+              <div class="py-2  bg-secondary  text-white col-3 text-center">
+                <p class=" text-white">{{itemData.charges.destinationCurrency.currencyCode}} </p>
+              </div>
+              <div class="py-2 bg-secondary  text-white even col-3 text-center">
+                <p class=" text-white">USD</p>
+              </div>                          
+          
+            
+            
+              </div>
+            <div class="row border border-default" *ngFor="let charge of destinationSummary">
+              
+              <div class="py-2 col-6 text-left d-block d-sm-none">
+                <p class=" text-black">{{charge.chargeDetail.name}}</p>
+              </div>
+
+              <div class="py-2 odd col-3 text-center">
+                <div *ngIf="charge.chargeDetail.name == blFee ;else templateName"> 
+                  <span class="font-sm d-block text-danger"><strong>{{charge.chargeAmount* searchParams.blCount |currency : itemData.charges.destinationCurrency.currencyCode}} </strong></span>
+                </div>
+                <ng-template #templateName>    
+                  <span class="font-sm d-block text-danger"><strong>{{charge.chargeAmount* searchParams.qty |currency : itemData.charges.destinationCurrency.currencyCode}} </strong></span>
+                </ng-template>
+             
+              </div>
+
+
+              <!-- <div class="py-2 odd col-3 text-center">
+                <p class="text-danger">{{charge.chargeAmount*searchParams.qty |currency : itemData.charges.destinationCurrency.currencyCode}} </p>
+              </div> -->
+              <div class="py-2 even col-3 text-center">
+                <span class="font-sm d-block text-danger"><strong>{{(charge.chargeAmount* searchParams.qty )/destFxVal |  currency}} </strong></span>
+              </div>
+            
+            
+             
+          
+            
+            
+            </div>
+
+            <div class="row border border-default">
+           
+              <div class="py-2 brand-color  text-white col-6 text-center d-block d-sm-none">
+                <p class=" text-white">Total</p>
+              </div>
+              <div class="py-2 brand-color  text-white col-3 text-center">
+                <span class="font-sm text-white"><strong>{{itemData.charges.destinationCharges |currency : itemData.charges.destinationCurrency.currencyCode}} </strong></span>
+              </div>
+              <div class="py-2 brand-color  text-white col-3 text-center">
+                <span class="font-sm text-white"><strong>{{itemData.charges.destinationCharges/destFxVal |  currency }} </strong></span>
+              </div>
+            
+            </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card pt-3">
+            <div class="bg-white">
+                 <span class="mt-5 summary">Summary</span>
+            </div>
+      
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Pol</span> <span class="summaryTitle">{{itemData.originPort.cityDescription}} ({{itemData.originPort.cityCode}})</span> </div>
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Pod</span> <span class="summaryTitle">{{itemData.destinationPort.cityDescription}} ({{itemData.destinationPort.cityCode}})</span> </div>
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Sailing Date</span> <span class="summaryTitle">{{itemData.startDate  |date:'mediumDate'}}</span> </div>
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Vessel Name</span> <span class="summaryTitle">{{ itemData.vesselSchedule.vesselName}}</span> </div>
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">ETA</span> <span class="summaryTitle">{{itemData.endDate  |date:'mediumDate'}}</span> </div>
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Transit</span> <span class="summaryTitle">{{transi.tranMessage}}</span> <br> <span class="summaryTitle"> <i> {{transi.tranPorts}}</i></span></div> 
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Frieght</span> <span class="summaryTitle">{{itemData.chargeAmount *searchParams.qty  |currency: 'USD'}}</span> </div> 
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Local Charges</span> <span class="summaryTitle">
+          {{itemData.charges.originCharges |currency :itemData.charges.originCurrency.currencyCode }}</span>
+          <span class="summaryTitle">
+            {{itemData.charges.originCharges /oriFxVal |currency }}
+          </span> 
+        </div> 
+          
+
+        
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Destination Charges</span> <span class="summaryTitle">
+          {{itemData.charges.destinationCharges |currency :itemData.charges.destinationCurrency.currencyCode }}</span>
+          <span class="summaryTitle">
+          {{itemData.charges.destinationCharges/destFxVal |currency }}</span>
+
+          
+        </div> 
+           
+                
+        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Total Charges</span>
+          <span class="summaryTitle">
+            {{((itemData.chargeAmount *searchParams.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}
+          </span>
+        </div>
+ 
+    </div>
+     </div>
+
+     <div class="row g-0">
+      <div class="col-md-4">
+        
+      </div>
+      <div class="col-md-4">
+       
+      </div>
+      <div class="col-md-4">
+        <button class="bnt btn-sm btn-success pull-right" (click)="gotoNext();"> <i class="fa fa-check"></i>  Continue & Book Now</button>
+          
+      </div>
+      </div>
+
+</div>
+
+ 

@@ -1,0 +1,247 @@
+ <div class="container-fluid">
+ 
+      <div *ngFor="let item of data;let index = index;">
+  
+    
+ 
+     
+        <div class="list-group-item p-0 clearfix shadow">
+          <div class="row pb-0">
+            
+              <div class="col-md-1 text-center">
+                <h1>{{index +1 }}</h1>
+              </div>
+            <div class="col-md-2 text-center">
+              <h5 class="list-group-item-heading"> {{item.schedule.vesselName}}</h5>
+ 
+            </div>
+
+
+            <div class="col text-center ">
+              <h6> <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}</h6>
+              <!-- <div class="item-time-date">
+                <time class="date" datetime="{{item.startDate |date:'mediumDate'}}">{{item.startDate |date:'mediumDate'}}</time>              
+              </div> -->
+              <p> <span class="summaryTitle">{{item.originPort.portCode}}</span></p>
+              <p class="list-group-item-text"> {{item.originPort.portDescription}}</p>
+            
+            </div>
+            <div class="col text-center">
+              <h6>{{calculateDiff(item.startDate,item.endDate)}} <i>days</i></h6>
+              <svg height="5" width="125">
+                <line x1="0" y1="0" x2="120" y2="0" style="stroke:#6190b0;stroke-width:4" />
+              </svg>
+             
+              <p class="list-group-item-text">
+                <small> <i>
+                    days
+                  
+                  </i>
+      
+                    <!-- {{ this.transitsLong.length > 0 ? this.transitsLong.toString() : "No Transits"}} -->
+                   </small>
+              </p>
+            </div>
+            <div class="col text-center">
+              <h6> <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</h6>
+              <p><span class="summaryTitle">{{item.destinationPort.portCode}}</span></p>
+              <p class="list-group-item-text ">  {{item.destinationPort.portDescription}}</p>
+            
+                  
+            </div>
+            
+           
+            <div class="col-md-2 content-center">
+                      <button class="bnt btn-sm btn-primary mt-3"    data-toggle="collapse" attr.data-target="#demo{{index}}"><i class="fa fa-plus"></i> View Details </button>
+            
+           
+                
+            </div>
+          </div>
+        </div>
+        <div class="card-body">
+           
+
+  
+
+          <!-- <form [formGroup]="form">
+            <input type="checkbox" formControlName="published"> Published
+            <div *ngIf="form.controls.published.value">
+      
+              <h2>Credentials</h2>
+              <button (click)="addCreds()">Add</button>
+      
+              <div formArrayName="credentials" *ngFor="let creds of form.controls.credentials?.value; let i = index">
+                <ng-container [formGroupName]="i">
+                  <input placeholder="Username" formControlName="username">
+                  <input placeholder="Password" formControlName="password">
+                </ng-container>
+              </div>
+      
+            </div>
+          </form> -->
+         
+          <!-- <form class="form-group" [formGroup]="ToDoListForm">
+            <div formArrayName="items">
+              <div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf">
+              <thead class="cf">
+
+              
+            <tr>
+            <th>ItemName</th>
+            <th>ItemName</th>
+            <th>ItemName</th>
+            <th>ItemName</th>
+            <th>Completed</th>
+            <th>Completed</th>
+            <th>Completed</th>
+            <th>Completed</th>
+            <th>Priority</th>
+            <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of ToDoListForm.get('items').controls;let i=index;trackBy:track" [formGroupName]="i">
+            <td  data-title="ItemName" ><input class="form-control" formControlName="title" placeholder="Item name"></td>
+            <td data-title="ItemName" ><input class="form-control" formControlName="title" placeholder="Item name"></td>
+            <td data-title="ItemName" ><input class="form-control" formControlName="title" placeholder="Item name"></td>
+            <td><input class="form-control" formControlName="title" placeholder="Item name"></td>
+            <td data-title="completed"><input class="form-control" type="checkbox" formControlName="completed"></td>
+            <td data-title="completed"><input class="form-control" type="checkbox" formControlName="completed"></td>
+            <td data-title="completed"><input class="form-control" type="checkbox" formControlName="completed"></td>
+            <td data-title="completed" ><input class="form-control" type="checkbox" formControlName="completed"></td>
+            <td data-title="priority"><select class="form-control" formControlName="priority">
+            <option *ngFor="let m of prio" [value]="m">{{m}}</option>
+            </select></td>
+            <td><button class="btn btn-secondary" (click)="deleteItem(i)">Delete Item</button></td>
+            </tr>
+            </tbody>
+
+            </table>
+              </div>
+            </div>
+            <button class="btn btn-primary" (click)="getMyData()">Refresh</button>
+            <button class="btn btn-secondary" (click)="add()">Add New Item</button>
+            <button class="btn btn-primary" (click)="submit()" [disabled]="ToDoListForm.invalid">Submit</button>
+            </form> -->
+
+
+            <form class="For-Group" [formGroup]="TransitListForm">
+
+              <div formArrayName="items">
+                <div id="no-more-tables">
+                      <table class="table-bordered table-striped table-condensed cf">
+                        <thead class="cf">
+          
+                        
+                      <tr>
+                        <th >scheduleDetailId</th>
+                        <th>Schedule Id</th>
+               
+                        <th>Transit Port</th>
+                        <th>Transit Terminal</th>
+                        <th>Exp Arrival</th>
+                        <th>Exp Departure</th>
+                        <th>Is Loading Available</th>
+                        <th>Is Delivery Available</th>
+                        <th>Transit Route No</th>
+            
+                        <th >Created By</th>
+                        <th >Created At</th>
+                        <th >Updated By</th>
+                        <th >Updated At</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let x of TransitListForm.get('items').controls;let i=index;trackBy:track" [formGroupName]="i">
+                        <td  data-title="scheduleDetailId" ><input class="form-control" formControlName="scheduleDetailId" placeholder="Item name"></td>
+                        <td  data-title="Schedule Id" ><input class="form-control" formControlName="scheduleId" placeholder="Item name"></td>
+                        <td  data-title="Transit Port" ><select class="form-control" formControlName="transitPortId"> </select></td>
+                        <td  data-title="Transit Terminal" ><input class="form-control" formControlName="transitTerminal" placeholder="Item name"></td>
+                        <td  data-title="Exp Arrival" ><input type="date" class="form-control" formControlName="expArrival"></td>
+                        <td  data-title="Exp Departure" ><input type="date" class="form-control" formControlName="expDeparture"></td>
+                        <td data-title="Is Loading Available"><input class="form-control" type="checkbox" formControlName="isLoadingAvailable"></td>
+                        <td data-title="Is Delivery Available"><input class="form-control" type="checkbox" formControlName="isDeliveryAvailable"></td>
+                        <td  data-title="Transit Route No" ><input class="form-control" formControlName="transitRouteNo" placeholder="Item name"></td>
+                      <td data-title="Created By"><input class="form-control" formControlName="createdBy"></td>
+                      <td data-title="Created At" > <input class="form-control" formControlName="createdAt"></td>
+                      <td data-title="Updated By" > <input class="form-control" formControlName="updatedBy"></td>
+                      <td data-title="Updated At" > <input class="form-control" formControlName="updatedAt"></td>
+                      <td><button class="btn btn-secondary" (click)="deleteTransitItem(i)">Delete Item</button></td>
+                      </tr>
+
+
+
+                    </tbody></table>
+                </div>
+              </div>
+                <button class="btn btn-primary" (click)="getExistingTransitData()">Refresh</button>
+                <button class="btn btn-secondary" (click)="addTransit()">Add New Item</button>
+                <button class="btn btn-primary" (click)="submitTransitDetails()" [disabled]="TransitListForm.invalid">Submit</button>
+             
+            </form>
+
+ 
+                    <div id="demo{{index}}" class="collapse">
+                 
+                      <div class="border-card" *ngFor="let pack of packages;">
+
+                      
+                        <div class="card-type-icon with-border ml-1 mr-1">  <a href="#"><i class="fa fa-plus"></i></a></div>
+                        <div class="content-wrapper">
+                        <div class="label-group fixed">
+                        <p class="title">{{pack.packageName}} - {{pack.description}}</p>
+                        <p class="caption"><input type="number"/></p>
+                        </div>
+                        <div class="min-gap"></div>
+                        
+                   
+                        <div class="label-group">
+                        <p class="title">{{pack.description}}</p>
+                        
+                        </div>
+                        
+                        </div>
+                   
+                        <div class="card-type-icon with-border ml-3 mr-1"><a href="#">  <i class="fa fa-check"></i></a></div>
+                        <div class="card-type-icon with-border ml-1 mr-1"><a href="#">  <i class="fa fa-trash"></i></a></div>
+               
+                        </div>
+                    
+                        
+             
+                     
+                       
+      
+                     
+      
+                    </div>
+                  
+        </div>
+        
+         </div> 
+ </div>
+
+    
+ <div class="card mb-3 bg-primary text-white">
+  <h5 class="card-header">Card Header</h5>
+  <div class="card-body">
+    <p class="card-text">In this section you can write the majority of the content of the card.</p>
+  </div>
+  <div class="card-footer">Est. reading time: 5 mins</div>
+</div>
+<div class="card mb-3 bg-success text-white">
+  <h5 class="card-header">Card Header</h5>
+  <div class="card-body">
+    <p class="card-text">In this section you can write the majority of the content of the card.</p>
+  </div>
+  <div class="card-footer">Est. reading time: 5 mins</div>
+</div>
+<div class="card mb-3 bg-danger text-white" >
+  <h5 class="card-header">Card Header</h5>
+  <div class="card-body">
+    <p class="card-text">In this section you can write the majority of the content of the card.</p>
+  </div>
+  <div class="card-footer">    <a href="#" class="btn btn-primary">More</a>  <a href="#" class="btn btn-primary">More</a></div>
+</div>

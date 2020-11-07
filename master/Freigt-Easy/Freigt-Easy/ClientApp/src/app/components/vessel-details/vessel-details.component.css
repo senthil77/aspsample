@@ -1,0 +1,22 @@
+ 
+
+.w-650
+{
+    max-width: 650px;
+    margin: 1.75rem auto;
+}
+ 
+.form-control-xs
+{
+    width: 95%;
+    font-size: small;
+}
+ 
+@media (min-width: 1100px)
+{
+.modal-dialog
+{
+    min-height: calc(100% - 3.5rem);
+  max-width:95%;
+}
+}

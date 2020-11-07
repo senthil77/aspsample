@@ -1,0 +1,53 @@
+
+
+.summary {
+    font-size: 45px;
+    color: green
+}
+
+p{
+  font-family: Montserrat-SemiBold;  
+  line-height: 1rem;
+}
+ 
+
+.transaction {
+    font-size: 13px
+}
+
+ 
+
+.money {
+    color: #9FA8DA
+}
+
+.summaryTitle {
+    color: #722329;
+    text-align: left;
+ 
+ 
+    font-weight: 600;
+    
+ 
+    
+}
+
+.summaryDetail{
+    color: #9FA8DA; 
+    text-align: end;
+    font-size: medium;
+    font-weight: 500;
+ 
+}
+
+
+ 
+ 
+
+.card {
+    
+    
+    border-radius: 20px;
+    border: none;
+    box-shadow: 1px 5px 10px 1px rgba(0, 0, 0, 0.2)
+}

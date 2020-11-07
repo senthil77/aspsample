@@ -1,0 +1,45 @@
+<div class="wrapper fadeInDown pt-5">
+    <div id="formContent">
+      <div *ngIf="error" class="alert alert-danger mt-3 mb-0">
+     {{error}}
+      </div>
+      <!-- Tabs Titles -->
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="../../../assets/images/icon05.png" id="icon" alt="User Icon" />
+        <h4>RIA Shipping</h4>
+      </div>
+   
+      <!-- Login Form -->
+      <form [formGroup]="loginForm" (ngSubmit)="login()">
+        <div class="form-group ml-2 mr-2">
+          <label for="userName">User Name</label>
+          <input type="text" formControlName="userName" class="form-input p-3" tabindex="1"
+                 [ngClass]="{ 'is-invalid': submitted && loginFormControl.userName.errors }" />
+          <div *ngIf="submitted && loginFormControl.userName.errors" class="invalid-feedback">
+            <div *ngIf="loginFormControl.userName.errors.required">userName is required</div>
+          </div>
+        </div>
+        <div class="form-group ml-2 mr-2">
+          <label for="password">Password</label>
+          <input type="password" formControlName="password" class="form-input p-3" tabindex="2"
+                 [ngClass]="{ 'is-invalid': submitted && loginFormControl.password.errors }" />
+          <div *ngIf="submitted && loginFormControl.password.errors" class="invalid-feedback">
+            <div *ngIf="loginFormControl.password.errors.required">Password is required</div>
+          </div>
+        </div>
+        <button [disabled]="loading" class="btn btn-solid  mt-3">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+          Login
+        </button>
+      </form>
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <a class="underlineHover" href="#">Forgot Password</a><br>
+        <a class="underlineHover" routerLink="/signUp">Sign Up</a>
+      </div>
+  
+    </div>
+  </div>
+  
+  

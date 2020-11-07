@@ -1,0 +1,178 @@
+ 
+          <div id="detail-content-sticky-nav-05"  *ngIf="data" class="container p-0 border">
+
+            <h4 class="heading-title">Availabilities</h4>
+            
+    
+            
+            <div class="mb-20"></div>
+            
+            <div class="item-text-long-wrapper">
+               
+        
+                <div class="item-heading text-muted">
+                
+                    <div class="row d-none d-sm-flex brand-color text-white ml-1 mr-1">
+                    
+                        <div class="col-12 col-sm-12 col-md-3">
+                          
+                            <div class="row align-items-center ">
+                                
+                                <div class="col-md-1 col-sm-2 text-center mt-3">
+                                    <h5>S.No</h5>
+                                  </div>
+                                <div class="col-11 col-sm-10 text-center mt-3"><h5>Vessel Name</h5></div>
+                               
+                            </div>
+                        </div>
+                   
+        
+                        <div class="col-12 col-sm-12 col-md-9">
+                            <div class="row align-items-center">
+                        <div class="col-12 col-sm-10">
+                        
+                           
+                            
+                                <div class="row">
+                                
+                                    <div class="col-5 pt-3">
+                                       <h5> From </h5> 
+                                    </div>
+                                    
+                                    <div class="col-2 pt-3">
+                                      <h5> Transits </h5> 
+                                    </div>
+                                    
+                                    <div class="col-5 text-center pt-3">
+                                       
+                                        <h5> To </h5> 
+                                    </div>
+                                    
+                                </div>
+                            
+                          
+                        
+                        </div>
+                        
+                      
+                        </div>
+                        </div>
+                        
+                        
+                    </div>
+                
+                </div>
+                
+                <div class="item-text-long" *ngFor="let item of data |  sortBy:'asc':'id'; let index = index;">
+                   
+                    <div class="row align-items-center ml-1 mr-1">
+                        <div class="col-12 col-sm-12 col-md-3">
+                            <div class="row align-items-center ">
+                                <div class="col-md-1 col-sm-2 text-center">
+                                  
+                                    <span class="badge">{{index +1 }}</span>
+                                  </div>
+                                <div class="col-11 col-sm-10 text-center"><h5> <strong>{{item.vesselName}}</strong></h5>
+                                  <p class="list-group-item-text"> {{item.voyageNo}}</p>
+                                </div>
+                               
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-9">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-sm-10">
+                        
+                                    <div class="col-inner mb-10 mb-sm-0">
+                                    
+                                        <div class="row gap-10 align-items-center">
+                                        
+                                            <div class="col-4">
+
+                                              
+
+      <div *ngIf="item.originPort.portCode == searchItem.originCity;else templateName"> 
+        <span class="font-sm"><strong class="d-block">  <i class="fa fa-calendar"></i> {{item.estDepDate |date:'mediumDate'}}</strong> </span>
+        <strong class="d-block"> {{item.originPort.portDescription}}</strong>
+        <span class="font-sm">{{item.originPort.portCode}}</span>
+ 
+ 
+      </div>
+   
+    <ng-template #templateName >                  
+      <div *ngFor="let detail of item.details | sortBy:'asc':'expDeparture'">
+        <div *ngIf="detail.transitPort.portCode ==searchItem.originCity">
+          <span class="font-sm"><strong class="d-block">  <i class="fa fa-calendar"></i>  {{detail.expArrival |date:'mediumDate'}}</strong></span>
+          <span class="font-sm"><strong class="d-block"><i class="fa fa-calendar"></i>  {{detail.expDeparture |date:'mediumDate'}}</strong></span>
+          <strong class="d-block">{{detail.transitPort.portDescription}}</strong>
+          <span class="font-sm">{{detail.transitPort.portCode}}</span>
+        </div>        
+      </div>
+  </ng-template>
+                                                <!-- <span class="font-sm">INMAA</span>
+                                                <strong class="d-block">March 26, 2019</strong>
+                                                <strong class="d-block">Chennai Port</strong> -->
+                                            </div>
+                                            
+                                            <div class="col-4 text-sm-center">
+                                                <span class="day-count mt-3"><strong class="d-block">{{getVesselSchedule(item).noOfDays}}</strong>  <br>days</span>
+                                               <br> <span class="font-sm">  {{getVesselSchedule(item).transits}}<br>
+                                                {{getVesselSchedule(item).transPorts}}</span>
+                                            </div>
+                                            
+                                            <div class="col-4 text-left text-sm-left">
+                                              <div *ngIf="item.destinationPort.portCode == searchItem.destinationCity;else totemplateName"> 
+                                                <span class="font-sm"><strong class="d-block">   <i class="fa fa-calendar"></i>                                             
+                                                  {{item.estArrDestDate |date:'mediumDate'}}</strong></span>
+                                                  <strong class="d-block">{{item.destinationPort.portDescription}}</strong>
+                                                  <span class="font-sm"> {{item.destinationPort.portCode}}</span>  
+                                              </div>
+                                           
+                                            <ng-template #totemplateName >  
+                                              
+                                              <div *ngFor="let detail of item.details | sortBy:'asc':'expDeparture'">
+                                                <div *ngIf="detail.transitPort.portCode ==searchItem.destinationCity">         
+                                                  <span class="font-sm">   <strong class="d-block">    <i class="fa fa-calendar"></i>   {{detail.expArrival |date:'mediumDate'}}</strong></span>
+                                              
+                                      
+                                                  <strong class="d-block">{{detail.transitPort.portDescription}} </strong> 
+                                                    <span class="font-sm">{{detail.transitPort.portCode}}</span> 
+                                                    <span class="font-sm"><i class="fa fa-calendar"></i> {{detail.expDeparture |date:'mediumDate'}}</span> 
+                                          
+                                       
+                                                
+                                              </div>
+                                              </div>
+                                      
+                                      
+                                           
+                                          </ng-template>
+                                            </div>
+                                            
+                                        </div>
+                                    
+                                    </div>
+                                
+                                </div>
+                                
+                             
+                                
+                                <div class="col-4 col-sm-2 pull-right">
+                                    <a href="#" class="btn btn-solid btn-sm mt-3  w80">Book now</a>
+                               
+                                </div>
+                            </div>
+                        </div>
+                      
+                        
+                    </div>
+                
+                </div>
+            
+               
+            
+            </div>
+        
+            <div class="mb-50"></div>
+            
+        </div>
+ 

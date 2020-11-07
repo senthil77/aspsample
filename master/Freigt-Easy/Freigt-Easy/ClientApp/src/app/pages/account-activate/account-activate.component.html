@@ -1,0 +1,133 @@
+
+
+    <div class="container border-bottom bg-white" *ngIf="userData">
+        <div class="flex-md-row justify-content-around align-items-center">
+            <div class="d-flex flex-md-row align-items-center">
+                
+                <div class="p-md-2 p-1" id="info">
+                    <h5>{{userData.firstName}} {{userData.lastName}}</h5>
+                  
+                </div>
+            </div>
+            <div class="flex-column" id="info">
+                <div class="text-muted"> <span class="fa fa-envelope-o bg-light p-1 rounded-circle"></span> {{userData.email}}</div>
+               
+            </div>
+           
+        </div>
+      
+    </div>
+
+    <div class="container pt-0 bg-white">
+    <div class="row">
+      
+        <div class="col-md-7">
+            <div>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Company Profile</h4>
+                </div>
+
+                <form [formGroup]="editPartnerForm" (ngSubmit)="onSubmit()">
+
+
+                    <div class="row">
+                       <input type="hidden" class="form-control" formControlName="id" id="id">
+                       <input type="hidden" class="form-control" formControlName="createdBy" id="createdBy">
+                       <input type="hidden" class="form-control" formControlName="updatedBy" id="updatedBy">
+                       <input type="hidden" class="form-control" formControlName="createdAt" id="createdAt">
+                       <input type="hidden" class="form-control" formControlName="updatedAt" id="updatedAt">
+                    
+                    </div>
+                <div class="row mt-2">
+                     
+                    <div class="col-md-12">
+                        <label for="PartnerName">PartnerName</label>
+                        <input type="text" maxlength="200" class="form-control" formControlName="partnerName" placeholder="Partner Name" id="partnerName">
+                    </div>
+                    
+                </div>
+
+                <div class="row mt-2">
+                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+
+
+                        <label for="Address1">Address1</label>
+                        <input type="text" maxlength="200" class="form-control" formControlName="address1" id="address1">
+                    </div>
+                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Address2">Address2</label>
+                  <input type="text" maxlength="200" class="form-control" formControlName="address2" id="address2">
+                    </div>
+                </div>
+
+
+                <div class="row mt-2">
+                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                       <label for="City">City</label>
+                       <input type="text" maxlength="200" class="form-control" formControlName="city" id="city">
+                    </div>
+                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                       <label for="ZipCode">ZipCode</label>
+                       <input type="text" maxlength="10" class="form-control" formControlName="zipCode" id="zipCode">
+                    </div>
+     
+                 </div>
+     
+                <div class="row mt-2">
+                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Email1">Email</label>
+                        <input type="text" readonly maxlength="200" class="form-control" formControlName="email1" id="email1">
+                     </div>
+                     <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Email2">Email </label>
+                        <input type="text" maxlength="200" class="form-control" formControlName="email2" id="email2">
+                     </div>
+      
+                </div>
+                <div class="row mt-2">
+                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Contact">Contact Name</label>
+                        <input type="text" readonly maxlength="200" class="form-control" formControlName="contact1" id="contact1">
+                     </div>
+                     <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Contact1">Contact Name </label>
+                        <input type="text" maxlength="200" class="form-control" formControlName="contact2" id="contact2">
+                     </div>
+                </div>
+                <div class="row mt-2">
+                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Phone">Mobile Phone</label>
+                        <input type="text" maxlength="15" class="form-control" formControlName="phone1" id="phone1">
+                     </div>
+                     <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Phone2">Phone</label>
+                        <input type="number"  maxlength="15" class="form-control" formControlName="phone2" id="phone2">
+                     </div>
+                </div>
+                <!-- <div class="row mt-2">
+                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Phone">Mobile Phone</label>
+                        <input type="text" maxlength="15" class="form-control" formControlName="phone1" id="phone1">
+                     </div>
+                     <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                        <label for="Phone2">Phone</label>
+                        <input type="number"  maxlength="15" class="form-control" formControlName="phone2" id="phone2">
+                     </div>
+                </div> -->
+                <div class="mt-5 text-center"> <button type="submit" class="btn btn-primary"
+                    [disabled]="editPartnerForm.invalid"
+                    >Save changes</button></div>
+                </form>
+            </div>
+        </div>
+       
+        <div class="col-md-5">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center experience"><span>Edit Experience</span><span class="border px-3 p-1 add-experience"><i class="fa fa-plus"></i>&nbsp;Experience</span></div><br>
+                <div class="col-md-12"><label class="labels">Experience in Designing</label><input type="text" class="form-control" placeholder="experience" value=""></div> <br>
+                <div class="col-md-12"><label class="labels">Additional Details</label><input type="text" class="form-control" placeholder="additional details" value=""></div>
+            </div>
+        </div>
+    </div>
+</div>
+ 

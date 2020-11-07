@@ -1,0 +1,277 @@
+ 
+
+   <div id="detail-content-sticky-nav-05" class="container" *ngIf="packageList"> 
+ 
+
+    <h4 class="heading-title"> Packages </h4>
+
+
+  
+
+
+  
+    
+   
+    <div class="mb-20"></div>
+    
+    <div class="item-text-long-wrapper">
+       
+  
+        <div class="item-heading text-muted">
+        
+          <div class="row d-none d-sm-flex brand-color text-white ml-1 mr-1">
+            
+                <div class="col-12 col-sm-12 col-md-6">
+                  
+                    <div class="row align-items-center ">
+                        
+                        <div class="col-1 col-sm-1">
+                            <span class="font-sm"> <strong>S.No </strong></span>
+                          </div>
+                        <div class="col-1 col-sm-1">
+                          <span class="font-sm"> <strong>Active  </strong></span>
+                            
+                        </div>
+                       
+                        <div class="col-5 col-md-5 col-sm-5 text-center">
+                    
+                          <span class="font-sm"> <strong>Name </strong></span>
+                        </div>
+
+                        <div class="col-5 col-md-5 col-sm-5">
+                    
+                          <span class="font-sm"> <strong>Description </strong></span>
+                        </div>
+                    </div>
+                </div>
+           
+  
+                <div class="col-12 col-sm-12 col-md-6">
+                    <div class="row align-items-center">
+                <div class="col-12 col-sm-7">
+                
+                   
+                    
+                        <div class="row">
+                        
+                            <div class="col-3">
+                                
+                                <span class="font-sm"> <strong>Updated By</strong></span>
+                            </div>
+                            
+                            <div class="col-3">
+                                 
+                              <span class="font-sm"> <strong>Updated At</strong></span>
+                            </div>
+                            
+                            <div class="col-3 text-sm-center">
+                                    
+                              <span class="font-sm"> <strong>Created By </strong></span>
+                            </div>
+                            <div class="col-3 text-sm-center">
+                                    
+                              <span class="font-sm"> <strong>Created AT</strong></span>
+                            </div>
+                        </div>
+                    
+                  
+                
+                </div>
+                
+                <div class="col-12 col-sm-3">
+                
+                    <div class="col-inner">
+                    
+                        <div class="row gap-10">
+                        
+                            <div class="col-6 text-center">
+                              <span class="font-sm"> <strong> Edit</strong></span>
+                              
+                            </div>
+                            
+                            <div class="col-6 text-right">
+                          
+                                <span class="font-sm text-right"> <strong> Delete</strong></span>
+                            </div>
+                            
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                </div>
+                </div>
+                
+                
+            </div>
+        
+        </div>
+         <hr>
+     <div *ngFor ="let package of packageList;let index = index;">
+        <div class="item-text-long">
+           
+            <div class="row align-items-center">
+                <div class="col-12 col-sm-12 col-md-6">
+                    <div class="row ">
+                      <div class="col-1 col-sm-1 text-center">
+                        <span class="font-sm"> <strong>{{index+1}} </strong></span>
+                      </div>
+                    <div class="col-1 col-md-1 col-sm-1 align-items-left">
+                
+                      <ui-switch 
+                      size="small"
+                      [checked]="package.isActive"
+                      [disabled]="true"    
+                      >
+                      </ui-switch>
+                    </div>
+                   
+                    <div class="col-5 col-sm-5 text-center">
+                
+                     <strong>{{package.packageName}} </strong> 
+                    </div>
+
+                    <div class="col-5 col-sm-5">
+                
+                       <strong>{{package.description}} </strong> 
+                    </div>
+                       
+                    </div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-sm-7">
+                
+                            <div class="col-inner mb-10 mb-sm-0">
+                            
+                                <div class="row gap-10 align-items-center">
+                                
+                                  <div class="col-3">
+                                
+                                    <p class="font-sm"> <strong>{{package.updatedBy}}</strong></p>
+                                </div>
+                                
+                                <div class="col-3">
+                                     
+                                  <p class="font-sm"> <strong>{{package.updatedAt|date:'medium'}}</strong></p>
+                                </div>
+                                
+                                <div class="col-3 text-sm-center">
+                                        
+                                  <p class="font-sm"><strong>{{package.createdBy}} </strong></p>
+                                </div>
+                                <div class="col-3 text-sm-center">
+                                        
+                                  <p class="font-sm"> <strong>{{package.createdAt|date:'medium'}}</strong></p>
+                                </div>
+                                </div>
+                            
+                            </div>
+                        
+                        </div>
+              
+                        
+                        <div class="col-3 col-sm-2 flex-nowrap align-items-right">
+                          
+                          <button  class="btn btn-solid btn-sm mt-0 btn-secondary font-sm"     (click)="openModal(editPackageModal,package)"> <i class="fa fa-pencil"></i>   Edit</button>
+                      
+                           
+                              
+                         
+
+                          </div>
+                          <div class="col-3 col-sm-2 flex-nowrap align-items-right">
+                          
+                            <button  class="btn btn-solid btn-sm mt-0 btn-danger font-sm"    (click)="delete(package.id, index);"><i class="fa fa-trash"></i></button>
+                      
+                             
+                                
+                           
+  
+                            </div>
+                            
+                            
+
+                        </div>
+
+                        
+                    </div>
+                </div>
+              
+                
+            </div>
+
+      
+     
+    
+    </div>
+  </div>
+    <div class="mb-50"></div>
+    
+  </div>
+  
+
+<ng-template #editPackageModal let-modal>
+    <div class="modal-header">
+     <h5 class="modal-title" id="editPackageLabel">{{title}} Package Info</h5>
+     <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    
+    <div class="modal-body">
+     <form [formGroup]="editPackageForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+      
+      <div class="col-sm-8">
+      <input type = "hidden" readonly class="form-control" formControlName="id" id="id">
+      <input type = "hidden" readonly class="form-control" formControlName="createdBy" id="createdBy">
+      <input type = "hidden" readonly class="form-control" formControlName="updatedBy" id="updatedBy">
+      <input type = "hidden" readonly class="form-control" formControlName="createdAt" id="createdAt">
+      <input type = "hidden" readonly class="form-control" formControlName="updatedAt" id="updatedAt">
+      </div>
+      </div>
+      
+      
+   <div class="form-group row">
+    <label for="IsActive" class="col-sm-4 col-form-label">Is Active</label>
+    <div class="col-sm-8">
+     
+    <input type="checkbox" formControlName="isActive" [checked]=isActive id="isActive" />
+    </div>
+    </div>
+    <div class="form-group row">
+
+   <label for="PackageName" class="col-sm-4 col-form-label">Package Name</label>
+   <div class="col-sm-8">
+   <input type = "text" maxlength="20" class="form-control" formControlName="packageName" id="packageName" [ngClass]  ="{ 'is-invalid': isSubmitted && packageFormControl.packageName.errors }" />
+   <div *ngIf="isSubmitted && packageFormControl.packageName.errors" class="invalid-feedback">
+    <div *ngIf="editPackageForm.controls['packageName'].errors.required">Package Name cannot be Blank</div>
+  </div>
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="Description" class="col-sm-4 col-form-label">Description</label>
+   <div class="col-sm-8">
+   <input type = "text" maxlength="50" class="form-control" formControlName="description" id="description" [ngClass]  ="{ 'is-invalid': isSubmitted && packageFormControl.description.errors }" />
+   <div *ngIf="isSubmitted && packageFormControl.description.errors" class="invalid-feedback">
+    <div *ngIf="editPackageForm.controls['description'].errors.required">Package Description cannot be Blank</div>
+  </div>
+   </div>
+   </div>
+   
+   
+       
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+       <button type="submit" class="btn btn-primary"
+       [disabled]="editPackageForm.invalid"
+       >Save changes</button>
+      </div>
+     </form>
+    </div>
+   </ng-template>
+   
+   
+   
