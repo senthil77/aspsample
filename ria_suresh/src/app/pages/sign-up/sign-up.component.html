@@ -1,0 +1,93 @@
+<div class="wrapper fadeInDown pt-3">
+    <div id="formContent">
+      
+      <!-- Tabs Titles -->
+      <!-- Icon -->
+      <div class="fadeIn first">
+        <img src="../../../assets/images/icon05.png" id="icon" alt="User Icon" />
+        <h4>RIA Shipping</h4>
+      </div>
+   
+      <!-- Login Form -->
+      <form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+        <!-- <div class="form-group mt-3 mb-4">
+            <div class="row noFlexWrap">
+                <div class="col-md-6 col-sm-6 col-xs-12"><label class="radio"> <input type="radio" name="buysell" value="sell" checked> <span>Individual</span></label></div>
+         
+                <div class="col-md-6 col-sm-6 col-xs-12"><label class="radio"> <input type="radio" name="buysell" value="buy"> <span>Company</span> </label></div>
+            </div>
+        </div> -->
+  
+  
+                     <div class="form-group ml-2 mr-2">
+                      <label for="email">Email Address</label>
+                      <input type="email" formControlName="email" class="form-input" id="email" >
+               
+                    </div>
+                     <div class="form-group ml-2 mr-2">
+                      <label for="password">Enter a memorable password</label>
+                      <input type="password" formControlName="password"  class="form-input" id="password">
+                   
+                    </div>
+                     <div class="form-group ml-2 mr-2">
+                      <label for="confirmPassword">Confirm Password</label>     
+                      <input type="password" class="form-input" formControlName="confirmPassword"   id="confirmPassword"  
+                      
+                      [ngClass]="{ 'is-invalid': isSubmitted && signupFormControl.confirmPassword.errors }"/>
+                           
+         
+                    </div>
+
+                 
+ 
+                     <div class="form-group ml-2 mr-2">
+                      <label for="firstName">First Name</label>
+                      <input type="text" class="form-input"  formControlName="firstName" id="firstName" >
+                   
+                    </div>
+                    <label for="lastName">Last Name</label>
+                     <div class="form-group ml-2 mr-2"><input type="text" class="form-input"  formControlName="lastName" id="lastName" >
+             
+                    </div>
+                     <div class="form-group ml-2 mr-2">
+                      <label for="companyName">Company Name</label>
+                       <input type="text" class="form-input"  formControlName="companyName"  id="companyName" >
+                   
+                    </div>
+                    
+                     <div class="form-group ml-2 mr-2">
+                      <input type="hidden" class="form-input"  formControlName="activationCode" id="activationCode" >
+                     
+                      <input type = "hidden" class="form-input" formControlName="id" id="id">
+                      <input type = "hidden" class="form-input" formControlName="isActive" id="isActive">
+                      <input type = "hidden" class="form-input" formControlName="updatedAt" id="updatedAt">
+                      <input type = "hidden" class="form-input" formControlName="updatedBy" id="updatedBy">
+                      <input type = "hidden" class="form-input" formControlName="createdAt" id="createdAt">
+                      <input type = "hidden" class="form-input" formControlName="createdBy" id="createdBy ">
+                      <input type = "hidden" class="form-input" formControlName="userRoleId" id="userRoleId">
+                      <input type = "hidden" class="form-input" formControlName="partnerId" id="partnerId">
+                    </div>
+
+
+                
+                    <div class="form-group pt-3">
+                        <div class="row">
+                            <div class="col-md-12">
+                              <button type="submit" class="btn btn-primary"
+                          
+                              [disabled]="editUserForm.invalid"
+                              >Register</button>
+                            </div>
+                        </div>
+                    </div>
+      </form>
+      <!-- Remind Passowrd -->
+      <div id="formFooter">
+        <p>Already a User </p>
+        <a class="underlineHover" href="#">Sign in</a>
+      </div>
+  
+    </div>
+  </div>
+  
+  

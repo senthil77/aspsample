@@ -1,0 +1,210 @@
+
+@import url("../node_modules/fontawesome-4.7/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('../src/assets/css/core.css');
+
+
+* {
+	margin: 0px; 
+	padding: 0px; 
+	box-sizing: border-box;
+}
+
+body, html {
+	font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  min-height: 110vh;
+ 
+
+}
+
+
+ 
+ 
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: normal; }
+
+  h1 {
+    font-size: calc(26px + (50 - 26) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    line-height: 1.1;
+    text-transform: uppercase; }
+  
+  h2 {
+    font-size: calc(22px + (36 - 22) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 700;
+    letter-spacing: 0.001em;
+    line-height: 32px;
+    text-transform: capitalize;
+    color: black; }
+  
+  h3 {
+    font-size: calc(20px + (24 - 20) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    color: black; }
+  
+  h4 {
+    font-size: calc(18px + (22 - 18) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.2;
+    text-transform: capitalize; }
+  
+  h5 {
+    font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    line-height: 1.2; }
+  
+  h6 {
+    font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.03em; }
+  
+  ul {
+    padding-left: 0;
+    margin-bottom: 0; }
+  
+  li {
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+
+    letter-spacing: 0.03em; }
+  
+  
+p {
+	font-family: 'Roboto', sans-serif;;
+    font-weight: 500;
+    line-height: 1.7;
+	color: #888888;
+	margin: 0px;
+}
+
+  
+label, input {
+  display: block; 
+  width: 100%; }
+
+label {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;;
+  margin-bottom: 3px; 
+  font-size: small;
+}
+
+.badge-package {
+  height: 36px;
+  width: 100%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 3px;
+  font-weight: 500;
+  color: #fff;
+  padding: 0 20px;
+  margin:10px;
+  white-space: nowrap;
+}
+
+.day-count {
+  font-size: 14px;
+  line-height: 0.8;
+  display: inline-block;
+  text-align: center;
+  border: 1px solid #989898;
+  
+  height: 36px;
+  border-radius: 4px;
+  padding-top: 4px;
+  font-weight: 600;
+  width: 75%;
+  line-height: 27px;
+  background-color: #efefef;
+  height: 40px;
+}
+
+
+
+.c-main{padding-top: 0}
+.c-subheader{margin-bottom: 10px;}
+
+.c-sidebar-nav-item{display: block;}
+.body-container{margin: 10px 0;}
+
+.card.table-data{padding:10px; margin-top: 12px;}
+.card.table-data > div  { display: flex; padding-bottom: 5px;  }
+.card.table-data > div label {max-width:100px; position: relative;margin-right: 5px;} 
+.card.table-data > div label:after{
+  content: ":";
+  position: absolute  ;
+  right: 0;
+}
+
+.navbar.navbar-light .navbar-nav .nav-link{    color: rgba(0, 0, 21, 1); }
+.c-sidebar,
+.c-sidebar .c-sidebar-brand, .c-sidebar .c-sidebar-header {
+  background: #355b83;
+}
+
+.c-sidebar .c-sidebar-nav-link:hover, .c-sidebar .c-sidebar-nav-dropdown-toggle:hover{
+  background: #2a3e52 !important;
+}
+
+
+a.c-sidebar-nav-link button {
+  width: 56px;
+  margin-left: -1rem;
+  background: none;
+  border: 0;
+  color: #ffff;
+  font-size: 14px;
+  outline: none;
+}
+
+.c-sidebar-minimized .c-sidebar-nav-link, 
+.c-sidebar-minimized .c-sidebar-nav-dropdown-toggle, 
+.c-sidebar-minimized .c-sidebar-nav-dropdown-toggle{
+  width: 56px;
+  display: block;
+}
+
+.switch-label{
+  float: left;
+    margin-top: -25px;
+    margin-left: 55px;
+    white-space: nowrap;
+}
+
+.row.l{margin-bottom:20px}
+
+.table th, .table td {
+  padding: 10px 5px;
+}
+
+td .btn {
+  margin-right: 5px;
+  /* color: #fff; */
+}
+td .btn .fa{
+  margin: 0 5px;
+}
+.fa.fa-check{color: green}
+.table{
+  border: 1px solid #c7c7c7;
+}
+.table thead th {
+  background: #ececec;
+}

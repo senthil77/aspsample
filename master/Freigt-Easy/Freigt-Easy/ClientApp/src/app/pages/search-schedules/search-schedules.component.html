@@ -1,98 +1,86 @@
 
 
- <section class="search-sec">
-    
-    <div class="container">
-        <button [hidden] = "!isShow" (click) = toggleDisplay()> <i class ="fa fa-eye"></i>Show Search Form</button>
+<section class="body-container">
+    <div class="col-md-12">
+            <div class="col-sm-12 text-right" [hidden]="!isShow">
+                <button  class="btn btn-primary" (click)=toggleDisplay()>
+               <i class="fa fa-eye"></i>Show Search Form</button>
+            </div>
 
-        <div class="container pb-3" [hidden] = "isShow">
-        <form [formGroup]="schlFrm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                     
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                          
-                            <label for="originPort">Origin Port</label>
-                             
-                            <div class="select-list">
-                                <select formControlName="originCity" id="pol" class="round" (change)="onCityChange($event)" 
-                                autofocus [ngClass]  ="{ 'is-invalid': isSubmitted && searchFormControl.originCity.errors }"  >
-                                <option selected disabled value="">Origin Port </option>     
-                                <option *ngFor="let port of originPorts" value="{{port.portCode}}">{{port.portDescription}}</option>
-                                  </select>
+            <form  [hidden]="isShow" [formGroup]="schlFrm" (ngSubmit)="onSubmit()">
+                <div class="col-sm-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Search</strong>
+                            <small>Schedules </small>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="row">
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="form-group">
+                                                <label for="originPort">Origin Port</label>
+                                                <select formControlName="originCity" id="pol" class="form-control" (change)="onCityChange($event)" autofocus [ngClass]="{ 'is-invalid': isSubmitted && searchFormControl.originCity.errors }">
+                                                    <option selected disabled value="">Origin Port </option>
+                                                    <option *ngFor="let port of originPorts" value="{{port.portCode}}">{{port.portDescription}}</option>
+                                                </select>
+                                                <div *ngIf="isSubmitted && searchFormControl.originCity.errors" class="invalid-feedback">
+                                                    <div *ngIf="schlFrm.controls['originCity'].errors.required">Origin City is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="form-group">
+                                                <label for="Destination">Destination Port</label>
+        
+                                                <select formControlName="destinationCity" id="destinationCity" class="form-control" autofocus [ngClass]="{ 'is-invalid': isSubmitted && searchFormControl.destinationCity.errors }">
+                                                    <option selected disabled value=""> Destination Port </option>
+                                                    <option *ngFor="let port of destPorts" value="{{port.portCode}}">{{port.portDescription}}</option>
+                                                </select>
+                                                <div *ngIf="isSubmitted && searchFormControl.destinationCity.errors" class="invalid-feedback">
+                                                    <div *ngIf="schlFrm.controls['destinationCity'].errors.required">Destination City is required</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="form-group">
+                                                <label for="starttingDate">From</label>
+                                                <input class="form-control" type="date" formControlName="expectedDeparture" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                            <div class="form-group">
+                                                <label for="period">To (x) Days</label>
+                                                <input class="form-control text-right" type="number" maxlength="2" formControlName="period" [ngClass]="{ 'is-invalid': isSubmitted && searchFormControl.period.errors }"
+                                                />
+        
+                                                <div *ngIf="isSubmitted && searchFormControl.period.errors" class="invalid-feedback">
+                                                    <div *ngIf="schlFrm.controls['period'].errors.required">period cannot be Blank</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3 col-md-6">
+                                                <button type="submit" class="btn btn-primary" [disabled]="schlFrm.invalid">
+                                                        <i class="fa fa-search"></i>Search</button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div *ngIf="isSubmitted && searchFormControl.originCity.errors" class="invalid-feedback">
-                                <div *ngIf="schlFrm.controls['originCity'].errors.required">Origin City is required</div>
-                              </div>
-                        </div>
 
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                          
-                            <label for="Destination">Destination Port</label>
-                              
-                            <div class="select-list">
-                                <select formControlName="destinationCity" id="destinationCity" class="round" 
-                                autofocus [ngClass]  ="{ 'is-invalid': isSubmitted && searchFormControl.destinationCity.errors }"  >
-                                <option selected disabled value=""> Destination Port </option>     
-                                <option *ngFor="let port of destPorts" value="{{port.portCode}}">{{port.portDescription}}</option>
-                                  </select>
-                            </div>
-                            <div *ngIf="isSubmitted && searchFormControl.destinationCity.errors" class="invalid-feedback">
-                                <div *ngIf="schlFrm.controls['destinationCity'].errors.required">Destination City is required</div>
-                              </div>
-
-
-                     
-                             
-
-
-
-                        </div>
-                       
-                        <div class="col-lg-2 col-md-2 col-sm-12">                          
-                            <label for="starttingDate">From</label>                         
-                            <input class="form-input" type="date"  formControlName ="expectedDeparture" />                        
-                        </div>
-
-                        <div class="col-lg-2 col-md-2 col-sm-12">
-                          
-                            <label for ="period">To (x) Days</label>
-                            <input class="form-input text-right" type="number" maxlength="2" formControlName="period"     [ngClass]  ="{ 'is-invalid': isSubmitted && searchFormControl.period.errors }" />
-
-                            <div *ngIf="isSubmitted && searchFormControl.period.errors" class="invalid-feedback">
-                                <div *ngIf="schlFrm.controls['period'].errors.required">period cannot be Blank</div>
-                              </div>
-
-
-                    
-                      
-                </div>
-
-                        <div class="col-lg-2 col-md-2 col-sm-12 pull-right">
-                            <label for="country" class="text-white">&nbsp;</label>
-                         
-                            <button type="submit" class="btn-solid-success"    [disabled]="schlFrm.invalid" ><i class="fa fa-search"></i>Search</button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </form>
-        </div>
-        
+            </form>
+
+
+
+        <app-search-schedule-list [data]="searchResults" [searchItem]="this.schlFrm.value"></app-search-schedule-list>
+
+
+
     </div>
 
-    <div class="container p-1">
-
-           
-  
-             <app-search-schedule-list [data]="searchResults" [searchItem]="this.schlFrm.value" ></app-search-schedule-list>
-          
-        
-        
-    </div>
-    
 </section>
 
-
-    

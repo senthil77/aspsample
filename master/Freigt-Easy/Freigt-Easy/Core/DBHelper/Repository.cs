@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,10 +12,17 @@ namespace Freigt_Easy.Core.DBHelper
     {
 
         protected readonly RiaDBContext _dbContext;
+        private readonly IHttpContextAccessor _webContext;
 
         public Repository(RiaDBContext dbContext)
         {
             _dbContext = dbContext;
+      
+        }
+        public Repository(RiaDBContext dbContext, IHttpContextAccessor webContext)
+        {
+            _dbContext = dbContext;
+            _webContext = webContext;
         }
         public async Task AddAsync<T>(T entity) where T : class
         {
@@ -64,8 +72,14 @@ namespace Freigt_Easy.Core.DBHelper
 
 
 
-        public T FindSingle<T>(Expression<Func<T, bool>> pred) where T : class
+        public T FindSingle<T>(Expression<Func<T, bool>> pred, string[] includes = null) where T : class
         {
+
+
+            if (includes != null)
+            {
+                return this._dbContext.Set<T>().AsQueryable().Where(pred).IncludeMultiple(includes).FirstOrDefault();
+            }
             return this._dbContext.Set<T>().AsQueryable().Where(pred).FirstOrDefault();
         }
 
@@ -123,6 +137,7 @@ namespace Freigt_Easy.Core.DBHelper
 
         public async Task UpdateAsync<T>(T entity) where T : class
         {
+            
             this._dbContext.Set<T>().Update(entity);
             _ = await _dbContext.SaveChangesAsync();
         }

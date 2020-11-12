@@ -70,7 +70,7 @@ export class StoreService {
     await this.apiservice.get <UserRole>('Utility').toPromise().then((data) => {
 
       this.userRoles = data;
-      console.log(this.userRoles);
+      
       this._userRoles.next(this.userRoles.slice());
 
 
@@ -107,7 +107,7 @@ export class StoreService {
   }
 
   async fetchChargeAt() {
-    await this.apiservice.get('Utility').toPromise().then((data) => {
+    await this.apiservice.getWithActionName('Utility','GetChargeAt').toPromise().then((data) => {
 
       this.chargedAt = data;
       this._chargedAt.next(this.chargedAt.slice());
@@ -173,7 +173,7 @@ export class StoreService {
 
 
   readonly activeRoles$ = this.userRoles$.pipe(
-    map(uRoles => uRoles.filter(uRole => uRole.roleName !== 'ADMIN'))
+    map(uRoles => uRoles.filter(uRole => uRole.roleName !== 'TEMP'))
   )
 
 
@@ -226,20 +226,14 @@ export class StoreService {
       }
 
 
-
-      // const tmpId = 1;
-      // we swap the local tmp record with the record from the server (id must be updated)
-      //const index = this.ports.indexOf(this.ports.find(t => t.id === tmpId));
-      //this.ports[index] = {
-      //   ...todo
-      // }
+ 
       this.ports = [...this.ports];
       this._ports.next(this.ports.slice());
 
     } catch (e) {
-      // is server sends back an error, we revert the changes
+       
       console.error(e);
-      // this.removeTodo(tmpId, false);
+   
     }
 
 
@@ -266,19 +260,13 @@ export class StoreService {
       }
 
 
-
-      // const tmpId = 1;
-      // we swap the local tmp record with the record from the server (id must be updated)
-      //const index = this.ports.indexOf(this.ports.find(t => t.id === tmpId));
-      //this.ports[index] = {
-      //   ...todo
-      // }
+ 
       this.packages = [...this.packages];
       this._packages.next(this.packages.slice());
     } catch (e) {
-      // is server sends back an error, we revert the changes
+    
       console.error(e);
-      // this.removeTodo(tmpId, false);
+     
     }
 
 
@@ -353,7 +341,7 @@ export class StoreService {
   async drop(id:number, url:string)
   {
 
-    try {
+   
       await this.apiservice.Delete<any>(url, id)
         .toPromise().then((data) => 
         {
@@ -364,16 +352,6 @@ export class StoreService {
         }).catch((err) =>
         {}
         );
-
-    
-
-
-
-
-    } catch (e) {
-      // is server sends back an error, we revert the changes
-      console.error(e);
-      // this.removeTodo(tmpId, false);
-    }
+   
   }
 }

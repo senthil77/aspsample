@@ -1,21 +1,27 @@
-
-
-<section id="banner" class="banner">
-    <div class="bg-color">
-        <app-nav-menu></app-nav-menu> 
-        <div class="container-fluid pt-5 bg-white">
-
+<div class="c-app">
+    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+        <div class="c-sidebar-brand d-lg-down-none">
+            Logo
+          </div>
+         <app-nav-menu></app-nav-menu>
+        <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
+    </div>
+    
   
+    <div class="c-wrapper c-fixed-components">
+     <app-header></app-header>
+        <div class="c-body">
+            <main class="c-main">
+                <div class="container-fluid">
+                    <router-outlet></router-outlet>
+                    <ng-http-loader></ng-http-loader>
+                    <div class="fade-in">
+                        <div class="card-columns cols-2">
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <app-footer></app-footer>
         </div>
     </div>
-
-
-
-
-<router-outlet></router-outlet>
-
-<!-- <app-footer></app-footer> -->
-<ng-http-loader></ng-http-loader>
-
-<app-footer></app-footer>  
-</section>
+</div>

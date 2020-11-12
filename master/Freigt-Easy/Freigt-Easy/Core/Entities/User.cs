@@ -22,6 +22,7 @@ namespace Freigt_Easy.Core.Entities
         [ForeignKey("partner")]
         public int? PartnerId { get; set; }
         public Partner Partner { get; set; }
+        public DateTime ValidUpTo { get; set; }
 
     }
 }

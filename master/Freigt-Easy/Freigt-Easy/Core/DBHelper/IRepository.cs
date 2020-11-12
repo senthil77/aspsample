@@ -21,7 +21,7 @@ namespace Freigt_Easy.Core.DBHelper
         Task DeleteAsync<T>(T entity) where T : class;
         Task<T> FindSingleAsync<T>(Expression<Func<T, bool>> pred) where T : class;
 
-        T FindSingle<T>(Expression<Func<T, bool>> pred) where T : class;
+        T FindSingle<T>(Expression<Func<T, bool>> pred, string[] includes=null) where T : class;
 
         Task<List<T>> FindFew<T>(Expression<Func<T, bool>> pred) where T : class;
 

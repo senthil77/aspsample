@@ -1,310 +1,196 @@
- 
-
-  <div id="detail-content-sticky-nav-05" class="container pt-5  bg-white" >
-
-    <div class="row mt-1 fill shadow">
-      <div class="col-md-11">
-        <div class="row div-head">Vessel-Charges</div>
+<section class="body-container">
+          <div class="card">
+              <div class="card-header">
+                Vessel-Charges
+              
   
-        <div class="row">
+                <select class="form-control col-md-2 pull-right" (click)="onchangeVessel($event);" >
+                    <option value="">Choose Vessel</option>
+                  <option *ngFor="let vessel of vesselList" value="{{vessel.vesselScheduleId}}">{{vessel.vesselName}}</option>
+                </select>
+              </div> 
 
-     
-          <div class="col-6 col-md-6 col-sm-6">
-            <div class="section-sort clearfix box">
-           
-              <ul class="sort-bar clearfix block-sm">
-                <li class="sort-by-name active"><a class="sort-by-container" (click)="sort('startDate');"><span>Date</span></a></li>
-                <li class="sort-by-price active"><a class="sort-by-container" (click)="sort('packageId');"><span>package</span></a></li>
-                <li class="sort-by-rating active"><a class="sort-by-container" (click)="sort('vesselScheduleId');"><span>Vessel</span></a></li>
-              </ul>
-               
-            </div>
-    
-          </div>
-          <div class="col-6 col-md-6 col-sm-6">
-            <label for="Vessel">Vessel</label>
-            <!-- formControlName="VesselId" -->
-            <div class="select-list">
-              <select class="classic" (click)="onchangeVessel($event);" >
-                <option value="">Choose Vessel</option>
-              <option *ngFor="let vessel of vesselList" value="{{vessel.vesselScheduleId}}">{{vessel.vesselName}}</option>
-            </select>
-            </div>
-          </div>
-        </div>
-       
-  
-      </div>
-    </div>
-    <div class="item-text-long-wrapper p-0">
-               
-        
-      <div class="item-heading text-muted">
-      
-          <div class="row d-none d-sm-flex brand-color text-white ml-1 mr-1">
-          
-              <div class="col-12 col-sm-12 col-md-3">
+              <div class="card-body">
+                  <table class="table my-responsive table-striped  table-responsive-sm ">
+                  <thead>
+                    <tr>
+                      <th>S.No</th>
+                      <th>Vessel Name 
+                          <button class="btn btn-sm btn-outline-light pull-right active" type="button"  (click)="sort('vesselScheduleId');"><i class='fa fa-sort'></i></button>
+                      </th>
+                      <th>Operated By
+                        <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('partnerId');">
+                          <i class='fa fa-sort'></i>
+                        </button>
+                      </th>
+                      <th>From
+                          <button class="btn btn-sm btn-outline-light pull-right active" type="button"  (click)="sort('startDate');"><i class='fa fa-sort'></i></button>
+                        </th>
+                      <th>Transits
+                        <button class="btn btn-sm btn-outline-light pull-right active" type="button"  (click)="sort('transitDays');"><i class='fa fa-sort'></i></button>
+                      </th>
+                      <th>To</th>
+                      <th>Package 
+                          <button class="btn btn-sm btn-outline-light pull-right active" type="button"  (click)="sort('packageId');"><i class='fa fa-sort'></i></button>
+                      </th>
+                      <th>Edit</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of vesscharges  |  sortBy: sortDirection : sortingName |filter:{vesselScheduleId: searchText} : false;  let index = index;">
+                      <td data-title="S.No"><i *ngIf="item.isActive ===true" class="fa fa-check"></i> {{index +1 }} </td>
+                      <td data-title="Vessel Name ">{{item.vesselSchedule.vesselName}}   -   {{item.vesselSchedule.voyageNo}}</td>
+                      
+              <td data-title="Operated By">
+
                 
-                  <div class="row align-items-center ">
-                      
-                      <div class="col-md-3 col-sm-3 text-center mt-3">
-                          <h5>S.No</h5>
-                        </div>
-                      <div class="col-9 col-sm-9 text-center mt-3"><h5>Vessel Name</h5></div>
-                     
-                  </div>
-              </div>
-         
-
-              <div class="col-12 col-sm-12 col-md-9">
-                  <div class="row align-items-center">
-              <div class="col-12 col-sm-8">
-              
-                 
-                  
-                      <div class="row">
-                      
-                          <div class="col-4 pt-3">
-                             <h5> From </h5> 
-                          </div>
-                          
-                          <div class="col-4 pt-3 text-left">
-                            <h5> Transits </h5> 
-                          </div>
-                          
-                          <div class="col-4 text-center pt-3">
-                             
-                              <h5>To</h5> 
-                          </div>
-                          
-                      </div>
-                  
-                
-              
-              </div>
-              <div class="col-12 col-sm-4 ">
-                <div class="row">
-                      
-                  <div class="col-8 pt-3">
-                     <h5>Package</h5> 
-                  </div>
-                  
-                  <div class="col-4 pt-3 text-right">
-                    <h5> Edit </h5> 
-                  </div>
-                </div>
-              </div>
-            
-              </div>
-              </div>
-              
-              
-          </div>
-      
-      </div>
-
-       <div *ngFor="let item of vesscharges  |  sortBy: sortDirection : sortingName |filter:{vesselScheduleId: searchText} : false;  let index = index;"> 
-      
- 
-  <!-- <div *ngFor="let item of vesscharges |  sortBy:'asc':'packageId'; let index = index;"></div> -->
-
-
-    <div class="row p-3 mt-1 bg-action">
-      
-      <div class="col-12 col-sm-12 col-md-3 text-center">
-        <div class="row align-items-center ">
-  
-          <div class="col-md-3 col-sm-3 align-items-center">
-          
-            <h3>{{index +1 }}</h3>
-           
-            <i *ngIf="item.isActive ===true" class="fa fa-check"></i>
-          </div>
-        <div class="col-9 col-sm-9 text-center brand-fore-color"><h5> <strong>{{item.vesselSchedule.vesselName}}</strong></h5>
-          <span class="font-sm brand-sec-fore-color"> {{item.vesselSchedule.voyageNo}}</span>
-        </div>
-        
-        </div>
-        </div>
-  
-  
-        <div class="col-12 col-md-9">
-          <div class="row align-items-center">
-              <div class="col-12 col-sm-8">
-                <div class="col-inner mb-10 mb-sm-0">
-                              
-                  <div class="row gap-10 align-items-center">
-                  
-                      <div class="col-4 p-0">
-                       <strong class="d-block brand-fore-color font-sm">  <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}</strong> 
-                      
-                        <strong>{{item.originPort.portCode}}</strong> 
-                        <span class="font-sm brand-sec-fore-color"><strong class="d-block"> {{item.originPort.portDescription}}</strong></span>
-  
-                      </div>
-                      
-                      <div class="col-4">
-  
-                          <span class="day-count mt-1">{{calculateDiff(item.startDate,item.endDate)}} <br>days</span>
-                      
-                   
-                      </div>
-                      
-                      <div class="col-4 p-0">
-  
-                        <strong class="d-block brand-fore-color font-sm">  <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</strong>
+                  <strong>{{item.partner.partnerName}}</strong><br>
+                  <small class="list-group-item-text"> {{item.partner.city}}</small>
+             
+              </td>
+                      <td data-title="From">
+                            <div>
+                              <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}
+                            </div>
+                            <strong>{{item.originPort.portCode}}</strong> 
+                            <div class="font-sm brand-sec-fore-color"><strong class="d-block"> {{item.originPort.portDescription}}</strong></div>
+                      </td>
+                      <td  data-title="Transits"><span class="day-count mt-1">{{item.transitDays}}  days</span></td>
+                      <td  data-title="To">  <strong class="d-block brand-fore-color font-sm">  <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</strong>
                         <strong class="d-block">{{item.destinationPort.portCode}}</strong>
-                        <span class="font-sm brand-sec-fore-color"><strong>{{item.destinationPort.portDescription}}</strong></span>
-  
-  
-                                                        </div>
-                      
-                  </div>
-              
+                        <span class="font-sm brand-sec-fore-color"><strong>{{item.destinationPort.portDescription}}</strong></span></td>
+                      <td data-title="Package">   <span class="badge-pill badge-secondary badge-package">{{item.package.packageName }}</span>
+                        {{item.chargeAmount |currency:item.currency.currencyCode}}</td>
+                      <td data-title="Edit">  <button  class="btn btn-dark  btn-sm" (click)="openModal(editCurrencyModal,item)">Quote Charges <i
+                        class="fa fa-plus"></i></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <!-- <ul class="pagination">
+                  <li class="page-item"><a class="page-link" href="#">Prev</a></li>
+                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" href="#">4</a></li>
+                  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul> -->
               </div>
-              </div>
-              <div class="col-12 col-sm-4 ">
-                <div class="col-inner mb-10 mb-sm-0">
-                              
-                  <div class="row gap-10 align-items-center">
-                    <div class="col-6">
-                  
-                              
-        <span class="badge badge-pill badge-secondary">{{item.package.packageName }}</span>
-        {{item.chargeAmount |currency:item.currency.currencyCode}}
-                    </div>
-                     <div class="col-6 pull-right">
-                      <button  class="btn btn-solid btn-sm mt-0 btn-secondary font-sm"  (click)="openModal(editCurrencyModal,item)"><i
-                        class="fa fa-plus"></i>Quote Charges</button>
-                     </div>
-                      
-                  </div>
-                </div>
-  
-              </div>
-          </div>
-  
-      </div>
-    </div>
-  
-  </div>
-</div>
-<ng-template #editCurrencyModal let-modal>
- 
-    <div class="modal-header">
-      <h5 class="modal-title" id="editVesselScheduleLabel">Quote Charges</h5>
-      <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-
+            </div>
+</section>
+  <ng-template #editCurrencyModal let-modal>
    
-    </div>
- 
-    <form [formGroup]="editQuoteForm" (ngSubmit)="onSubmit()">
-      <div class="modal-body">
-
-        <div class="row header">
-          {{title}}
-        </div>
-        <div class="row">
-          <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-            <input type="hidden" class="form-control-sm" formControlName="id" id="id">
-            <input type="hidden" formControlName="isActive" id="isActive" />
-            <input type="hidden" class="form-control-sm" formControlName="updatedAt" id="updatedAt">
-            <input type="hidden" class="form-control-sm" formControlName="updatedBy" id="updatedBy">
-            <input type="hidden" class="form-control-sm" formControlName="createdAt" id="createdAt">
-            <input type="hidden" class="form-control-sm" formControlName="createdBy" id="createdBy ">
-            <input type="hidden" class="form-control-sm" formControlName="destinationCharges" id="destinationCharges ">
-            <input type="hidden" class="form-control-sm" formControlName="originCharges" id="originCharges ">
-            <input type="hidden" class="form-control-sm" formControlName="vesselChargeId" id="vesselChargeId ">
-            <label for="CurrecyId">Origin Currecy</label>
-              <select formControlName="originCurrencyId" class="form-control-sm">
-                <option *ngFor="let currency of currencyList" selected="{{currency.id===originCurrencyId}}"
+      <div class="modal-header">
+        <h5 class="modal-title" id="editVesselScheduleLabel">Quote Charges</h5>
+        <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+  
+     
+      </div>
+   
+      <form [formGroup]="editQuoteForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+  
+          <div class="row header">
+            {{title}}
+          </div>
+          <div class="row">
+            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <input type="hidden" class="form-control-sm" formControlName="id" id="id">
+              <input type="hidden" formControlName="isActive" id="isActive" />
+              <input type="hidden" class="form-control-sm" formControlName="updatedAt" id="updatedAt">
+              <input type="hidden" class="form-control-sm" formControlName="updatedBy" id="updatedBy">
+              <input type="hidden" class="form-control-sm" formControlName="createdAt" id="createdAt">
+              <input type="hidden" class="form-control-sm" formControlName="createdBy" id="createdBy ">
+              <input type="hidden" class="form-control-sm" formControlName="destinationCharges" id="destinationCharges ">
+              <input type="hidden" class="form-control-sm" formControlName="originCharges" id="originCharges ">
+              <input type="hidden" class="form-control-sm" formControlName="vesselChargeId" id="vesselChargeId ">
+              <label for="CurrecyId">Origin Currecy</label>
+                <select formControlName="originCurrencyId" class="form-control-sm">
+                  <option *ngFor="let currency of currencyList" selected="{{currency.id===originCurrencyId}}"
+                    value="{{currency.id}}">{{currency.currencyCode}}</option>
+                </select>
+  
+            </div>
+            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+              <label for="CurrecyId">Destination Currecy</label>
+              <select formControlName="destinationCurrencyId" class="form-control-sm">
+                <option *ngFor="let currency of currencyList" selected="{{currency.id===destinationCurrencyId}}"
                   value="{{currency.id}}">{{currency.currencyCode}}</option>
               </select>
-
-          </div>
-          <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-            <label for="CurrecyId">Destination Currecy</label>
-            <select formControlName="destinationCurrencyId" class="form-control-sm">
-              <option *ngFor="let currency of currencyList" selected="{{currency.id===destinationCurrencyId}}"
-                value="{{currency.id}}">{{currency.currencyCode}}</option>
-            </select>
-
-          </div>
-        </div>
-        
-        
- 
-      <div class ="overflow m-height">
-        <form class="form-group" [formGroup]="ToDoListForm">
-          <div formArrayName="items">
-            <div id="no-more-tables">
-          <table class="col-md-12 table-bordered table-striped table-condensed cf">
-            <thead class="cf">              
-          <tr>
-            <th [hidden]="!hideBE">Id</th>
-            <th>isActive</th>
-          <th [hidden]="!hideBE">chargeDetailId</th>
-          <th [hidden]="!hideBE">chargedAtId</th>
-          <th>chargeDetailName</th>
-          <th>chargeDetailType</th>
- 
-          <th>charge Amount</th>
-         
-          <!-- <th>quoteTripChargeId</th> -->
-          <th [hidden]="!hideBE">createdBy</th>
-          <th [hidden]="!hideBE">updatedBy</th>
-          <th [hidden]="!hideBE">createdAt</th>
-          <th [hidden]="!hideBE">updatedAt</th>
-          
-          <th>Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let x of ToDoListForm.get('items').controls;let i=index;trackBy:track" [formGroupName]="i">
-            <td [hidden]="!hideBE" data-title="id" ><input class="form-control-sm" type="hidden" formControlName="id"></td>
-            <td data-title="isActive"><input class="form-control-sm" type="checkbox" formControlName="isActive"></td>
-          <td [hidden]="!hideBE" data-title="chargeDetailId" ><input type = "text" class="form-control-sm" formControlName="chargeDetailId"></td>
- 
-          <td [hidden]="!hideBE"  data-title="chargedAtId" ><input type = "text" readonly class="form-control-sm" formControlName="chargedAtId"> </td>
-          <td  data-title="chargeDetailName" ><input type = "text" readonly class="form-control-sm" formControlName="chargeDetailName"> </td>
-          <td  data-title="chargeDetailType" ><input type = "text" readonly class="form-control-sm" formControlName="chargeDetailType"> </td>
-          <td data-title="chargeAmount" ><input class="form-control-sm" formControlName="chargeAmount" placeholder="chargeAmount"></td>     
-    
-
-
-          <!-- <td data-title="quoteTripChargeId"><input class="form-control-sm" type="text" formControlName="quoteTripChargeId"></td> -->
-          <td      [hidden]="!hideBE" data-title="createdBy"><input class="form-control-sm" type="text" formControlName="createdBy"></td>
-          <td  [hidden]="!hideBE" data-title="updatedBy" ><input class="form-control-sm" type="text" formControlName="updatedBy"></td>
-          <td  [hidden]="!hideBE" data-title="createdAt"><input class="form-control-sm" type="text" formControlName="createdAt"></td>
-          <td [hidden]="!hideBE" data-title="updatedAt" ><input class="form-control-sm" type="text" formControlName="updatedAt"></td>
-         
-          <td><a class="btn btn-secondary" (click)="deleteItem(i)"><i class="fa fa-trash"></i></a></td>
-          </tr>
-          </tbody>
-    
-          </table>
+  
             </div>
           </div>
-          <button class="btn btn-primary" (click)="getMyData()">Refresh</button>
-
-        </form>
-      </div>
-
-
-
-
-      </div>
-
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
-        <button type="submit" class="btn btn-primary" 
-          [disabled]="editQuoteForm.invalid || ToDoListForm.invalid">Submit</button>
           
-      </div>
-    </form>
-  </ng-template>
-
-</div>
+          
+   
+        <div class ="overflow m-height">
+          <form class="form-group" [formGroup]="ToDoListForm">
+            <div formArrayName="items">
+              <div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf">
+              <thead class="cf">              
+            <tr>
+              <th [hidden]="!hideBE">Id</th>
+              <th>isActive</th>
+            <th [hidden]="!hideBE">chargeDetailId</th>
+            <th [hidden]="!hideBE">chargedAtId</th>
+            <th>Charge Name</th>
+            <th>Charged At</th>
+   
+            <th>Charge Amount</th>
+           
+            <!-- <th>quoteTripChargeId</th> -->
+            <th [hidden]="!hideBE">createdBy</th>
+            <th [hidden]="!hideBE">updatedBy</th>
+            <th [hidden]="!hideBE">createdAt</th>
+            <th [hidden]="!hideBE">updatedAt</th>
+            
+            <!-- <th>Action</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let x of ToDoListForm.get('items').controls;let i=index;trackBy:track;" [formGroupName]="i">
+              <td [hidden]="!hideBE" data-title="id" ><input class="form-control-sm" type="hidden" formControlName="id"></td>
+              <td data-title="isActive"><input class="form-control-sm" type="checkbox" formControlName="isActive"></td>
+            <td [hidden]="!hideBE" data-title="chargeDetailId" ><input type = "text" class="form-control-sm" formControlName="chargeDetailId"></td>
+   
+            <td [hidden]="!hideBE"  data-title="chargedAtId" ><input type = "text" readonly class="form-control-sm" formControlName="chargedAtId"> </td>
+            <td  data-title="Charge Name" ><input type = "text" readonly class="form-control-sm" formControlName="chargeDetailName"> </td>
+            <td  data-title="Charged At" ><input type = "text" readonly class="form-control-sm" formControlName="chargeDetailType"> </td>
+            <td data-title="Charge Amount" ><input class="form-control-sm" formControlName="chargeAmount" placeholder="chargeAmount"></td>     
+      
+  
+  
+            <!-- <td data-title="quoteTripChargeId"><input class="form-control-sm" type="text" formControlName="quoteTripChargeId"></td> -->
+            <td      [hidden]="!hideBE" data-title="createdBy"><input class="form-control-sm" type="text" formControlName="createdBy"></td>
+            <td  [hidden]="!hideBE" data-title="updatedBy" ><input class="form-control-sm" type="text" formControlName="updatedBy"></td>
+            <td  [hidden]="!hideBE" data-title="createdAt"><input class="form-control-sm" type="text" formControlName="createdAt"></td>
+            <td [hidden]="!hideBE" data-title="updatedAt" ><input class="form-control-sm" type="text" formControlName="updatedAt"></td>
+           
+            <!-- <td><a class="btn btn-secondary" (click)="deleteItem(i)"><i class="fa fa-trash"></i></a></td> -->
+            </tr>
+            </tbody>
+      
+            </table>
+              </div>
+            </div>
+            <!-- <button class="btn btn-primary" (click)="getMyData()">Refresh</button>
+   -->
+          </form>
+        </div>
+  
+  
+  
+  
+        </div>
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+          <button type="submit" class="btn btn-primary" 
+            [disabled]="editQuoteForm.invalid || ToDoListForm.invalid">Submit</button>
+            
+        </div>
+      </form>
+    </ng-template>
 

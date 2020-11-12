@@ -1,0 +1,84 @@
+<section class="body-container">
+    <div class="col-md-12">
+      <div class="card">
+          <div class="card-header">
+            User Management
+          </div> 
+          <div class="col-12" >
+
+            <div class="card table-data d-lg-none d-md-none" *ngFor="let item of userList | sortBy:'asc':'id'; let index = index;">
+
+              <div><label>S.No</label>{{index +1 }} </div>
+              <div><label>Name </label>{{item.firstName}}     {{item.lastName}}</div>
+              <div><label>Email Id </label>{{item.email}}</div>
+              <div><label>Role Id </label>{{item.userRole.roleName}}</div>
+              <div><label>Company</label>{{item.companyName}}</div>
+              <div *ngIf="item.companyName == item.partner.partnerName && item.partner.isActive==false && item.roleName!='ADMIN'"><label>Activate</label><button>Activate</button> <button>Extend</button></div>
+              <div *ngIf=" item.userRole.roleName !== item.companyName"><label>Reset Password</label><button>Reset Password</button></div>
+ 
+              <div *ngIf="item.userRole.roleName !=='ADMIN' && item.partner.partnerName !=='ADMIN' &&  item.partner.isActive==false"><label>Partner</label>{{item.partner|json}}</div>
+            </div>
+          </div>
+
+
+      </div>
+    </div>
+
+    <!-- <div class="col-sm-12">
+      <div class="card">
+            <div class="card-header">
+                  <strong>List of Port</strong>
+                  <button type="button" class="btn btn-info add-new pull-right" 
+                  (click)="openModal(editPortModal,null)"><i class="fa fa-plus"></i> Add New</button>
+            </div>
+            <div class="card-body  d-none d-md-block d-lg-block">
+                  <table class="table table-responsive-sm table-sm">
+                      <thead >
+                          <tr>
+                       
+                  <th>Id</th>
+                  <th>Is Active</th>
+                  
+                  <th>Port Code</th>
+                  <th>City Code</th>
+                  <th>Country Code</th>
+                  <th>City Description</th>
+                  <th>Port Description</th>
+                  <th>Long Description</th>
+                  <th>Country Description</th>
+                  <th>Created By</th>
+                  <th>Updated By</th>
+                  <th>Created At</th>
+                  <th>Updated At</th>
+                  <th> Action </th>
+                     
+                       </tr>
+                      </thead>
+                      <tbody>
+                       <tr *ngFor ="let port of  portList |  sortBy:'asc':'id'">
+                
+                  <td data-title="Id">{{port.id}}</td>
+                  <td data-title="Is Active"><input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=port.isActive /></td>
+                  
+                  <td data-title="Port Code">{{port.portCode}}</td>
+                  <td data-title="City Code">{{port.cityCode}}</td>
+                  <td data-title="Country Code">{{port.countryCode}}</td>
+                  <td data-title="City Description">{{port.cityDescription}}</td>
+                  <td data-title="Port Description">{{port.portDescription}}</td>
+                  <td data-title="Long Description">{{port.longDescription}}</td>
+                  <td data-title="Country Description">{{port.countryDescription}}</td>
+                  <td data-title="Created By">{{port.createdBy}}</td>
+                  <td data-title="Updated By">{{port.updatedBy}}</td>
+                  <td data-title="Created At">{{port.createdAt  | date:'medium'}}</td>
+                  <td data-title="Updated At">{{port.updatedAt | date:'medium'}}</td>
+                  <td><button type="button" class="btn btn-primary" (click)="openModal(editPortModal,port)">Edit</button>
+                     <button type="button" class="btn btn-danger"
+                     (click)="delete(port.id, index);"><i class="fa fa-trash"></i></button>
+                       
+                       </tr>
+                      </tbody>
+                  </table>
+            </div>
+      </div>
+</div> -->
+</section>

@@ -31,11 +31,6 @@ export class SearchSchedulesComponent implements OnInit {
      expectedDeparture: [new Date().toISOString().split('T')[0]],
      period: [ 7 ,[Validators.required, Validators.maxLength(2)]],
    }); }
-   selectedOriginValue="select Origin Port";
-   
-   changeDropdownName(value: string) {
-    this.selectedOriginValue = value;
-    }
    ngOnInit() {
  
       
@@ -99,6 +94,7 @@ export class SearchSchedulesComponent implements OnInit {
       this.apiService.postMethodAction(this.schlFrm.value, 'VesselSchedules','searchschedule').toPromise().then((data) => {
         { 
           this.searchResults=data; 
+          console.log(data);
           this.toggleDisplay();
         }
       

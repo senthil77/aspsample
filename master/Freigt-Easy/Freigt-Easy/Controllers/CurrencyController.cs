@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Freigt_Easy.Core;
 using Freigt_Easy.Core.DBHelper;
 using Freigt_Easy.Core.Entities;
+using Freigt_Easy.Core.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,13 +49,19 @@ namespace Freigt_Easy.Controllers
         [HttpPost]
         public async Task<ActionResult<Currency>> Post(Currency currency)
         {
-
+            string eMail = string.Empty;
+            using (Utility util = new Utility())
+            {
+                eMail = util.GetEmailclaim(User.Identity as ClaimsIdentity);
+            }
             if (currency.Id > 0)
             {
+                currency.UpdatedBy = eMail;
                 await _repository.UpdateAsync<Currency>(currency);
             }
             else
             {
+                currency.CreatedBy = eMail;
                 await _repository.AddAsync<Currency>(currency);
 
 

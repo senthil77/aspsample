@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Freigt_Easy.Core;
 using Freigt_Easy.Core.DBHelper;
@@ -30,37 +31,38 @@ namespace Freigt_Easy.Controllers
         public async Task<ActionResult<IEnumerable<VesselCharge>>> Get()
 
         {
-            var allTrips = await _repository.ListAllAsyncConditionInclude<VesselSchedule>(x => x.IsActive == true, new string[] {
-                "Details", "OriginPort", "DestinationPort", "Details.TransitPort"});
-            var currencyCode = _config["BaseValues:CurrencyCode"];
 
-            List<VesselCharge> finalList = new List<VesselCharge>();
+
 
             List<VesselCharge> returnList = new List<VesselCharge>();
-            foreach (var veseelSch in allTrips)
-            {
 
 
-                using (Utility uti = new Utility(_repository,_config))
-                {
-                    finalList.AddRange(uti.BuildVesselChargeEntitites(veseelSch, currencyCode));
-
-                }
-            }
-
-
-
-
-            var result = await _repository.ListAllAsyncIncludes<VesselCharge>(new string[] { "DestinationPort", "Currency", "OriginPort", "Package", "Partner", "VesselSchedule", "ChargedAt" });
+            var result = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x=>x.IsActive, new string[] { "DestinationPort", "Currency", "OriginPort", "Package", "Partner", "VesselSchedule", "ChargedAt" });
 
 
             if (result.Count == 0)
             {
-                returnList = finalList;
+                returnList = result;
             }
 
             else
             {
+                var allTrips = await _repository.ListAllAsyncConditionInclude<VesselSchedule>(x => x.IsActive == true, new string[] {
+                "Details", "OriginPort", "DestinationPort", "Details.TransitPort"});
+                var currencyCode = _config["BaseValues:CurrencyCode"];
+
+                List<VesselCharge> finalList = new List<VesselCharge>();
+
+                foreach (var veseelSch in allTrips)
+                {
+
+
+                    using (Utility uti = new Utility(_repository, _config))
+                    {
+                        finalList.AddRange(uti.BuildVesselChargeEntitites(veseelSch, currencyCode));
+
+                    }
+                }
 
                 if (finalList.Count == result.Count)
                 {
@@ -68,14 +70,9 @@ namespace Freigt_Easy.Controllers
                 }
                 else
                 {
-
-
-
-                    var obj2 = finalList
-    .Where(x => !result.Any(y => y.VesselScheduleId == x.VesselScheduleId && y.PackageId == x.PackageId && y.PartnerId == x.PartnerId
-    && y.OriginPortId == x.OriginPortId && y.DestinationPortId == x.DestinationPortId))
-
-  .ToList<VesselCharge>();
+                    var obj2 = finalList.Where(x => !result.Any(y => y.VesselScheduleId == x.VesselScheduleId && y.PackageId == x.PackageId && y.PartnerId == x.PartnerId
+                    && y.OriginPortId == x.OriginPortId && y.DestinationPortId == x.DestinationPortId))
+                        .ToList<VesselCharge>();
 
                     result.AddRange(obj2);
 
@@ -92,6 +89,9 @@ namespace Freigt_Easy.Controllers
         [HttpGet("Test")]
         public async Task<ActionResult<IEnumerable<VesselCharge>>> GetByActive([FromQuery] string requestData)
         {
+
+
+
             
 
             ParamQuery json = JsonConvert.DeserializeObject<ParamQuery>(requestData);
@@ -102,6 +102,12 @@ namespace Freigt_Easy.Controllers
 
             if (json.IsActive == false)
             {
+
+                if (json.RoleName=="ADMIN" || json.RoleName == "SUPPORT")
+                {
+                   return await Get();
+                }
+                else { 
                 var allTrips = await _repository.ListAllAsyncConditionInclude<VesselSchedule>(x => x.IsActive == true, new string[] {
                 "Details", "OriginPort", "DestinationPort", "Details.TransitPort"});
                 var currencyCode = _config["BaseValues:CurrencyCode"];
@@ -111,10 +117,10 @@ namespace Freigt_Easy.Controllers
                 {
                     using (Utility uti = new Utility(_repository, _config))
                     {
-                        finalList.AddRange(uti.BuildVesselChargeEntititesForPartner(veseelSch, currencyCode,json.PartnerId));
+                        finalList.AddRange(uti.BuildVesselChargeEntititesForPartner(veseelSch, currencyCode, json.PartnerId));
                     }
                 }
-                var result = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x=>x.PartnerId== json.PartnerId, new string[] { "DestinationPort", "Currency", "OriginPort", "Package", "Partner", "VesselSchedule", "ChargedAt" });
+                var result = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x => x.PartnerId == json.PartnerId, new string[] { "DestinationPort", "Currency", "OriginPort", "Package", "Partner", "VesselSchedule", "ChargedAt" });
 
                 if (result.Count == 0)
                 {
@@ -142,10 +148,20 @@ namespace Freigt_Easy.Controllers
                     }
                 }
             }
+            }
             else
             {
-                returnList = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x => x.IsActive == json.IsActive && x.PartnerId == json.PartnerId, 
-                    new string[] { "DestinationPort", "Currency", "OriginPort", "Package", "Partner", "VesselSchedule", "ChargedAt" });
+
+                if (json.RoleName == "ADMIN" || json.RoleName == "SUPPORT")
+                {
+                    returnList = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x => x.IsActive == json.IsActive,
+                       new string[] { "DestinationPort", "Currency", "OriginPort", "Package", "Partner", "VesselSchedule", "ChargedAt" });
+                }
+                else
+                {
+                    returnList = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x => x.IsActive == json.IsActive && x.PartnerId == json.PartnerId,
+                        new string[] { "DestinationPort", "Currency", "OriginPort", "Package", "Partner", "VesselSchedule", "ChargedAt" });
+                }
             }
 
 
@@ -176,12 +192,20 @@ namespace Freigt_Easy.Controllers
         public async Task<ActionResult<VesselCharge>> Post(VesselCharge vesselCharge)
         {
 
+            string eMail = string.Empty;
+            using (Utility util = new Utility())
+            {
+                eMail = util.GetEmailclaim(User.Identity as ClaimsIdentity);
+
+            }
             if (vesselCharge.Id > 0)
             {
+                vesselCharge.UpdatedBy = eMail;
                 await _repository.UpdateAsync<VesselCharge>(vesselCharge);
             }
             else
             {
+                vesselCharge.CreatedBy = eMail;
                 await _repository.AddAsync<VesselCharge>(vesselCharge);
 
 

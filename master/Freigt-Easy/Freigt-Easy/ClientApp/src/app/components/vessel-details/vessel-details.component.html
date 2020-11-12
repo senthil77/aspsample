@@ -1,59 +1,57 @@
-<div class="container-fluid pt-5 bg-white">
-  <div class="row">
-    <div class="col-md-12 py-4 text-center">
-      <h3>List of VesselSchedule</h3>
-    </div>
-  </div>
-  <div class="col-sm-12">
-    <button type="button" class="btn btn-info add-new" (click)="openModal(editVesselScheduleModal,null)"><i
-        class="fa fa-plus"></i> Add New</button>
-  </div>
-  <div id="no-more-tables">
-    <table class="col-md-12 table-bordered table-striped table-condensed cf">
-      <thead class="cf">
-        <tr>
-          <th>Id</th>
-          <th>Vessel Name</th>
-          <th>Voyage No</th>
-          <th>Origin Terminal</th>
-          <th>Est Origin Arrival Date</th>
-          <th>Est Berth Date</th>
-          <th>Est Gate Open Date</th>
-          <th>Est Cut Off Date</th>
-          <th>Est Departure Date</th>
-          <th>Destination Terminal</th>
-          <th>Est Destination Arrival Date</th>
-          <th>Origin Port</th>
-          <th>Destination Port</th>
-          <th> Action </th>
-
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let vesselschedule of  vesselScheduleList; let index=index;">
-          <th>{{vesselschedule.id }}</th>
-          <td data-title="Vessel Name">{{vesselschedule.vesselName}}</td>
-          <td data-title="Voyage No">{{vesselschedule.voyageNo}}</td>
-          <td data-title="Origin Terminal">{{vesselschedule.originTerminal}}</td>
-          <td data-title="Est Origin Arrival Date">{{vesselschedule.estArrOriDate|date:'mediumDate'}}</td>
-          <td data-title="Est Berth Date">{{vesselschedule.estBerthDate |date:'mediumDate'}}</td>
-          <td data-title="Est Gate Open Date">{{vesselschedule.estGateOpenDate|date:'mediumDate'}}</td>
-          <td data-title="Est Cut Off Date">{{vesselschedule.estCutOffDate|date:'mediumDate'}}</td>
-          <td data-title="Est Departure Date">{{vesselschedule.estDepDate|date:'mediumDate'}}</td>
-          <td data-title="Destination Terminal">{{vesselschedule.destinationTerminal}}</td>
-          <td data-title="Est Destination Arrival Date">{{vesselschedule.estArrDestDate|date:'mediumDate'}}</td>
-          <td data-title="Origin Port">{{vesselschedule.originPort.portCode}}</td>
-          <td data-title="Destination Port">{{vesselschedule.destinationPort.portCode}}</td>
-          <td><button type="button" class="btn btn-primary"
-              (click)="openModal(editVesselScheduleModal,vesselschedule)"><i class="fa fa-edit"></i></button>
-              <button type="button" class="btn btn-danger"
-              (click)="delete(vesselschedule.id, index);"><i class="fa fa-trash"></i></button>
-
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
+<section class="body-container">
+          <div class="card">
+                <div class="card-header">
+                      <strong>List of VesselSchedule</strong>
+                      <button type="button" class="btn btn-info add-new pull-right" (click)="openModal(editVesselScheduleModal,null)"><i
+                        class="fa fa-plus"></i> Add New</button>
+                </div>
+                <div class="card-body">
+                      <table class="table my-responsive table-striped  table-responsive-sm table-sm">
+                          <thead class="">
+                              <tr>
+                                <th>Id</th>
+                                <th>Vessel Name</th>
+                                <th>Voyage No</th>
+                                <th>Origin Terminal</th>
+                                <th>Est Origin Arrival Date</th>
+                                <th>Est Berth Date</th>
+                                <th>Est Gate Open Date</th>
+                                <th>Est Cut Off Date</th>
+                                <th>Est Departure Date</th>
+                                <th>Destination Terminal</th>
+                                <th>Est Destination Arrival Date</th>
+                                <th>Origin Port</th>
+                                <th>Destination Port</th>
+                                <th> Action </th>
+                      
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let vesselschedule of  vesselScheduleList; let index=index;">
+                                <th data-title="Id">{{vesselschedule.id }}</th>
+                                <td data-title="Vessel Name">{{vesselschedule.vesselName}}</td>
+                                <td data-title="Voyage No">{{vesselschedule.voyageNo}}</td>
+                                <td data-title="Origin Terminal">{{vesselschedule.originTerminal}}</td>
+                                <td data-title="Est Origin Arrival Date">{{vesselschedule.estArrOriDate|date:'mediumDate'}}</td>
+                                <td data-title="Est Berth Date">{{vesselschedule.estBerthDate |date:'mediumDate'}}</td>
+                                <td data-title="Est Gate Open Date">{{vesselschedule.estGateOpenDate|date:'mediumDate'}}</td>
+                                <td data-title="Est Cut Off Date">{{vesselschedule.estCutOffDate|date:'mediumDate'}}</td>
+                                <td data-title="Est Departure Date">{{vesselschedule.estDepDate|date:'mediumDate'}}</td>
+                                <td data-title="Destination Terminal">{{vesselschedule.destinationTerminal}}</td>
+                                <td data-title="Est Destination Arrival Date">{{vesselschedule.estArrDestDate|date:'mediumDate'}}</td>
+                                <td data-title="Origin Port">{{vesselschedule.originPort.portCode}}</td>
+                                <td data-title="Destination Port">{{vesselschedule.destinationPort.portCode}}</td>
+                                <td><button type="button" class="btn btn-primary"
+                                    (click)="openModal(editVesselScheduleModal,vesselschedule)"><i class="fa fa-edit"></i></button>
+                                    <button type="button" class="btn btn-danger"
+                                    (click)="delete(vesselschedule.id, index);"><i class="fa fa-trash"></i></button>
+                      
+                              </tr>
+                            </tbody>
+                      </table>
+                </div>
+          </div>
+</section>
 
   <ng-template   #editVesselScheduleModal let-modal class="font-sm">
     <div class="modal-header">
@@ -75,7 +73,7 @@
             <input type="hidden" class="form-control" formControlName="createdBy" id="createdBy ">
             <label for="vessel">Vessel</label>
         
-            <input type="text" formControlName="vesselName" id="vesselName" class="form-input">
+            <input type="text" formControlName="vesselName" id="vesselName" class="form-control">
           </div>
           <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
             <label for="voyage No">Voyage No</label>
@@ -85,7 +83,7 @@
                 Voyage No required.
               </div>
             </div> -->
-            <input type="text" formControlName="voyageNo" id="voyageNo" class="form-input">
+            <input type="text" formControlName="voyageNo" id="voyageNo" class="form-control">
           </div>
         </div>
         <div class="row header">
@@ -95,7 +93,7 @@
         </div>
         <div class="row">
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
-            <div class="select-list">
+         
             <label for="origin_city">City</label>
     
 <!-- 
@@ -108,16 +106,16 @@
             </div> -->
 
 
-            <!--<input type="text" formControlName="origin_city" id="origin_city" class="form-input">-->
-            <select formControlName="originCity" class="round" (change)="onCityChange($event)">
+            <!--<input type="text" formControlName="origin_city" id="origin_city" class="form-control">-->
+            <select formControlName="originCity"  (change)="onCityChange($event)" class="form-control">
               <option value="">city</option>
               <option *ngFor="let city of orginCities" selected="{{city.value===originCity}}" value="{{city.value}}">
                 {{city.label}}</option>
             </select>
-            </div>
+        
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
-            <div class="select-list">
+          
             <label for="originPort">Port</label>
 
             <!-- <div *ngIf="editVesselScheduleForm.controls['originPortId'].invalid && (editVesselScheduleForm.controls['originPortId'].dirty 
@@ -128,13 +126,13 @@
               </div>
             </div> -->
 
-            <!--<input type="text" formControlName="originPort" id="originPort" class="form-input">-->
-            <select formControlName="originPortId" class="round">
+            <!--<input type="text" formControlName="originPort" id="originPort" class="form-control">-->
+            <select formControlName="originPortId" class="form-control" >
               <option value="">Origin Port</option>
               <option *ngFor="let port of originPorts" selected="{{port.id===originPortId}}" value="{{port.id}}">
                 {{port.portDescription}}</option>
             </select>
-            </div>
+             
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
             <label for="originTerminal">Terminal</label>
@@ -143,22 +141,22 @@
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
             <label for="estArrOriDate">Est Arrival</label>
-            <input type="date" formControlName="estArrOriDate" id="estArrOriDate" class="form-input">
+            <input type="date" formControlName="estArrOriDate" id="estArrOriDate" class="form-control">
           </div>
         </div>
         <div class="row">
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
             <label for="estBerthDate">Est Berthing</label>
-            <input type="date" formControlName="estBerthDate" id="estBerthDate" class="form-input">
+            <input type="date" formControlName="estBerthDate" id="estBerthDate" class="form-control">
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
             <label for="estGateOpenDate">Est Gate Opening</label>
             <input type="date" formControlName="estGateOpenDate" id="estGateOpenDate"
-              class="form-input">
+              class="form-control">
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
             <label for="estCutOffDate">Est Cut-Off</label>
-            <input type="date" formControlName="estCutOffDate" id="estCutOffDate" class="form-input">
+            <input type="date" formControlName="estCutOffDate" id="estCutOffDate" class="form-control">
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
             <label for="estDepDate">Est Departure</label>
@@ -167,7 +165,7 @@
              Departure Date is less than Origin Arrival required.
               </div>
          
-            <input type="date" formControlName="estDepDate" id="estDepDate" class="form-input">
+            <input type="date" formControlName="estDepDate" id="estDepDate" class="form-control">
           </div>
         </div>
         <div class="row header">
@@ -175,7 +173,7 @@
         </div>
         <div class="row">
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
-            <div class="select-list">
+          
             <label for="destinationCity">City</label>
             <!-- <div *ngIf="editVesselScheduleForm.controls['destinationCity'].invalid && (editVesselScheduleForm.controls['destinationCity'].dirty 
       
@@ -184,18 +182,18 @@
                 Destination City is required.
               </div>
             </div> -->
-            <select formControlName="destinationCity" class="round"
+            <select formControlName="destinationCity" class="form-control"
               (change)="onCityChange($event)">
               <option value="">Dest. City</option>
               <option *ngFor="let city of destCities" selected="{{city.value===destinationCity}}"
                 value="{{city.value}}">{{city.label}}</option>
 
             </select>
-            </div>
+         
 
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
-            <div class="select-list">
+    
             <label for="destinationPort">Port</label>
             <!-- <div *ngIf="editVesselScheduleForm.controls['destinationPortId'].invalid && (editVesselScheduleForm.controls['destinationPortId'].dirty 
       
@@ -205,24 +203,24 @@
               </div>
             </div> -->
 
-            <select formControlName="destinationPortId" class="round" (change)="onPortChange();">
+            <select formControlName="destinationPortId" class="form-control" (change)="onPortChange();">
               <option value="">Dest. Port</option>
               <option *ngFor="let port of destPorts" selected="{{port.id===destinationPortId}}" value="{{port.id}}">
                 {{port.portDescription}}</option>
 
             </select>
-            </div>
+  
 
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
             <label for="destinationTerminal">Terminal</label>
             <input type="text" formControlName="destinationTerminal" id="destinationTerminal"
-              class="form-input">
+              class="form-control">
           </div>
           <div class=" col-lg-3 col-md-3 col-sm-3 col-xs-12 form-group">
             <label for="estArrDestDate">Est Arrival</label>
             <input type="date" formControlName="estArrDestDate" id="estArrDestDate"
-              class="form-input">
+              class="form-control">
           </div>
         </div>
         <div class="row header">
@@ -263,7 +261,7 @@
                         formControlName="id" placeholder="Item name"></td>
                     <td [hidden]="!hideBE" data-title="Schedule Id"><input class="form-control"
                         formControlName="scheduleId" placeholder="Item name"></td>
-                    <td data-title="Transit Port">    <div class="select-list"><select class="round" formControlName="transitPortId">
+                    <td data-title="Transit Port">    <div class="select-list"><select  formControlName="transitPortId">
                         <option value="" disabled>Trn Port</option>
 
 
@@ -332,4 +330,4 @@
       </div>
     </form>
   </ng-template>
-</div>
+ 

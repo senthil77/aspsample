@@ -1,113 +1,139 @@
-<!-- 
-<div class="container-fluid">
+<section class="body-container p-0">
 
- 
-   <div class="row">
-                <div class="col-md-12">
-                  <form [formGroup]="fclFrm" (ngSubmit)="onSubmit()">
-                    <div class="form-row">
-                      <div class="form-group col-md-4">
-                    
-                        <label for="pol" class="font-weight-bold">Origin</label>
-                        <select formControlName="originCity" id="pol" class="form-control form-control-sm" (change)="onCityChange($event)"                         
-                          [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.originCity.errors }">
-                          <option selected disabled value="">Select Origin Port </option>      
-                          <option *ngFor="let port of originPorts" value="{{port.id}}">{{port.portDescription}}</option>
-                        </select>
-
-                        <div *ngIf="isSubmitted && fclFormControl.originCity.errors" class="invalid-feedback">
-                          <div *ngIf="fclFrm.controls['originCity'].errors.required">Origin City is required</div>
+        <form [formGroup]="fclFrm" (ngSubmit)="onSubmit()">
+                <div class="col-sm-12 p-0">
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>Search</strong>
+                            <small>Form</small>
                         </div>
-                      </div>
-                      <div class="form-group col-md-4">
-                      
-                        <label for="pod" >Destination</label>
-                        <select formControlName="destinationCity" id="pod" class="form-control form-control-sm" (change)="onCityChange($event)" 
-                        [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.destinationCity.errors }">
-                          <option selected disabled value="">Select Destination Port </option>              
-                          <option *ngFor="let port of destPorts" value="{{port.id}}">{{port.portDescription}}</option>
-                        </select>
-                        <div *ngIf="isSubmitted && fclFormControl.destinationCity.errors" class="invalid-feedback">
-                          <div *ngIf="fclFrm.controls['destinationCity'].errors.required">DestinationCity City is required</div>
-                        </div>
-                      </div>
-                      <div class="form-group col-md-4">
-                       
-                        <label for="packageId" >Container Type</label>
-                        <select formControlName="packageId" id="packageId" class="form-control form-control-sm"  
-                        [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.packageId.errors }">
-                          <option selected disabled value="">Select Container Type </option>    
-                          <option *ngFor= "let pack of packages" value="{{pack.id}}"> {{ pack.packageName}}</option>
-                           
-                        </select>
-                        <div *ngIf="isSubmitted && fclFormControl.packageId.errors" class="invalid-feedback">
-                          <div *ngIf="fclFrm.controls['packageId'].errors.required">Container Type is required</div>
-                        </div>
-                      </div>
-                    </div>
-                      <div class="form-row">
-                       
-                        <div class="form-group col-md-1">
-                          <label for="qty" >Quantity</label>
-                          <input type="number"  [min]="minv"  formControlName="qty" id="qty" class="form-control form-control-sm"
-                          [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.qty.errors }"
-                          >
-
-                          <div *ngIf="isSubmitted && fclFormControl.qty.errors" class="invalid-feedback">
-                            <div *ngIf="fclFrm.controls['qty'].errors.required">qty is required & Should be Greater than 0</div>
-                          </div>
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="blCount" >No of BLs</label>
-                          <input type="number" formControlName="blCount" id="blCount" class="form-control form-control-sm"
-                          [ngClass]  ="{ 'is-invalid': isSubmitted && (fclFormControl.blCount.errors && fclFrm.controls['blCount'].errors?.pattern)  }"
-                          >
-                         
-                          <div *ngIf="isSubmitted && fclFormControl.blCount.errors" class="invalid-feedback">
-                            <div *ngIf="fclFrm.controls['blCount'].errors.required">BL count is required </div>
-                          </div>
-
-                          <div *ngIf="isSubmitted &&  fclFrm.controls['blCount'].errors?.pattern" class="invalid-feedback">
-                            <div *ngIf=" fclFrm.controls['blCount'].errors?.pattern">BL count  Should be Greater than 0</div>
-                          </div>
-                        </div>
-                        <div class="form-group col-md-2">
-                          <label for="commodity" >Commodity</label>
-                          <input type="text" formControlName="commodity" id="commodity" class="form-control form-control-sm">
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="expectedDeparture" >Shipping Date</label>
-                          <input type="date" formControlName="expectedDeparture" id="expectedDeparture" class="form-control form-control-sm">
-                                 
-                        </div>
-                        <div class="form-group col-md-3">
-                          <label for="commodity" >Commodity</label>     
-                          <div class="d-inlineflex p-0">
-                             <label class="radio">   <input type="radio" value="Hazordous" formControlName="commodityType" 
-                              [checked]="fclFormControl.commodityType.value=='Hazordous'"><span class="font-sm">Hazordous</span> </label> 
-                             <label class="radio">    <input type="radio" value=" Non Hazordous" formControlName="commodityType" 
-                              [checked]="fclFormControl.commodityType.value=='Non Hazordous'"> <span class="font-sm">Non Hazordous</span> </label>
-                            </div>
-                        
-           
-                          
-     
-                      
-                        </div>
-                         
-                      </div>
-                    
-                    
+                        <div class="card-body p-1"  [hidden] = "isShow"   > 
+                          <div class="row l">
+                            <div class="col-md-3">
+                                <label for="pol">Origin</label>
+                                <select formControlName="originCity" id="pol" class="form-control" (change)="onCityChange($event)"                         
+                                  [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.originCity.errors }">
+                                  <option selected disabled value="">Origin Port </option>      
+                                  <option *ngFor="let port of originPorts" value="{{port.id}}">{{port.portDescription}}</option>
+                                </select>
             
-                      <button type="submit" class="btn btn-primary">Get Quotes</button>
-                  </form>
+                                <div *ngIf="isSubmitted && fclFormControl.originCity.errors" class="invalid-feedback">
+                                  <div *ngIf="fclFrm.controls['originCity'].errors.required">Origin City is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="pod" >Destination</label>
+                                <select formControlName="destinationCity" id="pod" class="form-control" (change)="onCityChange($event)" 
+                                [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.destinationCity.errors }">
+                                  <option selected disabled value="">Destination Port </option>              
+                                  <option *ngFor="let port of destPorts" value="{{port.id}}">{{port.portDescription}}</option>
+                                </select>
+                                <div *ngIf="isSubmitted && fclFormControl.destinationCity.errors" class="invalid-feedback">
+                                  <div *ngIf="fclFrm.controls['destinationCity'].errors.required">DestinationCity City is required</div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <label for="packageId" >Container Type</label>
+                                <select formControlName="packageId" id="packageId" class="form-control"
+                                [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.packageId.errors }">
+                                  <option selected disabled value="">Container Type </option>    
+                                  <option *ngFor= "let pack of packages" value="{{pack.id}}"> {{ pack.packageName}}</option>
+                                  
+                                </select>
+                                <div *ngIf="isSubmitted && fclFormControl.packageId.errors" class="invalid-feedback">
+                                  <div *ngIf="fclFrm.controls['packageId'].errors.required">Container Type is required</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="expectedDeparture" >Shipping Date</label>
+                                <input type="date" formControlName="expectedDeparture" id="expectedDeparture" class="form-control">
+                            </div>
+                            
+                          </div>
+                              <div class="row l">
+                            <div class="col-md-3">
+                              <div class="row">
+                                  <div class="col-md-6 col-sm-2">
+                                      <label for="qty" >Quantity</label>
+                                      <input type="number"  [min]="minv"  formControlName="qty" id="qty" class="form-control"
+                                      [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.qty.errors }"
+                                      >
+                            
+                                      <div *ngIf="isSubmitted && fclFormControl.qty.errors" class="invalid-feedback">
+                                        <div *ngIf="fclFrm.controls['qty'].errors.required">qty is required & Should be Greater than 0</div>
+                                      </div>
+                            
+                                    </div>
+                                    <div class="col-md-6 col-sm-2">
+                                        <label for="blCount" >No of BLs</label>
+                                        <input type="number" formControlName="blCount" id="blCount" class="form-control"
+                                        [ngClass]  ="{ 'is-invalid': isSubmitted && (fclFormControl.blCount.errors && fclFrm.controls['blCount'].errors?.pattern)  }"
+                                        >
+                                      
+                                        <div *ngIf="isSubmitted && fclFormControl.blCount.errors" class="invalid-feedback">
+                                          <div *ngIf="fclFrm.controls['blCount'].errors.required">BL count is required </div>
+                                        </div>
+                              
+                                        <div *ngIf="isSubmitted &&  fclFrm.controls['blCount'].errors?.pattern" class="invalid-feedback">
+                                          <div *ngIf=" fclFrm.controls['blCount'].errors?.pattern">BL count  Should be Greater than 0</div>
+                                        </div>
+                              
+                                      </div>
+                              </div>
+                            </div>
+                                
+                                <div class="col-md-3 col-sm-3">
+                                  <label for="commodity" >Commodity</label>
+                                  <input type="text" formControlName="commodity" id="commodity" class="form-control">
+                                  </div>
+                                  <div class="col-md-3 col-sm-3">
+                                    <label for="commodity" >Commodity Type</label>     
+                                    <div class="row">
+                                      <div class="col-md-6">
+                                          <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+                                            <input class="c-switch-input" type="radio"  formControlName="commodityType"   value="Hazordous"  [checked]="fclFormControl.commodityType.value=='Hazordous'"><span class="c-switch-slider" data-checked="?" data-unchecked="?"></span>
+                                            <span class="font-sm switch-label">Haz</span>
+                                            </label>  
+                                      </div>
+                                      <div class="col-md-6">
+                                          <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+                                            <input class="c-switch-input" type="radio"  formControlName="commodityType" value=" Non Hazordous"     [checked]="fclFormControl.commodityType.value=='Non Hazordous'"><span class="c-switch-slider" data-checked="?" data-unchecked="?"></span>
+                                            <span class="font-sm switch-label">Non Haz</span>
+                                            </label>  
+                                      </div>
+                                    </div>
+                            
+                                  
+
+                                   
+
+                                      
+                                    <!-- <div class="d-inlineflex p-0">
+                                       <label class="radio">   <input type="radio" value="Hazordous" formControlName="commodityType" 
+                                        [checked]="fclFormControl.commodityType.value=='Hazordous'"><span class="font-sm">Haz</span> </label> 
+                                       <label class="radio">    <input type="radio" value=" Non Hazordous" formControlName="commodityType" 
+                                        [checked]="fclFormControl.commodityType.value=='Non Hazordous'"> <span class="font-sm">Non Haz</span> </label>
+                                      </div> -->
+                                  </div>
+                                  <div class="col-md-3">
+                                      <button type="submit" class="btn-primary btn"    [disabled]="fclFrm.invalid" ><i class="fa fa-search"></i>Get Quotes</button>
+                                  </div>
+                          </div>
+
+                        </div>
+                    </div>
                 </div>
-    </div>
-</div>  -->
-
+            </form>
+</section>
  
-<button [hidden] = "!isShow" (click) = toggleDisplay()> <i class ="fa fa-eye"></i>Show Search Form</button>
-
+ 
+<div class="row">
+<div class="col-sm-12 text-right" [hidden]="!isShow">
+  <button  class="btn btn-primary" (click)=toggleDisplay()>
+ <i class="fa fa-eye"></i>Show Search Form</button>
+</div>
+</div>
 <div class="container-fluid mt-1 p-0">
 
 <section class="search-sec pt-0">
@@ -115,121 +141,6 @@
 <div id="detail-content-sticky-nav-05" class="container-fluid" [hidden] = "isShow" >
 
    
- 
-  
-  <div class="mb-20"></div>
-  
- 
-     
-  <div class="item-text-long">
-    <form [formGroup]="fclFrm" (ngSubmit)="onSubmit()">
-      <div class="row">
-    
-                  <div class="col-md-3 col-sm-3">
-                    <label for="pol">Origin</label>
-                    <div class="select-list">
-                    <select formControlName="originCity" id="pol" class="round" (change)="onCityChange($event)"                         
-                      [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.originCity.errors }">
-                      <option selected disabled value="">Origin Port </option>      
-                      <option *ngFor="let port of originPorts" value="{{port.id}}">{{port.portDescription}}</option>
-                    </select>
-
-                    <div *ngIf="isSubmitted && fclFormControl.originCity.errors" class="invalid-feedback">
-                      <div *ngIf="fclFrm.controls['originCity'].errors.required">Origin City is required</div>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="col-md-3 col-sm-3">
-                    <label for="pod" >Destination</label>
-                    <div class="select-list">
-                    <select formControlName="destinationCity" id="pod" class="round" (change)="onCityChange($event)" 
-                    [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.destinationCity.errors }">
-                      <option selected disabled value="">Destination Port </option>              
-                      <option *ngFor="let port of destPorts" value="{{port.id}}">{{port.portDescription}}</option>
-                    </select>
-                    <div *ngIf="isSubmitted && fclFormControl.destinationCity.errors" class="invalid-feedback">
-                      <div *ngIf="fclFrm.controls['destinationCity'].errors.required">DestinationCity City is required</div>
-                    </div>
-                    </div>
-                  </div>
-                  <div class="col-md-3 col-sm-3">
-                    <label for="packageId" >Container Type</label>
-                    <div class="select-list">
-                    <select formControlName="packageId" id="packageId" class="round"  
-                    [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.packageId.errors }">
-                      <option selected disabled value="">Container Type </option>    
-                      <option *ngFor= "let pack of packages" value="{{pack.id}}"> {{ pack.packageName}}</option>
-                      
-                    </select>
-                    <div *ngIf="isSubmitted && fclFormControl.packageId.errors" class="invalid-feedback">
-                      <div *ngIf="fclFrm.controls['packageId'].errors.required">Container Type is required</div>
-                    </div>
-                    </div>
-                  </div>
-                <div class="col-md-3 col-sm-3">
-                  <label for="expectedDeparture" >Shipping Date</label>
-                  <input type="date" formControlName="expectedDeparture" id="expectedDeparture" class="form-input">
-                </div>
-      </div>
- 
-      <div class="row">
-
-        <div class="col-md-2 col-sm-2">
-          <label for="qty" >Quantity</label>
-          <input type="number"  [min]="minv"  formControlName="qty" id="qty" class="form-input"
-          [ngClass]  ="{ 'is-invalid': isSubmitted && fclFormControl.qty.errors }"
-          >
-
-          <div *ngIf="isSubmitted && fclFormControl.qty.errors" class="invalid-feedback">
-            <div *ngIf="fclFrm.controls['qty'].errors.required">qty is required & Should be Greater than 0</div>
-          </div>
-
-        </div>
-
-        <div class="col-md-2 col-sm-2">
-          <label for="blCount" >No of BLs</label>
-          <input type="number" formControlName="blCount" id="blCount" class="form-input"
-          [ngClass]  ="{ 'is-invalid': isSubmitted && (fclFormControl.blCount.errors && fclFrm.controls['blCount'].errors?.pattern)  }"
-          >
-         
-          <div *ngIf="isSubmitted && fclFormControl.blCount.errors" class="invalid-feedback">
-            <div *ngIf="fclFrm.controls['blCount'].errors.required">BL count is required </div>
-          </div>
-
-          <div *ngIf="isSubmitted &&  fclFrm.controls['blCount'].errors?.pattern" class="invalid-feedback">
-            <div *ngIf=" fclFrm.controls['blCount'].errors?.pattern">BL count  Should be Greater than 0</div>
-          </div>
-
-        </div>
-        
-        <div class="col-md-3 col-sm-3">
-          <label for="commodity" >Commodity</label>
-          <input type="text" formControlName="commodity" id="commodity" class="form-input">
-          </div>
-          <div class="col-md-3 col-sm-3">
-            <label for="commodity" >Commodity Type</label>     
-            <div class="d-inlineflex p-0">
-               <label class="radio">   <input type="radio" value="Hazordous" formControlName="commodityType" 
-                [checked]="fclFormControl.commodityType.value=='Hazordous'"><span class="font-sm">Haz</span> </label> 
-               <label class="radio">    <input type="radio" value=" Non Hazordous" formControlName="commodityType" 
-                [checked]="fclFormControl.commodityType.value=='Non Hazordous'"> <span class="font-sm">Non Haz</span> </label>
-              </div>
-          </div>
-          <div class="col-md-2 col-sm-2 pt-3 pl-3">
-             
-            <button type="submit" class="btn-solid-success"    [disabled]="fclFrm.invalid" ><i class="fa fa-search"></i>Get Quotes</button>
-          
-            </div>
-
-
-      </div>
-       
-        
- 
-    </form>
-</div>
-
- 
  
 
   <div class="mb-50"></div>

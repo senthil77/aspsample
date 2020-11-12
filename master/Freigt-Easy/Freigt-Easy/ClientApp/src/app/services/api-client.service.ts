@@ -29,13 +29,11 @@ export class ApiClientService {
   }
   public postMethodAction<T>(appData, url,actionName) {
  
-//    return this._http.post(this.getUrl(url)+"/" + actionName , appData);
-//    return this._http.post(this.getUrl(url)+"/" + actionName , appData);
-
+ 
     return this._http.post<any>(this.getUrl(url) + "/" + actionName, appData);
   }  
   
-
+  
 
   private getUrl(url: string) {
     const trimmedUrl = url.startsWith('/') ? url.substring(1) : url;

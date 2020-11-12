@@ -1,0 +1,175 @@
+<section class="body-container">
+      <div class="col-sm-12">
+            <div class="card">
+                  <div class="card-header">
+                        <strong>List of Partner</strong>
+                        <button type="button" class="btn btn-info add-new pull-right" (click)="openModal(editPartnerModal,null)">
+                              <i class="fa fa-plus"></i> Add New</button>
+                  </div>
+                  <div class="card-body  d-none d-md-block d-lg-block">
+                        <table class="table table-responsive-sm table-sm">
+                              <thead >
+                                    <tr>
+                                          <th [hidden]="!hideBE">Id</th>
+                                          <th>Is Active</th>
+                                          <th [hidden]="!hideBE"> CreatedBy</th>
+                                          <th [hidden]="!hideBE">UpdatedBy</th>
+                                          <th [hidden]="!hideBE">CreatedAt</th>
+                                          <th [hidden]="!hideBE">UpdatedAt</th>
+                                          <th>PartnerName</th>
+                                          <th>Address1</th>
+                                          <th>Address2</th>
+                                          <th>City</th>
+                                          <th>ZipCode</th>
+                                          <th>PartnerTypeId</th>
+                                          <th>Email1</th>
+                                          <th>Email2</th>
+                                          <th>Phone1</th>
+                                          <th>Phone2</th>
+                                          <th>Contact1</th>
+                                          <th>Contact2</th>
+                                          <th> Action </th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    <tr *ngFor="let partner of  partnerList">
+
+                                          <td data-title="Id" [hidden]="!hideBE">{{partner.id}}</td>
+                                          <td data-title="Is Active">
+                                                <input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=partner.isActive
+                                                />
+                                          </td>
+                                          <td data-title="CreatedBy" [hidden]="!hideBE">{{partner.createdBy}}</td>
+                                          <td data-title="UpdatedBy" [hidden]="!hideBE">{{partner.updatedBy}}</td>
+                                          <td data-title="CreatedAt" [hidden]="!hideBE">{{partner.createdAt | date:'medium'}}</td>
+                                          <td data-title="UpdatedAt" [hidden]="!hideBE">{{partner.updatedAt | date:'medium' }}</td>
+                                          <td data-title="PartnerName">{{partner.partnerName}}</td>
+                                          <td data-title="Address1">{{partner.address1}}</td>
+                                          <td data-title="Address2">{{partner.address2}}</td>
+                                          <td data-title="City">{{partner.city}}</td>
+                                          <td data-title="ZipCode">{{partner.zipCode}}</td>
+                                          <td data-title="PartnerTypeId">{{partner.partnerTypeId}}</td>
+                                          <td data-title="Email1">{{partner.email1}}</td>
+                                          <td data-title="Email2">{{partner.email2}}</td>
+                                          <td data-title="Phone1">{{partner.phone1}}</td>
+                                          <td data-title="Phone2">{{partner.phone2}}</td>
+                                          <td data-title="Contact1">{{partner.contact1}}</td>
+                                          <td data-title="Contact2">{{partner.contact2}}</td>
+                                          <td *ngIf="partner.partnerName !=='ADMIN'">
+                                                <button type="button" class="btn btn-primary" (click)="openModal(editPartnerModal,partner)">Edit</button>
+
+                                    </tr>
+                              </tbody>
+                        </table>
+                  </div>
+            </div>
+      </div>
+</section>
+
+
+<ng-template class="modal-width" #editPartnerModal let-modal>
+      <div class="modal-header">
+            <h5 class="modal-title" id="editPartnerLabel">{{title}} Partner</h5>
+            <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+            </button>
+      </div>
+
+      <div class="modal-body">
+            <form [formGroup]="editPartnerForm" (ngSubmit)="onSubmit()">
+
+
+                  <div class="row">
+                        <input type="hidden" class="form-control" formControlName="id" id="id">
+                        <input type="hidden" class="form-control" formControlName="createdBy" id="createdBy">
+                        <input type="hidden" class="form-control" formControlName="updatedBy" id="updatedBy">
+                        <input type="hidden" class="form-control" formControlName="createdAt" id="createdAt">
+                        <input type="hidden" class="form-control" formControlName="updatedAt" id="updatedAt">
+                        <input type="hidden" class="form-control" formControlName="partnerTypeId" id="partnerTypeId">
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="IsActive">IsActive</label>
+                              <br>
+                              <input type="checkbox" formControlName="isActive" value={{isActive}} [checked]=isActive id="isActive" />
+                        </div>
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="PartnerName">PartnerName</label>
+                              <input type="text" maxlength="200" class="form-control" formControlName="partnerName" id="partnerName">
+                        </div>
+
+                  </div>
+
+                  <div class="row">
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="Address1">Address1</label>
+                              <input type="text" maxlength="200" class="form-control" formControlName="address1" id="address1">
+                        </div>
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="Address2">Address2</label>
+                              <input type="text" maxlength="200" class="form-control" formControlName="address2" id="address2">
+                        </div>
+
+                  </div>
+
+                  <div class="row">
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="City">City</label>
+                              <input type="text" maxlength="200" class="form-control" formControlName="city" id="city">
+                        </div>
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="ZipCode">ZipCode</label>
+                              <input type="text" maxlength="10" class="form-control" formControlName="zipCode" id="zipCode">
+                        </div>
+
+                  </div>
+
+
+                  <div class="row">
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="Email1">Email</label>
+                              <input type="text" maxlength="200" class="form-control" formControlName="email1" id="email1">
+                        </div>
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="Email2">Email </label>
+                              <input type="text" maxlength="200" class="form-control" formControlName="email2" id="email2">
+                        </div>
+
+                  </div>
+                  <div class="row">
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="Contact">Contact Name</label>
+                              <input type="text" maxlength="200" class="form-control" formControlName="contact1" id="contact1">
+                        </div>
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="Contact1">Contact Name </label>
+                              <input type="text" maxlength="200" class="form-control" formControlName="contact2" id="contact2">
+                        </div>
+
+                  </div>
+
+                  <div class="row">
+
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="Phone">Mobile Phone</label>
+                              <input type="text" maxlength="15" class="form-control" formControlName="phone1" id="phone1">
+                        </div>
+                        <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
+                              <label for="Phone2">Phone</label>
+                              <input type="number" maxlength="15" class="form-control" formControlName="phone2" id="phone2">
+                        </div>
+
+                  </div>
+
+
+
+
+
+
+
+
+                  <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="editPartnerForm.invalid">Save changes</button>
+                  </div>
+            </form>
+      </div>
+</ng-template>

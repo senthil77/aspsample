@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Freigt_Easy.Core;
 using Freigt_Easy.Core.DBHelper;
@@ -114,13 +115,27 @@ namespace Freigt_Easy.Controllers
         [HttpPost]
         public async Task<ActionResult<QuoteTripCharge>> Post(QuoteTripCharge quoteTripCharge)
         {
+            string eMail = string.Empty;
+            using (Utility util = new Utility())
+            {
+                eMail = util.GetEmailclaim(User.Identity as ClaimsIdentity);
+
+            }
+
 
             if (quoteTripCharge.Id > 0)
             {
+
+                quoteTripCharge.UpdatedBy = eMail;
+                quoteTripCharge.ChargeDetails.ForEach(x => x.UpdatedBy = eMail);
+
                 await _repository.UpdateAsync<QuoteTripCharge>(quoteTripCharge);
             }
             else
             {
+                quoteTripCharge.CreatedBy = eMail;
+                quoteTripCharge.ChargeDetails.ForEach(x => x.CreatedBy = eMail);
+
                 await _repository.AddAsync<QuoteTripCharge>(quoteTripCharge);
 
 

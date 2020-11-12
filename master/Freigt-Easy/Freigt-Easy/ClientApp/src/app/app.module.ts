@@ -21,7 +21,7 @@ import { PortMainComponent } from './components/port-main/port-main.component';
 import { PortPartnerChargesComponent } from './components/port-partner-charges/port-partner-charges.component';
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { SearchScheduleListComponent } from './components/search-schedule-list/search-schedule-list.component';
-import { UiSwitchModule } from 'ngx-ui-switch';
+ 
 import { EditableComponent } from './components/editable/editable.component';
 import { EditOnEnterDirective } from './components/editable/edit-on-enter.directive';
 import { EditModeDirective } from './components/editable/edit-mode.directive';
@@ -51,7 +51,9 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { AccountActivateComponent } from './pages/account-activate/account-activate.component';
 import { FilterNestedPipe } from './pipes/order-by.pipe';
-import {AuthInterceptor} from './services/auth-interceptor'
+import {AuthInterceptor} from './services/auth-interceptor';
+import { UserMainComponent } from './components/user-main/user-main.component';
+import { HeaderComponent } from './components/header/header.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,7 +110,11 @@ import {AuthInterceptor} from './services/auth-interceptor'
   
     AccountActivateComponent,
   
-    FilterNestedPipe
+    FilterNestedPipe,
+  
+    UserMainComponent,
+  
+    HeaderComponent
   ],
   imports: [
     NgbModule,
@@ -124,7 +130,7 @@ import {AuthInterceptor} from './services/auth-interceptor'
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
-    UiSwitchModule,
+  
   ],
   providers: [ApiClientService,FilterPipe, DatePipe,FilterNestedPipe,{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

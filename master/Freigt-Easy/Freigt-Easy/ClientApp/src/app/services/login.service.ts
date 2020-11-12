@@ -4,37 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { ApiClientService } from '../services/api-client.service';
 import {tokenUser, User} from '../models/user';
-import { map } from 'rxjs/operators';
+
 import jwt_decode from "jwt-decode";
-import { ReturnStatement } from '@angular/compiler';
-
-export class ModelMapper<T> {
-  _propertyMapping: any;
-  _target: any;
-  constructor(type: { new(): T; }) {
-    this._target = new type();
-    this._propertyMapping = this._target.constructor._propertyMap;
-  }
-
-  map(source) {
-    Object.keys(this._target).forEach((key) => {
-      const mappedKey = this._propertyMapping[key]
-      if (mappedKey) {
-        this._target[key] = source[mappedKey];
-      }
-      else {
-        this._target[key] = source[key];
-      }
-    });
-    Object.keys(source).forEach((key) => {
-      const targetKeys = Object.keys(this._target);
-      if (targetKeys.indexOf(key) === -1) {
-        this._target[key] = source[key];
-      }
-    });
-    return this._target;
-  }
-}
+import { ModelMapper } from '../utils/model-mapper'
 
 @Injectable({
   providedIn: 'root'
@@ -45,11 +17,13 @@ export class LoginService {
    loggedInSubj = new Subject<boolean>();
   userSubj = new Subject<tokenUser>();
 
- 
+ isAdminSupportSubj= new Subject<boolean>();
+ isAdminSubj= new Subject<boolean>();
 
-
+ isAdminSupport=false;
+ isAdmin=false;
   expirationTimer: any;
-  isAdmin=false;
+ 
   
   constructor(private http: ApiClientService, private router: Router,private route: ActivatedRoute) { 
 
@@ -85,6 +59,10 @@ export class LoginService {
     }
     else
     {
+      localStorage.removeItem('token');
+   
+    //this.router.navigate(['./home'])
+
       return null;
     }
     
@@ -108,18 +86,44 @@ export class LoginService {
  
       var decoded = jwt_decode(tokenData);
    
-   
-     return new ModelMapper(tokenUser).map(decoded);
+   var loggedUser= new ModelMapper(tokenUser).map(decoded);
+   if (loggedUser.role=="ADMIN")
+   {
+     this.isAdmin=true;
+     this.isAdminSubj.next(true);
+   }
+   if (loggedUser.role=="ADMIN" || loggedUser.role=="SUPPORT")
+   {
+     this.isAdminSupport=true;
+     this.isAdminSupportSubj.next(true);
+   }
+     return loggedUser;
 
     }
  
     public getCurrentUser(){
  
  
-      var decoded = jwt_decode(this.getToken());
+    var decoded = jwt_decode(this.getToken());
    
-   
-     return new ModelMapper(tokenUser).map(decoded);
+    if (decoded!=null)
+    {
+      var loggedUser= new ModelMapper(tokenUser).map(decoded);
+      
+    
+      if (loggedUser.role=="ADMIN")
+   {
+     this.isAdmin=true;
+     this.isAdminSubj.next(true);
+   }
+   if (loggedUser.role=="ADMIN" || loggedUser.role=="SUPPORT")
+   {
+     this.isAdminSupport=true;
+     this.isAdminSupportSubj.next(true);
+   }
+     return loggedUser;
+    }
+    return null;
 
     }
  
@@ -143,6 +147,8 @@ export class LoginService {
 
   
   }
+
+  
 
   autoLogout(expiresIn: number){
     this.expirationTimer =  setTimeout(() => {

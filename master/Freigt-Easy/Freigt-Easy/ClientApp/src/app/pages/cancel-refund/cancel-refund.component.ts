@@ -8,8 +8,10 @@ import { ApiClientService } from 'src/app/services/api-client.service';
   styleUrls: ['./cancel-refund.component.css']
 })
 export class CancelRefundComponent implements OnInit {
-  item:any;
+  itemData:any;
   searchParams:any;
+  originSummary:any;
+  destinationSummary:any;
   oriFxVal:number;
   destFxVal:number;
   constructor(private apiService:ApiClientService, private router:Router) {
@@ -17,12 +19,13 @@ export class CancelRefundComponent implements OnInit {
     if ( this.router.getCurrentNavigation().extras.state!=null)
 {
   var allData = this.router.getCurrentNavigation().extras.state.example;
-
-    this.item = allData.selectedOrder;
-    this.searchParams = allData.searchData;
-    this.oriFxVal = allData.fxOriginCharge;
-    this.destFxVal= allData.fxDestCharge;
-//  console.log(allData);
+ 
+  this.itemData = allData.selectedOrder;
+  this.searchParams=allData.searchData;
+  this.oriFxVal=allData.fxOriginCharge;
+  this.destFxVal=allData.fxDestCharge;
+ 
+ console.log(this.oriFxVal);
 }
 else
 {

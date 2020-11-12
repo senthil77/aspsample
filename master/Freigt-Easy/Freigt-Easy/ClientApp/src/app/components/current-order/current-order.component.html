@@ -1,50 +1,37 @@
- 
-  <div class="row pb-0">
-    
-     
-    <div class="col-md-2 text-center  bg-top">
-      <h5 class="list-group-item-heading  text-white"> {{item.vesselSchedule.vesselName}}</h5>
-      <span class="summaryTitle"> {{item.partner.partnerName}}</span>
-    </div>
-    <div class="col text-center ">
-      <h6> <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}</h6>
-      <p class="list-group-item-text"> {{item.originPort.portDescription}}</p>
-      <p> <span class="summaryTitle">{{item.originPort.portCode}}</span></p>
-    </div>
-    <div class="col text-center">
-      <h6>{{utils.calculateDiff(item.endDate,item.startDate)}} <i>days</i></h6>
-      <svg height="5" width="125">
-        <line x1="0" y1="0" x2="120" y2="0" style="stroke:#6190b0;stroke-width:4" />
-      </svg>
-     
-      <p class="list-group-item-text">
-        <small> <i>
-            {{getTransits(item).tranMessage}}<br>
-            {{getTransits(item).tranPorts}}
-          
-          </i>
-
-            <!-- {{ this.transitsLong.length > 0 ? this.transitsLong.toString() : "No Transits"}} -->
-           </small>
-      </p>
-    </div>
-    <div class="col text-center">
-      <h6> <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</h6>
-      <p class="list-group-item-text ">  {{item.destinationPort.portDescription}}</p>
-      <p><span class="summaryTitle">{{item.destinationPort.portCode}}</span></p>
-          
-    </div>
-    <div class="col text-center">
-      <h6> Local Charges</h6> 
-      <p class="list-group-item-text text-danger"> <strong>{{item.partner.originPortCharges.payableSum |currency:item.partner.originPortCharges.currency.currencyCode}}</strong> </p>
-    </div>
-    <div class="col text-center">
-      <h6> Frieght </h6>
-      <p class="list-group-item-text text-danger"><strong> {{item.chargeAmount*searchItem.qty |currency: item.currency.currencyCode}} </strong></p>
-    </div>
-   
-    
+<div class="card pt-3" *ngIf="itemData"> 
+  <div class="bg-white">
+       <span class="mt-5 summary">Summary</span>
   </div>
- 
 
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Pol</span> <span class="summaryTitle">{{itemData.originPort.cityDescription}} ({{itemData.originPort.cityCode}})</span> </div>
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Pod</span> <span class="summaryTitle">{{itemData.destinationPort.cityDescription}} ({{itemData.destinationPort.cityCode}})</span> </div>
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Sailing Date</span> <span class="summaryTitle">{{itemData.startDate  |date:'mediumDate'}}</span> </div>
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Vessel Name</span> <span class="summaryTitle">{{ itemData.vesselSchedule.vesselName}}</span> </div>
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">ETA</span> <span class="summaryTitle">{{itemData.endDate  |date:'mediumDate'}}</span> </div>
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Transit</span> <span class="summaryTitle">{{transi.tranMessage}}</span> <br> <span class="summaryTitle"> <i> {{transi.tranPorts}}</i></span></div> 
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Frieght</span> <span class="summaryTitle">{{itemData.chargeAmount *searchItem.qty  |currency: 'USD'}}</span> </div> 
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Local Charges</span> <span class="summaryTitle">
+{{itemData.charges.originCharges |currency :itemData.charges.originCurrency.currencyCode }}</span>
+<span class="summaryTitle">
+  {{itemData.charges.originCharges /oriFxVal |currency }}
+</span> 
+</div> 
+
+
+
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Destination Charges</span> <span class="summaryTitle">
+{{itemData.charges.destinationCharges |currency :itemData.charges.destinationCurrency.currencyCode }}</span>
+<span class="summaryTitle">
+{{itemData.charges.destinationCharges/destFxVal |currency }}</span>
+
+
+</div> 
  
+      
+<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Total Charges</span>
+<span class="summaryTitle">
+  {{((itemData.chargeAmount * searchItem.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}
+</span>
+</div>
+
+</div>

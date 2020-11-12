@@ -54,60 +54,55 @@ export class LoginPageComponent implements OnInit {
       if (this.loginForm.invalid) {
         return;
       }
+      else
+
+      {
+       
       this.loading = true; 
         if (val.userName && val.password) {       
            
-            this.authService.login(val.userName, val.password).subscribe(data => {
+            this.authService.login(val.userName, val.password).toPromise().then((data) => {
 
-              console.log(data);
+            if (data)
+            {
+
               localStorage.setItem('token', data.token);
               this.authService.loggedIn = true;
               this.authService.loggedInSubj.next(true);
               
               this.authService.currentUser = this.authService.getLoggedInUser(data.token);
-              console.log(this.authService.currentUser);
+              
           
               this.authService.userSubj.next(this.authService.currentUser);
         
              
 
               this.router.navigate([this.returnUrl]);
+            }
+            else
+            {
+              
+              this.error ="Something went wrong";
+            }
         
-            },
-            error => {
-            
-
+            }).catch((error)=>
+            {
+              return;
+              this.submitted = false;
+              this.loading = false;
               if (error instanceof HttpErrorResponse) {
 
                 console.log(error.error.message);
 
                 this.error= error.error.message;
-                
-                if (!error.status) {
-                  console.log(error.message || error.toString());
-                } else {
-                  console.log(error);
-                  switch (error.status) {
-                    case 401:
-                      this.router.navigateByUrl("/login");
-                      break;
-                    case 500:
-                      this.router.navigateByUrl("/login");
-                      console.log(`redirect to login`);
-                      break;
-                  }
-                }
-              } else {
-                console.error("Other Errors");
               }
-              
-              this.loading = false;
             });
-          }
-        
-  
-  
           
+          }
+
+          return;
+        }
+        
           
     }
   }

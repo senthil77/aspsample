@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Freigt_Easy.Core;
+using Freigt_Easy.Core.ApiResp;
 using Freigt_Easy.Core.DBHelper;
 using Freigt_Easy.Core.Entities;
 using Freigt_Easy.Core.Helpers;
+using Freigt_Easy.Core.POCO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace Freigt_Easy.Controllers
 {
@@ -30,8 +33,36 @@ namespace Freigt_Easy.Controllers
         public async Task<ActionResult<IEnumerable<User>>> Get()
 
         {
-            return await _repository.ListAllAsync<User>();
+            var userList= await  _repository.ListAllAsyncConditionInclude<User>(x=>x.UserRole.RoleName!="ADMIN", new string[] { "UserRole", "Partner"});
 
+            return userList.WithOutPassword();
+        }
+
+
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<IEnumerable<User>> GetUserList(string requestData)
+        {
+
+            ParamQuery json = JsonConvert.DeserializeObject<ParamQuery>(requestData);
+
+            List<User> returnList = new List<User>();
+
+            UserRole urole = _repository.FindSingle<UserRole>(x => x.RoleName == "ADMIN");
+
+            if (json.RoleName == "ADMIN")
+            {
+                returnList =  await _repository.ListAllAsyncIncludes<User>(new string[] { "Partner","UserRole"});
+            }
+            else
+            {
+                returnList= await _repository.ListAllAsyncConditionInclude<User>(x=>x.UserRoleId!= urole.Id, new string[] { "Partner", "UserRole" });
+            }
+            //
+
+          returnList.Where(x => x.ValidUpTo == DateTime.MinValue).ToList().ForEach(x => x.ValidUpTo = DateTime.Now);
+
+            return returnList.FindAll(x => x.Partner != null).WithOutPassword();
 
         }
 
@@ -46,7 +77,7 @@ namespace Freigt_Easy.Controllers
                 return NotFound();
             }
 
-            return user;
+            return user.WithOutPassword();
         }
 
         [HttpGet("Test")]
@@ -63,7 +94,7 @@ namespace Freigt_Easy.Controllers
                 return NotFound();
             }
 
-            return user;
+            return user.WithOutPassword();
 
         }
 
@@ -87,11 +118,18 @@ namespace Freigt_Easy.Controllers
 
 
                 await _repository.AddAsync<User>(user);
-                using (Utility util = new Utility( _repository, _config))
+                try
                 {
-                    //await util.SendVerificationLink(user.Email, activationCode, user.FirstName);
+                    using (Utility util = new Utility(_repository, _config))
+                    {
+                        //await util.SendVerificationLink(user.Email, activationCode, user.FirstName);
 
-                    await util.SendWelcomeEmailAsync(user.Email, user.FirstName, activationCode);
+                        await util.SendWelcomeEmailAsync(user.Email, user.FirstName, activationCode);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    return NotFound(new ApiResponse(500, ex.Message));
                 }
 
             }
@@ -101,6 +139,51 @@ namespace Freigt_Easy.Controllers
             return result;
 
         }
+
+        [HttpPost, Route("ResetActivateLink")]
+        public async Task<ActionResult<User>> ResetActivateLink([FromBody]  int userId)
+        {
+           var  activationCode = Guid.NewGuid().ToString();
+            var user = await _repository.GetByIdAsync<User>(Convert.ToInt32(userId));
+
+            if (user == null)
+            {
+                return NotFound(new ApiResponse(500, $"User not found"));
+            }
+            user.ActivationCode = activationCode;
+             await _repository.UpdateAsync<User>(user);
+
+            using (Utility util = new Utility(_repository, _config))
+            {
+                //await util.SendVerificationLink(user.Email, activationCode, user.FirstName);
+
+                await util.SendWelcomeEmailAsync(user.Email, user.FirstName, activationCode);
+            }
+
+            return user;
+        }
+        [HttpPost, Route("Activate")]
+        public async Task<ActionResult<User>> Activate([FromBody]  ActivateUser activateUser)
+        {
+            //update user with role
+          //  ActivateUser activateUser = JsonConvert.DeserializeObject<ActivateUser>(requestData);
+            var user =  _repository.FindSingle<User>(x=>x.Id== activateUser.userId, new string[] { "Partner"});
+            if (user == null)
+            {
+                return NotFound(new ApiResponse(500, $"User not found"));
+            }
+
+            user.ValidUpTo = activateUser.validUpTo;
+            user.UserRoleId = activateUser.roleId;
+            user.IsActive = activateUser.isActive;
+            user.Partner.IsActive = activateUser.isActive;
+            user.Partner.ValidUpTo = activateUser.validUpTo;
+            user.Partner.IsSusbcribed = activateUser.isSubscribed;
+            await _repository.UpdateAsync<User>(user);
+
+            return user;
+        }
+     
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]

@@ -1,0 +1,290 @@
+<div class="container p-3" style="margin-top: 1em;">
+    <!-- Sign up form -->
+    <form [formGroup]="editBolForm" (ngSubmit)="onSubmit()">
+              
+        <div class="row">
+            <div class="col-md-6 p-1">
+                
+                <div class="card">
+                    <h2 class="card-title header">Shipper</h2>
+                    <div class="card-body">
+                      
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">Name</label>
+                                    <input type="email" class="form-control" formControlName="shipperName" placeholder="Name" id="shipperName">
+                                  
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">Address1</label>
+                                    <input type="email" class="form-control" formControlName="shipperAddress1" id="shipperAddress1">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                      
+                        <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">Address2</label>
+                            <input type="email" class="form-control" formControlName="shipperAddress2" id="shipperAddress2">
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">City</label>
+                            <input type="email" class="form-control" formControlName="shipperCity" id="shipperCity">
+                           
+                        </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">PinCode</label>
+                            <input type="email" class="form-control" formControlName="shipperZipCode" id="shipperZipCode">
+                           
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">GST No.</label>
+                            <input type="email" class="form-control" formControlName="shipperPanNo" id="shipperPanNo">
+                             
+                        </div>
+                        </div>
+                    </div>
+                         
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-6 p-1">
+                <div class="card">
+                    <h2 class="card-title header">Consignee</h2>
+                    <div class="card-body">
+                      
+                        <div class="row">
+                                <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">Name</label>
+                                    <input type="email" class="form-control" formControlName="consigneeName" placeholder="Name" id="consigneeName">
+                                     
+                                </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="shipper"  class="col-form-label">Address1</label>
+                                        <input type="email" class="form-control" formControlName="consigneeAddress1" id="consigneeAddress1">                                         
+                                    </div>
+                                </div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">Address2</label>
+                            <input type="email" class="form-control" formControlName="consigneeAddress2" id="consigneeAddress2">
+                             
+                        </div>
+                            </div>
+                            <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">City</label>
+                            <input type="email" class="form-control" formControlName="consigneeCity" id="consigneeCity">
+                             
+                        </div>
+                        </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">PinCode</label>
+                                    <input type="email" class="form-control" formControlName="consigneeZipCode" id="consigneeZipCode">
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">GST No.</label>
+                                    <input type="email" class="form-control" formControlName="consigneePanNo" id="consigneePanNo">
+                                     
+                                </div>
+                                </div>
+
+                        </div>
+                       
+                       
+                         
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 p-1">
+                
+                <div class="card">
+                    <h2 class="card-title header">Notify</h2>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <label for="shipper"  class="col-form-label">Same as Consignee.</label>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    
+                                    <input type="checkbox" class="form-control" formControlName="shipperName" id="shipperName">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                       
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">Name</label>
+                                    <input type="email" class="form-control" formControlName="notifyName" placeholder="Name" id="notifyName">
+                                  
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">Address1</label>
+                                    <input type="email" class="form-control" formControlName="notifyAddress1" id="notifyAddress1">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                       <div class="row">
+                           <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="shipper"  class="col-form-label">Address2</label>
+                                <input type="email" class="form-control" formControlName="notifyAddress2" id="notifyAddress2">
+                                
+                            </div>
+                           </div>
+                           <div class="col-md-6">
+                                
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">City</label>
+                            <input type="email" class="form-control" formControlName="notifyCity" id="notifyCity">
+                            
+                        </div>
+                        </div>
+                       </div>
+                   
+                         
+                       <div class="row">
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">PinCode</label>
+                            <input type="email" class="form-control" formControlName="notifyZipCode" id="notifyZipCode">
+                        
+                        </div>
+                        </div>
+                        <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">GST No.</label>
+                            <input type="email" class="form-control" formControlName="notifyPanNo" id="notifyPanNo">
+                           
+                        </div>
+                        </div>
+                       </div>
+                         
+                    </div>
+                </div>
+            </div>
+                
+            <div class="col-md-6 p-1">
+                <div class="card">
+                    <h2 class="card-title header">Bill Details</h2>
+                    <div class="card-body">   
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">Number of Original Bill </label>
+                        <select class="form-control" formControlName="noOfOriginalBill">
+                            <option value="">Selectt BL</option>
+                        </select>
+                             
+                        </div>
+                            </div>
+                            <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">Terms of Shipment </label>
+                        <select class="form-control" formControlName="termsofShipment">
+                            <option value="">Selectt BL</option>
+                        </select>
+                             
+                        </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">Frieght Payable AT</label>
+                                <select class="form-control" formControlName="frieghtPayableAt">
+                                    <option value="">Selectt BL</option>
+                                </select>
+                                     
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="shipper"  class="col-form-label">Cargo</label>
+                                    <input type="text" class="form-control" formControlName="cargo" id="shipperName">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                     <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="shipper"  class="col-form-label">Gross Weight</label>
+                                <input type="text" class="form-control" formControlName="grossWeight" id="shipperName">
+                              
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            
+                        <div class="form-group">
+                            <label for="shipper"  class="col-form-label">Nett Weight</label>
+                            <input type="text" class="form-control" formControlName="netWeight" id="shipperName">
+                        
+                        </div>
+                        </div>
+                     </div>
+                      
+                     <div class="row">
+                         <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="shipper"  class="col-form-label">Cargo Description</label>
+                                <textarea class="form-control" formControlName="cargoDescription" id="shipperName"></textarea>
+                            
+                            </div>
+                         </div>
+                     </div>
+                       
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-3">
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Create BOL</button>
+        </div>
+        </form>
+        
+</div>

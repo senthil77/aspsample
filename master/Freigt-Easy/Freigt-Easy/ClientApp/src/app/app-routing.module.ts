@@ -31,9 +31,11 @@ import {AuthGuardService} from './services/auth-guard.service';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { AccountActivateComponent } from './pages/account-activate/account-activate.component';
+import {UserMainComponent} from './components/user-main/user-main.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
+   
   { path: 'searchschedule', component: SearchSchedulesComponent,    canActivate: [AuthGuardService] },
   { path: 'refund', component: CancelRefundComponent, canActivate: [AuthGuardService] },
   { path: 'pack', component: PackageMainComponent, canActivate: [AuthGuardService] },
@@ -54,6 +56,8 @@ const routes: Routes = [
   {path:'signUp', component: SignUpComponent},
   {path:'welcome', component:WelcomePageComponent},
   {path:'activate', component:AccountActivateComponent},
+  {path:'user', component:UserMainComponent},
+  
   {path:'Vessel-subscribe', component: SubscribeComponent, canActivate: [AuthGuardService]},
   {
     path: 'quotes',

@@ -31,10 +31,11 @@ namespace Freigt_Easy.Controllers
 
         [SwaggerOperation("GetChargeAt")]
 
-        [HttpGet("{isActive}", Name = "GetChargeAt")]
-        public async Task<ActionResult<IEnumerable<ChargedAt>>> GetChargeAt(bool isActive)
+        [Route("[action]")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<ChargedAt>>> GetChargeAt()
         {
-            return await _repository.ListAllAsyncWhere<ChargedAt>(x => x.IsActive == isActive);
+           return await _repository.ListAllAsync<ChargedAt>();
         }
  
       

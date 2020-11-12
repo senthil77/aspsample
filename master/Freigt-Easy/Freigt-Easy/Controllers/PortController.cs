@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Freigt_Easy.Core;
 using Freigt_Easy.Core.DBHelper;
 using Freigt_Easy.Core.Entities;
+using Freigt_Easy.Core.Helpers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace Freigt_Easy.Controllers
 {
@@ -15,10 +19,20 @@ namespace Freigt_Easy.Controllers
     public class PortController : ControllerBase
     {
         private readonly IRepository _repository;
-        public PortController(RiaDBContext context, IRepository repository)
-        {
+        private readonly IConfiguration _config;
+        
+        public PortController(RiaDBContext context, IRepository repository, IConfiguration config)
+        { 
             _repository = repository;
+            _config = config;
+
+
+
+
         }
+
+
+
         // GET: api/Ports
         [HttpGet]
 
@@ -26,9 +40,7 @@ namespace Freigt_Easy.Controllers
         public async Task<ActionResult<IEnumerable<Port>>> Get()
 
         {
-
-
-            // var result = await _repository.ListAllAsync<StandardCharge>();
+             
 
             return await _repository.ListAllAsync<Port>();
 
@@ -50,17 +62,26 @@ namespace Freigt_Easy.Controllers
             return port;
         }
         // POST: api/Ports
+        [Authorize(Policy = Policies.Support)]
         [HttpPost]
         public async Task<ActionResult<Port>> Post(Port port)
         {
-
-            if (port.Id > 0)
+       
+            string eMail = string.Empty;
+            using (Utility util = new Utility())
             {
+              eMail=  util.GetEmailclaim(User.Identity as ClaimsIdentity);
+                
+            }
+
+             if (port.Id > 0)
+            {
+                port.UpdatedBy = eMail;
                 await _repository.UpdateAsync<Port>(port);
             }
             else
             {
-
+                port.CreatedBy = eMail;
                 await _repository.AddAsync<Port>(port);
 
 

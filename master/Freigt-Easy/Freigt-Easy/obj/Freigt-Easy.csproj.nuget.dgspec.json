@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\skumar743\\source\\repos\\Freigt-Easy\\Freigt-Easy\\Freigt-Easy.csproj": {}
+    "C:\\aspsample\\master\\Freigt-Easy\\Freigt-Easy\\Freigt-Easy.csproj": {}
   },
   "projects": {
-    "C:\\Users\\skumar743\\source\\repos\\Freigt-Easy\\Freigt-Easy\\Freigt-Easy.csproj": {
+    "C:\\aspsample\\master\\Freigt-Easy\\Freigt-Easy\\Freigt-Easy.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\skumar743\\source\\repos\\Freigt-Easy\\Freigt-Easy\\Freigt-Easy.csproj",
+        "projectUniqueName": "C:\\aspsample\\master\\Freigt-Easy\\Freigt-Easy\\Freigt-Easy.csproj",
         "projectName": "Freigt-Easy",
-        "projectPath": "C:\\Users\\skumar743\\source\\repos\\Freigt-Easy\\Freigt-Easy\\Freigt-Easy.csproj",
+        "projectPath": "C:\\aspsample\\master\\Freigt-Easy\\Freigt-Easy\\Freigt-Easy.csproj",
         "packagesPath": "C:\\Users\\skumar743\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\skumar743\\source\\repos\\Freigt-Easy\\Freigt-Easy\\obj\\",
+        "outputPath": "C:\\aspsample\\master\\Freigt-Easy\\Freigt-Easy\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -80,10 +80,6 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
-            },
-            "NETCore.MailKit": {
-              "target": "Package",
-              "version": "[2.0.3, )"
             },
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",

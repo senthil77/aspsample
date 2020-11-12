@@ -134,7 +134,7 @@ qcValue:QuoteTripCharge;
     this.ToDoListForm.get('items').push(new FormGroup({
     id:new FormControl(dat[x].id,[Validators.required]),
     chargeDetailId:new FormControl(dat[x].chargeDetailId,[Validators.required]),
-    chargeAmount:new FormControl(dat[x].chargeAmount,[Validators.required]),
+    chargeAmount:new FormControl(dat[x].chargeAmount,[Validators.required, Validators.pattern('^[0-9]*$'),Validators.max(25000)]),
     isActive:new FormControl(dat[x].isActive,[Validators.required]),
     createdBy:new FormControl(dat[x].createdBy),
     updatedBy:new FormControl(dat[x].updatedBy),
@@ -276,11 +276,12 @@ deleteItem(i:number){
     let data ={
 
       isActive: true,
-      partnerId: this.authService.currentUser.partnerId
+      partnerId: this.authService.currentUser.partnerId,
+      roleName: this.authService.currentUser.roleName,
     }
     this.apiClient.getWithActionColls<VesselCharge>('VesselCharge','getActive', data).subscribe((res)=>{
       this.vesscharges= res;
-     console.log(res);
+
   // console.log(this.vesscharges.map(this.pick('vesselScheduleId', 'vesselSchedule.vesselName')));
 
   

@@ -1,0 +1,152 @@
+<section class="body-container">
+    <div class="col-md-12">
+      <div class="card">
+          <div class="card-header">
+            User Management
+          </div> 
+          <div class="col-12" >
+
+            <div class="card table-data d-lg-none d-md-none" *ngFor="let item of userList | sortBy:'asc':'id'; let index = index;">
+
+              <div><label>S.No</label>{{index +1 }} </div>
+              <div><label>Name </label>{{item.firstName}}     {{item.lastName}}</div>
+              <div><label>Email Id </label>{{item.email}}</div>
+              <div><label>Role Name </label>{{item.userRole.roleName}}</div>
+              <div><label>Company</label>{{item.companyName}}</div>
+              <div *ngIf="item.companyName == item.partner.partnerName && item.partner.isActive==false && item.roleName!='ADMIN'"><label>Activate</label><button>Activate</button> <button>Extend</button></div>
+              <div *ngIf=" item.userRole.roleName !== item.companyName"><label>Reset Password</label><button>Reset Password</button></div>
+ 
+              <div *ngIf="item.userRole.roleName !=='ADMIN' && item.partner.partnerName !=='ADMIN' &&  item.partner.isActive==false"><label>Partner</label>{{item.partner|json}}</div>
+            </div>
+          </div>
+          <div class="card-body  d-none d-md-block d-lg-block">
+            <table class="table table-responsive-sm ">
+            <thead>
+              <tr>
+                <th>S.No</th>
+                <th> Name 
+                    <button class="btn btn-sm btn-outline-light pull-right active" type="button"  (click)="sort('firstName');"><i class='fa fa-sort'></i></button>
+                </th>
+                <th>Email Id
+                    <button class="btn btn-sm btn-outline-light pull-right active" type="button"  (click)="sort('email');"><i class='fa fa-sort'></i></button>
+                  </th>
+                <th>Role Name
+                  <button class="btn btn-sm btn-outline-light pull-right active" type="button"><i class='fa fa-sort'></i></button>
+                </th>
+                <th>Company</th>
+                <th>KYP 
+                   
+                </th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor ="let item of userList  |  sortBy: sortDirection : sortingName;">
+                <td>  {{item.id}} </td>
+                <td>  {{item.firstName}} </td>
+                <td>  {{item.email}} </td>
+                <td>  {{item.userRole.roleName ==='TEMP'?'':item.userRole.roleName  }} </td>
+                <td>  {{item.companyName}} </td>
+                <td> <div *ngIf="item.userRole.roleName !=='ADMIN' && item.partner.partnerName !=='ADMIN' &&  item.partner.isActive==false">
+                  {{item.partner|json}}
+                </div> </td>
+                <td>  
+                  <div *ngIf="item.companyName == item.partner.partnerName && item.partner.isActive==false && item.userRole.roleName!='ADMIN'"> <button  (click)="openModal(editActivateUserModal,item)">Activate</button></div>
+                  <div *ngIf="item.companyName !== item.partner.partnerName  && item.userRole.roleName =='TEMP'"> <button (click)= "resetActivationLink(item.id);">Resend Link</button> <button>Trash</button></div>
+                  <div *ngIf="item.companyName == item.partner.partnerName && item.partner.isActive==true && item.isActive==true && item.userRole.roleName!='ADMIN'"> <button>Reset Password</button> <button>Deactivate</button></div>
+                </td>
+                
+              </tr>
+              |
+            </tbody>
+            </table>
+          </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <ng-template #editActivateUserModal let-modal>
+    <div class="modal-header">
+     <h5 class="modal-title" id="editEmployeeLabel">Edit Employee</h5>
+     <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    
+    <div class="modal-body">
+      <span></span>
+     <form [formGroup]="editAcivateUserForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+   <label for="RoleId" class="col-sm-4 col-form-label">RoleId</label>
+   <div class="col-sm-8">
+ 
+
+   <select formControlName="roleId" id="pol" class="form-control" autofocus [ngClass]="{ 'is-invalid': isSubmitted && activateUserControl.roleId.errors }">
+    <option selected disabled value="">Role Name </option>
+    <option *ngFor="let role of roleList;" value="{{role.id}}">{{role.roleName}}</option>
+    </select>
+<div *ngIf="isSubmitted && activateUserControl.roleId.errors" class="invalid-feedback">
+    <div *ngIf="editAcivateUserForm.controls['roleId'].errors.required">Role is Required</div>
+</div>
+
+
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="isActive" class="col-sm-4 col-form-label">isActive</label>
+   <div class="col-sm-8">
+  
+
+    <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+      <input class="c-switch-input" type="checkbox"  formControlName="isActive"     [checked]="isActive"><span class="c-switch-slider" data-checked="?" data-unchecked="?"></span>
+ 
+      </label>  
+
+ 
+  
+   </div>
+   </div>
+   <div class="form-group row">
+    <label for="Validity" class="col-sm-4 col-form-label">Validity</label>
+    <div class="col-sm-8">
+ 
+    <input type="date"  formControlName="validUpTo" id="validUpTo" class="form-control">
+
+    <div class="alert alert-danger" *ngIf="isSubmitted && !helper.inFuture(editAcivateUserForm.controls['validUpTo'].value)">
+Date has to be in Future
+       </div>
+    </div>
+    </div>
+   <div class="form-group row">
+   <label for="IsSubscribed" class="col-sm-4 col-form-label">IsSubscribed</label>
+   <div class="col-sm-8">
+ 
+
+   <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+    <input class="c-switch-input" type="checkbox"  formControlName="isSubscribed"     [checked]="isSubscribed"><span class="c-switch-slider" data-checked="?" data-unchecked="?"></span>
+
+    </label>  
+
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="UserId" class="col-sm-4 col-form-label">UserId</label>
+   <div class="col-sm-8">
+   <input type = "text" class="form-control" formControlName="userId" id="userId">
+   </div>
+   </div>
+   
+       
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+
+       <button type="submit" class="btn btn-primary" 
+       [disabled]="editAcivateUserForm.invalid"
+        >Save changes</button>
+      </div>
+     </form>
+    </div>
+   </ng-template>

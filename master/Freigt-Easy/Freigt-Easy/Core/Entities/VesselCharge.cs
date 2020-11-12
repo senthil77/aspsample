@@ -54,7 +54,10 @@ namespace Freigt_Easy.Core.Entities
 
         public QuoteTripCharge Charges { get; set; }
 
-
+        [NotMapped]
+        public int TransitDays { get { return ((TimeSpan)(EndDate - StartDate)).Days; }
+            set { }
+        }
 
         // public List<StandardCharge> StdCharges { get; set; }
     }

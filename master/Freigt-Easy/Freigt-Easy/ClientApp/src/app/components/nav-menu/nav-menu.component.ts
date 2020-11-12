@@ -9,42 +9,27 @@ declare var $:any;
 })
 export class NavMenuComponent implements OnInit {
 
-  currentUser:tokenUser;
-  constructor(public service:LoginService, ) { }
+ 
+  constructor(public service:LoginService ) { }
  
   ngOnInit(): void {
 
     if (this.service.currentUser== null)    {
 
-      this.currentUser =this.service.getCurrentUser();
-      console.log(this.service.getCurrentUser())
+   
 
       this.service.currentUser = this.service.getCurrentUser();
  
   
       this.service.userSubj.next(this.service.currentUser);
     }
-     
- 
-
-    // Dropdown Menu Fade    
-$(document).ready(function(){
-  $(".dropdown").hover(
-      function() { $('.dropdown-menu', this).fadeIn("fast");
-      },
-      function() { $('.dropdown-menu', this).fadeOut("fast");
-  });
-});
+  
   }
 
   closeme() {
     $('.navbar-toggler:visible').click();
   }
-  logOut(){
-    this.closeme();
-    this.currentUser=null;
-    this.service.logout();
-  }
+ 
 
 
 }

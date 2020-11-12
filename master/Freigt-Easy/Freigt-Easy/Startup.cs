@@ -25,21 +25,7 @@ namespace Freigt_Easy
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            services.AddControllers().AddNewtonsoftJson(options =>
-            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
-            services.AddControllersWithViews();
-            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
-            {
- 
-                builder
-                .WithOrigins("http://localhost:4200")
-                  .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials();
-            }));
-            services.AddDbContext<RiaDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<IRepository, Repository<RiaDBContext>>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.RequireHttpsMetadata = false;
@@ -56,16 +42,47 @@ namespace Freigt_Easy
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            services.AddSwaggerGen(options =>
+            services.AddAuthorization(config =>
             {
-                options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
-                {
-                    Title = "Freight-Easy",
-                    Version = "v2",
-                    Description = "Sample service for Freight-Easy",
-                });
+                config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
+                config.AddPolicy(Policies.Support, Policies.SupportPolicy());
+                config.AddPolicy(Policies.Partner, Policies.PartnerPolicy());
+                config.AddPolicy(Policies.Vendors, Policies.VendorsPolicy());
+                config.AddPolicy(Policies.Temp, Policies.TempPolicy());
             });
 
+            services.AddControllersWithViews();
+            services.AddControllers();
+        
+ 
+            services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
+            {
+ 
+                builder
+                .WithOrigins("http://localhost:4200")
+                  .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials();
+            }));
+            services.AddControllers().AddNewtonsoftJson(options =>
+        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+
+            services.AddDbContext<RiaDBContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IRepository, Repository<RiaDBContext>>();
+        
+            //services.AddSwaggerGen(options =>
+            //{
+            //    options.SwaggerDoc("v2", new Microsoft.OpenApi.Models.OpenApiInfo
+            //    {
+            //        Title = "Freight-Easy",
+            //        Version = "v2",
+            //        Description = "Sample service for Freight-Easy",
+            //    });
+            //});
+
+
+    
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
@@ -93,24 +110,25 @@ namespace Freigt_Easy
             }
 
             app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseCors("CorsPolicy");
-            app.UseAuthorization();
+        
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
-            app.UseSwagger();
+            //app.UseSwagger();
 
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("/swagger/v2/swagger.json", "Freight-Easy");
-                c.InjectJavascript("/swagger/custom.js");
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v2/swagger.json", "Freight-Easy");
+            //    c.InjectJavascript("/swagger/custom.js");
 
-            });
+            //});
 
             app.UseSpa(spa =>
             {

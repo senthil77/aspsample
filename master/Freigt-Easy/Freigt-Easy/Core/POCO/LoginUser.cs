@@ -1,5 +1,5 @@
 ﻿using Freigt_Easy.Core.Entities;
-using MimeKit;
+ 
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -58,13 +58,7 @@ namespace Freigt_Easy.Core.POCO
 
     }
 
-    public class EmailMessage
-    {
-        public MailboxAddress Sender { get; set; }
-        public MailboxAddress Reciever { get; set; }
-        public string Subject { get; set; }
-        public string Content { get; set; }
-    }
+ 
     public class PortRoute
     {
         public int OriginPortId { get; set; }
@@ -86,5 +80,19 @@ namespace Freigt_Easy.Core.POCO
     
         public bool IsActive { get; set; }
         public int PartnerId { get; set; }
+        public bool IsAdmin { get; set; }
+ 
+        public string RoleName { get; set; }
+    }
+
+    public class ActivateUser
+    {
+
+        public int roleId { get; set; }
+        public bool isActive { get; set; }
+        public bool isSubscribed { get; set; }
+        public int  userId { get; set; }
+        public DateTime validUpTo { get; set; }
+     
     }
 }

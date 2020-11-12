@@ -69,7 +69,7 @@ return  date.toLocaleDateString('en-GB', {
 
   ngOnInit(): void {
 
-console.log(this.getCurrentDate());
+ 
     this.TransitListForm = new FormGroup({
       items: new FormArray([])
     })
@@ -159,7 +159,7 @@ console.log(this.getCurrentDate());
 
     this.apiClient.get('VesselSchedules').subscribe((res) => {
       this.vesselScheduleList = res;
-      console.log(this.vesselScheduleList);
+ 
      
 
     });

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
+using System.Web;
 namespace Freigt_Easy.Core
 {
     public class RiaDBContext : DbContext
@@ -22,7 +22,7 @@ namespace Freigt_Easy.Core
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //13.90.197.172
-            string conString = @"Host=13.90.197.172;Port=5432; Username=postgres; Password=postgres; Database=ria-ship; ";
+            string conString = @"Host=localhost;Port=5432; Username=postgres; Password=admin; Database=ria-ship; ";
             //            string conString = @"Host=localhost;Port=5432; Username=postgres; Password=postgres; Database= ria-ship; ";
             // string conString = @"Host=localhost;Port=5432;Username=postgres;Password=admin;Database=ria-ship;";
 
@@ -76,12 +76,15 @@ namespace Freigt_Easy.Core
 
         public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
         {
+         
             AddTimestamps();
             return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
         }
 
         private void AddTimestamps()
         {
+
+           
             var entities = ChangeTracker.Entries().Where(x => x.Entity is BaseEntity && (x.State == EntityState.Added || x.State == EntityState.Modified));
 
 
@@ -91,11 +94,11 @@ namespace Freigt_Easy.Core
                 if (entity.State == EntityState.Added)
                 {
                     ((BaseEntity)entity.Entity).CreatedAt = DateTime.Now;
-                    ((BaseEntity)entity.Entity).CreatedBy = "admin";
+               
                 }
 
                 ((BaseEntity)entity.Entity).UpdatedAt = DateTime.Now;
-                ((BaseEntity)entity.Entity).UpdatedBy = "admin";
+             
             }
         }
 

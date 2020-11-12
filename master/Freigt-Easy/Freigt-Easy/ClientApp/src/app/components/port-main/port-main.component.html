@@ -1,66 +1,60 @@
- 
-    <div class="container-fluid pt-5 bg-white">
-    <div class="row">
-     <div class="col-md-12 py-4 text-center">
-      <h3>List of Port</h3>
-     </div>
-    </div>
-    <div class="col-sm-12">
-           <button type="button" class="btn btn-info add-new" 
-        
-           (click)="openModal(editPortModal,null)"><i class="fa fa-plus"></i> Add New</button>
-         </div>
-      <div id="no-more-tables">
-       <table class="col-md-12 table-bordered table-striped table-condensed cf">
-               <thead class="cf">
-           <tr>
-        
-   <th>Id</th>
-   <th>Is Active</th>
-   
-   <th>Port Code</th>
-   <th>City Code</th>
-   <th>Country Code</th>
-   <th>City Description</th>
-   <th>Port Description</th>
-   <th>Long Description</th>
-   <th>Country Description</th>
-   <th>Created By</th>
-   <th>Updated By</th>
-   <th>Created At</th>
-   <th>Updated At</th>
-   <th> Action </th>
-      
-        </tr>
-       </thead>
-       <tbody>
-        <tr *ngFor ="let port of  portList |  sortBy:'asc':'id'">
- 
-   <td data-title="Id">{{port.id}}</td>
-   <td data-title="Is Active"><input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=port.isActive /></td>
-   
-   <td data-title="Port Code">{{port.portCode}}</td>
-   <td data-title="City Code">{{port.cityCode}}</td>
-   <td data-title="Country Code">{{port.countryCode}}</td>
-   <td data-title="City Description">{{port.cityDescription}}</td>
-   <td data-title="Port Description">{{port.portDescription}}</td>
-   <td data-title="Long Description">{{port.longDescription}}</td>
-   <td data-title="Country Description">{{port.countryDescription}}</td>
-   <td data-title="Created By">{{port.createdBy}}</td>
-   <td data-title="Updated By">{{port.updatedBy}}</td>
-   <td data-title="Created At">{{port.createdAt  | date:'medium'}}</td>
-   <td data-title="Updated At">{{port.updatedAt | date:'medium'}}</td>
-   <td><button type="button" class="btn btn-primary" (click)="openModal(editPortModal,port)">Edit</button>
-      <button type="button" class="btn btn-danger"
-      (click)="delete(port.id, index);"><i class="fa fa-trash"></i></button>
-        
-        </tr>
-       </tbody>
-      </table>
-     </div>
-    
-   </div>
-
+<section class="body-container">
+          <div class="card">
+                <div class="card-header">
+                      <strong>List of Port</strong>
+                      <button type="button" class="btn btn-info add-new pull-right" 
+                      (click)="openModal(editPortModal,null)"><i class="fa fa-plus"></i> Add New</button>
+                </div>
+                <div class="card-body">
+                      <table class="table my-responsive table-striped  table-responsive-sm table-sm">
+                          <thead >
+                              <tr>
+                           
+                      <th>Id</th>
+                      <th>Is Active</th>
+                      
+                      <th>Port Code</th>
+                      <th>City Code</th>
+                      <th>Country Code</th>
+                      <th>City Description</th>
+                      <th>Port Description</th>
+                      <th>Long Description</th>
+                      <th>Country Description</th>
+                      <th>Created By</th>
+                      <th>Updated By</th>
+                      <th>Created At</th>
+                      <th>Updated At</th>
+                      <th> Action </th>
+                         
+                           </tr>
+                          </thead>
+                          <tbody>
+                           <tr *ngFor ="let port of  portList |  sortBy:'asc':'id'">
+                    
+                      <td data-title="Id">{{port.id}}</td>
+                      <td data-title="Is Active"><input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=port.isActive /></td>
+                      
+                      <td data-title="Port Code">{{port.portCode}}</td>
+                      <td data-title="City Code">{{port.cityCode}}</td>
+                      <td data-title="Country Code">{{port.countryCode}}</td>
+                      <td data-title="City Description">{{port.cityDescription}}</td>
+                      <td data-title="Port Description">{{port.portDescription}}</td>
+                      <td data-title="Long Description">{{port.longDescription}}</td>
+                      <td data-title="Country Description">{{port.countryDescription}}</td>
+                      <td data-title="Created By">{{port.createdBy}}</td>
+                      <td data-title="Updated By">{{port.updatedBy}}</td>
+                      <td data-title="Created At">{{port.createdAt  | date:'medium'}}</td>
+                      <td data-title="Updated At">{{port.updatedAt | date:'medium'}}</td>
+                      <td><button type="button" class="btn btn-primary" (click)="openModal(editPortModal,port)">Edit</button>
+                         <button type="button" class="btn btn-danger"
+                         (click)="delete(port.id, index);"><i class="fa fa-trash"></i></button>
+                           
+                           </tr>
+                          </tbody>
+                      </table>
+                </div>
+          </div>
+</section>
 
    <ng-template #editPortModal let-modal>
     <div class="modal-header">

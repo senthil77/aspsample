@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ModelMapper } from '../../utils/model-mapper';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Partner } from 'src/app/models/partner';
 import { VesselHeader } from 'src/app/models/vessel-header';
@@ -14,6 +14,7 @@ import {VesselCharge} from '../../models/vessel-charge'
 import { HelperService } from 'src/app/services/helper.service';
 import {NotificationService} from '../../services/notification.service'
 import { LoginService } from 'src/app/services/login.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-vessel-operator-charges',
   templateUrl: './vessel-operator-charges.component.html',
@@ -22,7 +23,8 @@ import { LoginService } from 'src/app/services/login.service';
 export class VesselOperatorChargesComponent implements OnInit {
  
   constructor(private apiClient:ApiClientService, public filter: FilterPipe, private store: StoreService, private authService:LoginService,
-    private fb: FormBuilder, private modalService: NgbModal,private helperService:HelperService, private notifyService: NotificationService) { }
+    private fb: FormBuilder, private modalService: NgbModal,private helperService:HelperService, 
+    private notifyService: NotificationService, private router:Router) { }
     public searchText: string;
     public sortDirection :string= 'asc'
     public sortingName: string ='packageId';
@@ -46,7 +48,7 @@ export class VesselOperatorChargesComponent implements OnInit {
   });
  
   if (vesselCharge!=null)  {  
-    vesselCharge.isActive= true;
+ 
     this.vesselDetail = vesselCharge; 
     this.editVesselChargeForm.patchValue({
       chargeDetail:vesselCharge.chargeDetail,
@@ -95,6 +97,12 @@ updatedAt:'',
     });
  }
 }
+
+gotoPortCharges()
+{
+ 
+  this.router.navigateByUrl('/partnerPort');
+}
 onchangeVessel(event: Event) {
 
   const selVessel = (event.target as HTMLSelectElement).value;
@@ -105,7 +113,12 @@ onSubmit() {
   
 var vesId = this.editVesselChargeForm.getRawValue()['id'];
 
- 
+if (this.editVesselChargeForm.getRawValue()['isActive']==false) {
+
+  this.notifyService.showWarning("is Active has to be checked while saving");
+  return;
+} 
+ else{
   this.apiClient.postMethod(this.editVesselChargeForm.value, 'VesselCharge').toPromise().then((data => {
     this.vesselDetail = new ModelMapper(VesselCharge).map(data); 
     console.log(data);
@@ -120,6 +133,7 @@ var vesId = this.editVesselChargeForm.getRawValue()['id'];
    
    
     })).catch((err=> {     this.notifyService.showError("Promise rejected with " + JSON.stringify(err));}))
+ }
 
     this.modalService.dismissAll();
  }
@@ -133,18 +147,13 @@ var vesId = this.editVesselChargeForm.getRawValue()['id'];
   
    this.sortingName =fieldname;
  }
- calculateDiff(stDate,enDate)
- {
-   var dt= this.helperService.calculateDiff(enDate,stDate);
-   
-   return dt;
- }
+ 
   ngOnInit() {
 
     this.editVesselChargeForm = this.fb.group({
       chargeDetail: [''],
-      chargedAtId: [''],
-      chargeAmount: [''],
+      chargedAtId: ['',[Validators.required]],
+      chargeAmount: ['', [Validators.required, Validators.pattern('^[0-9]*$'),Validators.max(5000)]],
       chargeType: [''],
       packageId: [''],
       vesselScheduleId: [''],
@@ -166,7 +175,9 @@ var vesId = this.editVesselChargeForm.getRawValue()['id'];
        let data ={
 
       isActive: false,
-        partnerId: this.authService.currentUser.partnerId
+      partnerId: this.authService.currentUser.partnerId,
+      roleName: this.authService.currentUser.roleName,
+   
       }
       this.apiClient.getWithActionColls<VesselCharge>('VesselCharge','getActive', data).subscribe((res)=>{
         this.vesscharges= res;

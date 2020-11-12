@@ -1,5 +1,5 @@
 
-     <div id="detail-content-sticky-nav-05" class="container-fluid" *ngIf="data.length>0"> 
+     <div id="detail-content-sticky-nav-05" class="container-fluid p-0" *ngIf="data.length>0"> 
  
 
       <h4 class="heading-title"></h4>
@@ -98,7 +98,7 @@
           <div class="item-text-long">
              
               <div class="row align-items-center">
-                  <div class="col-12 col-sm-12 col-md-3 text-center">
+                  <div class="col-12 col-sm-12 col-md-3 text-center p-0">
                       <div class="row align-items-center ">
                           <div class="col-md-3 col-sm-3">
                          
@@ -111,14 +111,14 @@
                       </div>
                   </div>
                   <div class="col-12 col-md-9">
-                      <div class="row align-items-center">
+                      <div class="row">
                           <div class="col-12 col-sm-7">
                   
                               <div class="col-inner mb-10 mb-sm-0">
                               
-                                  <div class="row gap-10 align-items-center">
+                                  <div class="row gap-10">
                                   
-                                      <div class="col-4">
+                                      <div class="col-4 p-0">
                                        <strong class="d-block brand-fore-color">  <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}</strong> 
                                         <strong class="d-block"> {{item.originPort.portDescription}}</strong>
                                         <span class="font-sm brand-sec-fore-color"><strong>{{item.originPort.portCode}}</strong> </span>
@@ -126,18 +126,17 @@
              
                                       </div>
                                       
-                                      <div class="col-4 text-sm-center">
+                                      <div class="col-4 text-sm-center p-0">
+                                          <span class="day-count mt-3">{{item.transitDays}} days</span>
+                                         <br>
+                                         <span class="font-sm">  {{getTransits(item).tranMessage}}
+                                         </span>
+                                         <span class="font-sm brand-sec-fore-color"><strong>{{getTransits(item).tranPorts}} </strong> </span>
 
-                                       
-
-
-                                          <span class="day-count mt-3">{{utils.calculateDiff(item.endDate,item.startDate)}} <br>days</span>
-                                         <hr>
-                                         <span class="font-sm">  {{getTransits(item).tranMessage}}<br>
-                                          {{getTransits(item).tranPorts}}</span>
+                                         
                                       </div>
                                       
-                                      <div class="col-4">
+                                      <div class="col-4 p-0">
 
                                         <strong class="d-block brand-fore-color">  <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</strong>
                                         <strong class="d-block">{{item.destinationPort.portDescription}}</strong>
@@ -165,7 +164,7 @@
                                   
                                       <div class="col-6 text-left  text-sm-left">
                                           <span class="font-sm d-block text-danger"><strong>{{item.chargeAmount*searchvalues.qty |currency: item.currency.currencyCode}}</strong></span>
-                                          <span class="font-micro">{{item.chargedAt.name}}</span>
+                                          <!-- <span class="font-micro">{{item.chargedAt.name}}</span> -->
                                       </div>
                                       
                                   </div>

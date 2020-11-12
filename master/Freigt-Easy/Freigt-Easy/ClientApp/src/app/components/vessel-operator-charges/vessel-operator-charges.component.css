@@ -109,4 +109,7 @@ ul {
   display:contents;
 }
 
- 
+ .brand-color
+ {
+  background: #355b84;
+ }

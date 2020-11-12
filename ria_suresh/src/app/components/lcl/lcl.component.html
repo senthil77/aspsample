@@ -1,0 +1,95 @@
+<div class="row">
+    <div class="col-md-12">
+      
+      <form [formGroup]="lclFrm" (ngSubmit)="onSubmit()">
+        <div class="row">
+      
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="pol">Origin</label>
+            <select formControlName="origin_city" id="pol" class="form-control form-control-sm">
+              <option *ngFor="let port of ports;" value="{{port.portCode}}">{{port.portDescription}}</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="pod" class=" font-weight-bold">Destination</label>
+            <select formControlName="destination_city" id="pod" class="form-control form-control-sm">
+              <option *ngFor="let port of ports" value="{{port.portCode}}">{{port.portDescription}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="commodity" class=" font-weight-bold">Commodity</label>
+            <input type="text" formControlName="commodity" id="commodity" class="form-control form-control-sm">
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="noofPackages" class=" font-weight-bold">No of Packages</label>
+            
+          </div>
+        </div>
+ 
+ 
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="dimensions" class=" font-weight-bold">Dimensions in CM</label>
+            <div class="row">
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="L">
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="W">
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="H">
+              </div>
+              or
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="L">
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="W">
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="H">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="cargoType" class=" font-weight-bold">Cargo Type</label>
+            <div class="switch-container">
+              <span class="switch">
+                <label for="idChk-normal" class=" font-weight-bold"> Non Hazardous</label>
+                <input type="checkbox" class="switch" id="idChk-normal">
+                <label for="idChk-normal" class=" font-weight-bold">Hazardous</label>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="grosWeight" class=" font-weight-bold">Gross in Weight</label>
+      
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="netWeight" class=" font-weight-bold">Net Weight</label>
+           
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <button class="btn btn-primary btn-sm" type="submit" [disabled]="!this.lclFrm.valid">Get Fares</button>
+          </div>
+        </div>
+      </form>
+    </div>
+   </div>
+   <div class="row">
+     <div class="col-md-12 m-0 p-0">
+      
+     </div>
+   </div>
+  
+ 
+ 
+ 
+   <ng-http-loader></ng-http-loader>

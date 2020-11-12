@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Freigt_Easy.Core;
 using Freigt_Easy.Core.DBHelper;
@@ -64,18 +65,24 @@ namespace Freigt_Easy.Controllers
         public async Task<ActionResult<Partner>> Post(Partner partner)
         {
 
+            string eMail = string.Empty;
+            using (Utility util = new Utility())
+            {
+                eMail = util.GetEmailclaim(User.Identity as ClaimsIdentity);
+            }
             if (partner.Id > 0)
             {
+                partner.UpdatedBy = eMail;
                 await _repository.UpdateAsync<Partner>(partner);
 
             }
             else
             {
-
+                partner.CreatedBy = eMail;
                 await _repository.AddAsync<Partner>(partner);
                 using (Utility uti = new Utility(_repository,_config))
                 {
-                    await uti.updateUser(partner.Email1, partner.Id);
+                    await uti.updateUser(partner.Email1, partner.Id, eMail);
 
                 }
 

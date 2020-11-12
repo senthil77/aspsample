@@ -1,0 +1,143 @@
+<section class="body-container">
+    <div class="col-sm-12">
+          <div class="card">
+                <div class="card-header">
+                      <strong>List of Port</strong>
+                      <button type="button" class="btn btn-info add-new pull-right" 
+                      (click)="openModal(editPortModal,null)"><i class="fa fa-plus"></i> Add New</button>
+                </div>
+                <div class="card-body  d-none d-md-block d-lg-block">
+                      <table class="table table-responsive-sm table-sm">
+                          <thead >
+                              <tr>
+                           
+                      <th>Id</th>
+                      <th>Is Active</th>
+                      
+                      <th>Port Code</th>
+                      <th>City Code</th>
+                      <th>Country Code</th>
+                      <th>City Description</th>
+                      <th>Port Description</th>
+                      <th>Long Description</th>
+                      <th>Country Description</th>
+                      <th>Created By</th>
+                      <th>Updated By</th>
+                      <th>Created At</th>
+                      <th>Updated At</th>
+                      <th> Action </th>
+                         
+                           </tr>
+                          </thead>
+                          <tbody>
+                           <tr *ngFor ="let port of  portList |  sortBy:'asc':'id'">
+                    
+                      <td data-title="Id">{{port.id}}</td>
+                      <td data-title="Is Active"><input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=port.isActive /></td>
+                      
+                      <td data-title="Port Code">{{port.portCode}}</td>
+                      <td data-title="City Code">{{port.cityCode}}</td>
+                      <td data-title="Country Code">{{port.countryCode}}</td>
+                      <td data-title="City Description">{{port.cityDescription}}</td>
+                      <td data-title="Port Description">{{port.portDescription}}</td>
+                      <td data-title="Long Description">{{port.longDescription}}</td>
+                      <td data-title="Country Description">{{port.countryDescription}}</td>
+                      <td data-title="Created By">{{port.createdBy}}</td>
+                      <td data-title="Updated By">{{port.updatedBy}}</td>
+                      <td data-title="Created At">{{port.createdAt  | date:'medium'}}</td>
+                      <td data-title="Updated At">{{port.updatedAt | date:'medium'}}</td>
+                      <td><button type="button" class="btn btn-primary" (click)="openModal(editPortModal,port)">Edit</button>
+                         <button type="button" class="btn btn-danger"
+                         (click)="delete(port.id, index);"><i class="fa fa-trash"></i></button>
+                           
+                           </tr>
+                          </tbody>
+                      </table>
+                </div>
+          </div>
+    </div>
+</section>
+
+   <ng-template #editPortModal let-modal>
+    <div class="modal-header">
+     <h5 class="modal-title" id="editPortLabel">{{title}} Port</h5>
+     <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    
+    <div class="modal-body">
+     <form [formGroup]="editPortForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+   
+   <div class="col-sm-8">
+   <input type = "hidden" class="form-control" formControlName="id" id="id">
+   <input type = "hidden" class="form-control" formControlName="createdBy" id="createdBy">
+   <input type = "hidden" class="form-control" formControlName="updatedBy" id="updatedBy">
+   <input type = "hidden" class="form-control" formControlName="createdAt" id="createdAt">
+   <input type = "hidden" class="form-control" formControlName="updatedAt" id="updatedAt">
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="IsActive" class="col-sm-4 col-form-label">IsActive</label>
+   <div class="col-sm-8">
+    <input type="checkbox" formControlName="isActive" value={{isActive}} [checked]=isActive id="isActive" />
+   </div>
+   </div>
+   
+   <div class="form-group row">
+   <label for="PortCode" class="col-sm-4 col-form-label">Port Code</label>
+   <div class="col-sm-8">
+   <input type = "text" class="form-control" formControlName="portCode" id="portCode">
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="CityCode" class="col-sm-4 col-form-label">City Code</label>
+   <div class="col-sm-8">
+   <input type = "text" class="form-control" formControlName="cityCode" id="cityCode">
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="CountryCode" class="col-sm-4 col-form-label">Country Code</label>
+   <div class="col-sm-8">
+   <input type = "text" class="form-control" formControlName="countryCode" id="countryCode">
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="CityDescription" class="col-sm-4 col-form-label">City Description</label>
+   <div class="col-sm-8">
+   <input type = "text" class="form-control" formControlName="cityDescription" id="cityDescription">
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="PortDescription" class="col-sm-4 col-form-label">Port Description</label>
+   <div class="col-sm-8">
+   <input type = "text" class="form-control" formControlName="portDescription" id="portDescription">
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="LongDescription" class="col-sm-4 col-form-label">Long Description</label>
+   <div class="col-sm-8">
+   <input type = "text" class="form-control" formControlName="longDescription" id="longDescription">
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="CountryDescription" class="col-sm-4 col-form-label">Country Description</label>
+   <div class="col-sm-8">
+   <input type = "text" class="form-control" formControlName="countryDescription" id="countryDescription">
+   </div>
+   </div>
+
+      
+ 
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-primary"
+           [disabled]="editPortForm.invalid"
+           >Save changes</button>
+      </div>
+     </form>
+    </div>
+   </ng-template>
+
+  

@@ -1,0 +1,170 @@
+<!-- <section id="banner" class="banner">
+    <div class="bg-color">
+        <app-nav-menu></app-nav-menu> 
+        <div class="container-fluid pt-5 bg-white">
+        </div>
+    </div>
+<router-outlet></router-outlet>
+<ng-http-loader></ng-http-loader>
+</section> -->
+
+<div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-show" id="sidebar">
+    <div class="c-sidebar-brand d-lg-down-none">
+        <img src="../assets/images/ship-icon.png" style="width: 50px" />
+    </div>
+
+
+    <ul class="c-sidebar-nav">
+        <li class="c-sidebar-nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+            <a class="c-sidebar-nav-link" routerLink="/">
+                <button>
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                </button>
+                Home</a>
+        </li>
+        <li class="c-sidebar-nav-item" routerLinkActive="active">
+            <a class="c-sidebar-nav-link" routerLink="/quotes">
+                <button>
+                        <i class="fa fa-file-text" aria-hidden="true"></i>
+                </button>
+                Quotes</a>
+        </li>
+        <li class="c-sidebar-nav-item" routerLinkActive="active">
+            <a class="c-sidebar-nav-link" routerLink="/searchschedule">
+                <button>
+                        <i class="fa fa-list" aria-hidden="true"></i>
+                </button>
+                Search</a>
+        </li>
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                <button>
+                    <i class="fa fa-asterisk" aria-hidden="true"></i>
+                </button>
+                Master-Data </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/pack">
+                        <button>
+                            <i class="fa fa-suitcase" aria-hidden="true"></i>
+                        </button>
+                        Package</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/port">
+                        <button>
+                            <i class="fa fa-ship" aria-hidden="true"></i>
+                        </button>
+                        Port</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/vesselDetails">
+                        <button>
+                            <i class="fa fa-gears" aria-hidden="true"></i>
+                        </button>
+                        Vessel Management</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/partner">
+                        <button>
+                            <i class="fa fa-users" aria-hidden="true"></i>
+                        </button>
+                        Partner</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/vesselcharges">
+                        <button>
+                            <i class="fa fa-money" aria-hidden="true"></i>
+                        </button>
+                        Operator Vesel Charges</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/currency">
+                        <button>
+                            <i class="fa fa-dollar" aria-hidden="true"></i>
+                        </button>
+                        Currency</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/chargeDetails">
+                        <button>
+                            <i class="fa fa-gg" aria-hidden="true"></i>
+                        </button>
+                        ChargeDetails</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/partnerPort">
+                        <button>
+                                <i class="fa fa-fort-awesome" aria-hidden="true"></i>
+                        </button>Port Charges</a>
+                </li>
+            </ul>
+        </li>
+        <li class="c-sidebar-nav-item c-sidebar-nav-dropdown">
+            <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
+                <button>
+                        <i class="fa fa-list-alt" aria-hidden="true"></i>
+                </button> Listing </a>
+            <ul class="c-sidebar-nav-dropdown-items">
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/bol">
+                        <button>
+                                <i class="fa fa-file-o" aria-hidden="true"></i>
+                        </button>
+                        Bill of Landing</a>
+                </li>
+                <li class="c-sidebar-nav-item">
+                    <a class="c-sidebar-nav-link" routerLink="/invoice">
+                        <button>
+                            <i class="fa fa-book" aria-hidden="true"></i>
+                        </button>
+                        Invoice</a>
+                </li>
+
+            </ul>
+        </li>
+        <!-- <span class="badge badge-info">NEW</span> -->
+    </ul>
+    <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized">
+    </button>
+  </div>
+  <div class="c-wrapper c-fixed-components">
+    <header class="c-header c-header-light c-header-fixed c-header-with-subheader">
+        <button class="c-header-toggler c-class-toggler d-lg-none mfe-auto" type="button" data-target="#sidebar" data-class="c-sidebar-show">
+            <i class="fa fa-bars" aria-hidden="true"></i>
+        </button>
+        <a class="c-header-brand d-lg-none" href="#">
+            <img src="../assets/images/ship-icon.png" style="width:50px" alt="">
+        </a>
+        <button class="c-header-toggler c-class-toggler mfs-3 d-md-down-none" type="button" data-target="#sidebar" data-class="c-sidebar-lg-show"
+            responsive="true">
+            <i class="fa fa-bars"></i>
+        </button>
+
+        <app-nav-menu></app-nav-menu>
+        <!-- <ul class="c-header-nav d-md-down-none">
+        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Dashboard</a></li>
+        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Users</a></li>
+        <li class="c-header-nav-item px-3"><a class="c-header-nav-link" href="#">Settings</a></li>
+      </ul> -->
+      <div class="c-subheader px-3">
+            <!-- Breadcrumb-->
+            <ol class="breadcrumb border-0 m-0">
+                <li class="breadcrumb-item">Search</li>
+                <!-- <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                  <li class="breadcrumb-item active">Dashboard</li> -->
+                <!-- Breadcrumb Menu-->
+            </ol>
+        </div>      
+ 
+    </header>
+  
+    <div class="c-body">
+      <main class="c-main">
+            <router-outlet></router-outlet>
+            <ng-http-loader></ng-http-loader>
+      </main>
+        <app-footer></app-footer>  
+
+    </div>
+  </div>

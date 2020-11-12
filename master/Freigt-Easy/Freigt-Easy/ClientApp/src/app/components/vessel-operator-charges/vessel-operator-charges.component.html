@@ -1,264 +1,244 @@
-<div class="container pt-5 bg-white">
-  <div class="row mt-1 fill shadow">
-    <div class="col-md-11">
-      <div class="row div-head">Vessel-Charges</div>
-
-      <div class="row">
-
-     
-        <div class="col-6 col-md-6 col-sm-6">
-          <div class="section-sort clearfix box">
-         
-            <ul class="sort-bar clearfix block-sm">
-              <li class="sort-by-name active"><a class="sort-by-container" (click)="sort('startDate');"><span>Date</span></a></li>
-              <li class="sort-by-price active"><a class="sort-by-container" (click)="sort('packageId');"><span>package</span></a></li>
-              <li class="sort-by-rating active"><a class="sort-by-container" (click)="sort('vesselScheduleId');"><span>Vessel</span></a></li>
-            </ul>
-             
-          </div>
+<section class="body-container">
+    <div class="card">
+      <div class="card-header">
+        Vessel-Charges
+        <select class="form-control col-md-2 pull-right" (click)="onchangeVessel($event);">
+          <option value="">Choose Vessel</option>
+          <option *ngFor="let vessel of vesselList" value="{{vessel.vesselScheduleId}}">{{vessel.vesselName}}</option>
+        </select>
+      </div>
   
+      <div class="card-body">
+        <table class="table  my-responsive  table-responsive-sm ">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Vessel Name
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('vesselScheduleId');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>Operated By
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('partnerId');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>From
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('startDate');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>Transits
+
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('transitDays');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>To</th>
+              <th>Package
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('packageId');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of vesscharges  |  sortBy: sortDirection : sortingName |filter:{vesselScheduleId: searchText} : false;  let index = index;">
+              <td data-title="Id"> 
+                <h3> <i *ngIf="item.isActive ===true" class="fa fa-check"></i> {{index +1 }} </h3>
+              </td>
+              <td data-title="Vessel Name">
+
+                <h5>
+                  <strong>{{item.vesselSchedule.vesselName}}</strong>
+                  <small class="list-group-item-text"> {{item.vesselSchedule.voyageNo}}</small>
+                </h5>
+              </td>
+
+              <td data-title="Operated By">
+
+                 
+                  <strong>{{item.partner.partnerName}}</strong><br>
+                  <small class="list-group-item-text"> {{item.partner.city}}</small>
+           
+              </td>
+              <td data-title="From date">
+                <strong class="d-block brand-fore-color">
+                  <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}</strong>
+                <strong class="d-block"> {{item.originPort.portDescription}}</strong>
+                <span class="font-sm brand-sec-fore-color">
+                  <strong>{{item.originPort.portCode}}</strong>
+                </span>
+              </td>
+              <td data-title="Transits">
+                <span class="day-count mt-1">{{item.transitDays}} days</span>
+
+              </td>
+              <td data-title="To date">
+
+                <strong class="d-block brand-fore-color">
+                  <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</strong>
+                <strong class="d-block">{{item.destinationPort.portDescription}}</strong>
+                <span class="font-sm brand-sec-fore-color">
+                  <strong>{{item.destinationPort.portCode}}</strong>
+                </span>
+              </td>
+              <td data-title="Package">
+                <div class="badge-package brand-color">{{item.package.packageName }}</div>
+                <p class="pull-left text-danger">
+                  <strong>{{item.chargeAmount |currency:item.currency.currencyCode}}</strong>
+                </p>
+
+              </td>
+              <td data-title="Edit">
+                <button class="btn btn-sm   btn-secondary font-sm" (click)="openModal(editVesselChargeModal,item)">
+                  <i class="fa fa-plus"></i>Edit Charge</button>
+                <!-- <button class="btn btn-sm   btn-secondary font-sm" (click)="gotoPortCharges()"
+                [disabled] ="!item.isActive"
+                >Quote Charges
+                  <i class="fa fa-arrow-right"></i>
+                </button> -->
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+</section>
+
+
+
+
+<div class="mb-50"></div>
+<ng-template #editVesselChargeModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editVesselChargeLabel">Edit VesselCharge</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="editVesselChargeForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group row">
+        <label for="IsActive" class="col-sm-4 col-form-label">IsActive</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="updatedAt" id="updatedAt">
+          <input type="hidden" class="form-control" formControlName="id" id="id">
+          <input type="hidden" class="form-control" formControlName="createdBy" id="createdBy">
+          <input type="hidden" class="form-control" formControlName="updatedBy" id="updatedBy">
+          <input type="hidden" class="form-control" formControlName="createdAt" id="createdAt">
+          <input type="checkbox" formControlName="isActive" value={{isActive}} [checked]=isActive id="isActive" />
         </div>
-        <div class="col-6 col-md-6 col-sm-6">
-          <label for="Vessel">Vessel</label>
-          <!-- formControlName="VesselId" -->
-          <div class="select-list">
-          <select class="classic" (click)="onchangeVessel($event);" >
-            <option value="">Choose Vessel</option>
-            <option *ngFor="let partner of vesselList" value="{{partner.id}}">{{partner.vesselName}}</option>
+      </div>
+
+      <div class="form-group row">
+        <label for="ChargeDetail" class="col-sm-4 col-form-label">ChargeDetail</label>
+        <div class="col-sm-8">
+
+
+          <input type="text" class="form-control" formControlName="chargeDetail" id="chargeDetail">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ChargedAt" class="col-sm-4 col-form-label">ChargedAt</label>
+        <div class="col-sm-8">
+          <select formControlName="chargedAtId" class="form-control form-control-sm">
+
+            <option *ngFor="let charge of chargedAt" selected="{{chargedAtId===charge.id}}" value="{{charge.id}}">{{charge.name}}</option>
+
+
+
+
           </select>
-          </div>
         </div>
       </div>
-     
-
-    </div>
-  </div>
- 
-
-
-
-  <div *ngFor="let item of vesscharges  |  sortBy: sortDirection : sortingName |filter:{vesselScheduleId: searchText} : false;  let index = index;">
-
-
-    <div class="row pb-0 mb-3 mt-1 fill shadow">
-      
-      <div class="col-12 col-sm-12 col-md-3 text-center">
-        <div class="row align-items-center ">
-
-          <div class="col-md-3 col-sm-3">
-          
-            <h3>{{index +1 }}</h3>
-            <i *ngIf="item.isActive ===true" class="fa fa-check"></i>
-          </div>
-        <div class="col-9 col-sm-9 text-center brand-fore-color"><h5> <strong>{{item.vesselSchedule.vesselName}}</strong></h5>
-          <p class="list-group-item-text"> {{item.vesselSchedule.voyageNo}}</p>
+      <div class="form-group row">
+        <label for="ChargeAmount" class="col-sm-4 col-form-label">ChargeAmount</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="chargeAmount" id="chargeAmount">
         </div>
-        </div>
-        </div>
-
-
-        <div class="col-12 col-md-9">
-          <div class="row align-items-center">
-              <div class="col-12 col-sm-8">
-                <div class="col-inner mb-10 mb-sm-0">
-                              
-                  <div class="row gap-10 align-items-center">
-                  
-                      <div class="col-4">
-                       <strong class="d-block brand-fore-color">  <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}</strong> 
-                        <strong class="d-block"> {{item.originPort.portDescription}}</strong>
-                        <span class="font-sm brand-sec-fore-color"><strong>{{item.originPort.portCode}}</strong> </span>
-
-
-                      </div>
-                      
-                      <div class="col-4">
-
-                          <span class="day-count mt-1">{{calculateDiff(item.startDate,item.endDate)}} <br>days</span>
-                      
-                   
-                      </div>
-                      
-                      <div class="col-4 pl-2">
-
-                        <strong class="d-block brand-fore-color">  <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</strong>
-                        <strong class="d-block">{{item.destinationPort.portDescription}}</strong>
-                        <span class="font-sm brand-sec-fore-color"><strong>{{item.destinationPort.portCode}}</strong></span>
-
-
-                                                        </div>
-                      
-                  </div>
-              
-              </div>
-              </div>
-              <div class="col-12 col-sm-4">
-                <div class="col-inner mb-10 mb-sm-0">
-                              
-                  <div class="row gap-10 align-items-center">
-                    <div class="col-6">
-                      <div class="badge-package brand-color">{{item.package.packageName }}</div>
-                      <p class="pull-left text-danger"> <strong>{{item.chargeAmount |currency:item.currency.currencyCode}}</strong>
-                      </p>
-
-                     </div>
-                     <div class="col-6">
-                      <button  class="btn btn-solid btn-sm mt-0 btn-secondary font-sm"  (click)="openModal(editVesselChargeModal,item)"><i
-                        class="fa fa-plus"></i>Edit Charge</button>
-                     </div>
-                
-               
-                  
-
-                      
- 
-                  </div>
-                </div>
-
-              </div>
-          </div>
-
       </div>
-    </div>
- 
+      <div class="form-group row">
+        <label for="ChargeType" class="col-sm-4 col-form-label">ChargeType</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="chargeType" id="chargeType">
+
+
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="packageId" class="col-sm-4 col-form-label">packageId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="packageId" id="packageId"> {{vesselDetail.package.packageName}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ScheduleId" class="col-sm-4 col-form-label">ScheduleId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="vesselScheduleId" id="scheduleId"> {{vesselDetail.vesselSchedule.vesselName}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="PartnerId" class="col-sm-4 col-form-label">PartnerId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="partnerId" id="partnerId"> {{vesselDetail.partner.partnerName}}
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="startDate" class="col-sm-4 col-form-label">startDate</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="startDate" id="startDate"> {{vesselDetail.startDate}}
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="endDate" class="col-sm-4 col-form-label">endDate</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="endDate" id="endDate"> {{vesselDetail.endDate}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="CurrecyId" class="col-sm-4 col-form-label">CurrecyId</label>
+        <div class="col-sm-8">
+
+          <select formControlName="currencyId" class="form-control form-control-sm">
+
+            <option *ngFor="let currency of currencyList" selected="{{currency.id===currencyId}}" value="{{currency.id}}">{{currency.currencyCode}}</option>
+
+
+
+
+          </select>
+
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="OriginPortId" class="col-sm-4 col-form-label">OriginPortId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="originPortId" id="originPortId"> {{vesselDetail.originPort.portDescription}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="DestinationPortId" class="col-sm-4 col-form-label">DestinationPortId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="destinationPortId" id="destinationPortId"> {{vesselDetail.destinationPort.portDescription}}
+        </div>
+      </div>
+
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-primary"
+        [disabled]="editVesselChargeForm.invalid"
+        >Save changes</button>
+      </div>
+    </form>
   </div>
-  <div class="mb-50"></div>
-  <ng-template #editVesselChargeModal let-modal>
-    <div class="modal-header">
-      <h5 class="modal-title" id="editVesselChargeLabel">Edit VesselCharge</h5>
-      <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-
-    <div class="modal-body">
-      <form [formGroup]="editVesselChargeForm" (ngSubmit)="onSubmit()">
-
-        <div class="form-group row">
-          <label for="IsActive" class="col-sm-4 col-form-label">IsActive</label>
-          <div class="col-sm-8">
-            <input type="hidden" class="form-control" formControlName="updatedAt" id="updatedAt">
-            <input type="hidden" class="form-control" formControlName="id" id="id">
-            <input type="hidden" class="form-control" formControlName="createdBy" id="createdBy">
-            <input type="hidden" class="form-control" formControlName="updatedBy" id="updatedBy">
-            <input type="hidden" class="form-control" formControlName="createdAt" id="createdAt">
-            <input type="checkbox" formControlName="isActive" value={{isActive}} [checked]=isActive id="isActive" />
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="ChargeDetail" class="col-sm-4 col-form-label">ChargeDetail</label>
-          <div class="col-sm-8">
-
-
-            <input type="text" class="form-control" formControlName="chargeDetail" id="chargeDetail">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="ChargedAt" class="col-sm-4 col-form-label">ChargedAt</label>
-          <div class="col-sm-8">
-            <select formControlName="chargedAtId" class="form-control form-control-sm">
-
-              <option *ngFor="let charge of chargedAt" selected="{{chargedAtId===charge.id}}"
-                value="{{charge.id}}">{{charge.name}}</option>
-
-
-
-
-            </select>
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="ChargeAmount" class="col-sm-4 col-form-label">ChargeAmount</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="chargeAmount" id="chargeAmount">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="ChargeType" class="col-sm-4 col-form-label">ChargeType</label>
-          <div class="col-sm-8">
-            <input type="text" class="form-control" formControlName="chargeType" id="chargeType">
-
-
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="packageId" class="col-sm-4 col-form-label">packageId</label>
-          <div class="col-sm-8">
-            <input type="hidden" class="form-control" formControlName="packageId" id="packageId">
-            {{vesselDetail.package.packageName}}
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="ScheduleId" class="col-sm-4 col-form-label">ScheduleId</label>
-          <div class="col-sm-8">
-            <input type="hidden" class="form-control" formControlName="vesselScheduleId" id="scheduleId">
-            {{vesselDetail.vesselSchedule.vesselName}}
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="PartnerId" class="col-sm-4 col-form-label">PartnerId</label>
-          <div class="col-sm-8">
-            <input type="hidden" class="form-control" formControlName="partnerId" id="partnerId">
-            {{vesselDetail.partner.partnerName}}
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="startDate" class="col-sm-4 col-form-label">startDate</label>
-          <div class="col-sm-8">
-            <input type="hidden" class="form-control" formControlName="startDate" id="startDate">
-            {{vesselDetail.startDate}}
-          </div>
-        </div>
-
-        <div class="form-group row">
-          <label for="endDate" class="col-sm-4 col-form-label">endDate</label>
-          <div class="col-sm-8">
-            <input type="hidden" class="form-control" formControlName="endDate" id="endDate">
-            {{vesselDetail.endDate}}
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="CurrecyId" class="col-sm-4 col-form-label">CurrecyId</label>
-          <div class="col-sm-8">
-
-            <select formControlName="currencyId" class="form-control form-control-sm">
-
-              <option *ngFor="let currency of currencyList" selected="{{currency.id===currencyId}}"
-                value="{{currency.id}}">{{currency.currencyCode}}</option>
-
-
-
-
-            </select>
-
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="OriginPortId" class="col-sm-4 col-form-label">OriginPortId</label>
-          <div class="col-sm-8">
-            <input type="hidden" class="form-control" formControlName="originPortId" id="originPortId">
-            {{vesselDetail.originPort.portDescription}}
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="DestinationPortId" class="col-sm-4 col-form-label">DestinationPortId</label>
-          <div class="col-sm-8">
-            <input type="hidden" class="form-control" formControlName="destinationPortId" id="destinationPortId">
-            {{vesselDetail.destinationPort.portDescription}}
-          </div>
-        </div>
-
-
-
-
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-      </form>
-    </div>
-  </ng-template>
-</div>
- 
+</ng-template>

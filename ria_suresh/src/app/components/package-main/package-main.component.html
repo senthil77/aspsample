@@ -1,0 +1,121 @@
+<section class="body-container">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <strong>List of Package</strong>
+              <button type="button" class="btn btn-info add-new pull-right" 
+     
+              (click)="openModal(editPackageModal,null)"><i class="fa fa-plus"></i> Add New</button>
+            </div>
+            <div class="card-body  d-none d-md-block d-lg-block">
+              <table class="table table-responsive-sm ">
+            <thead class="cf">
+        <tr>
+    <th>Id</th>
+    <th>Is Active</th>
+   <th>Name</th>
+   <th>Description</th>   
+   <th>Created By</th>
+   <th>Updated By</th>
+   <th>Created At</th>
+   <th>Updated At</th>
+   <th> Action </th>
+      
+        </tr>
+       </thead>
+       <tbody>
+        <tr *ngFor ="let package of packageList">
+    <td data-title="Id">{{package.id}}</td>
+    <td data-title="Is Active">     <ui-switch 
+      size="small"
+      [checked]="package.isActive"
+      [disabled]="true"    
+      >
+      </ui-switch></td>
+   <td data-title="Name">{{package.packageName}}</td>
+   <td data-title="Description">{{package.description}}</td>
+   
+   
+   <td data-title="Created By">{{package.createdBy  }}</td>
+   <td data-title="Updated By">{{package.updatedBy}}</td>
+   <td data-title="Created At">{{package.createdAt|date:'medium'}}</td>
+   <td data-title="Updated At">{{package.updatedAt|date:'medium'}}</td>
+   <td><button type="button" class="btn btn-primary" (click)="openModal(editPackageModal,package)"> <i class="fa fa-pencil"></i>   Edit</button>
+    <button type="button" class="btn btn-danger"
+    (click)="delete(package.id, index);"><i class="fa fa-trash"></i></button>
+        
+        </tr>
+       </tbody>
+      </table>
+            </div>
+    </div>
+   </div>
+      </section>
+
+   
+
+<ng-template #editPackageModal let-modal>
+    <div class="modal-header">
+     <h5 class="modal-title" id="editPackageLabel">{{title}} Package Info</h5>
+     <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+     </button>
+    </div>
+    
+    <div class="modal-body">
+     <form [formGroup]="editPackageForm" (ngSubmit)="onSubmit()">
+      <div class="form-group row">
+      
+      <div class="col-sm-8">
+      <input type = "hidden" readonly class="form-control" formControlName="id" id="id">
+      <input type = "hidden" readonly class="form-control" formControlName="createdBy" id="createdBy">
+      <input type = "hidden" readonly class="form-control" formControlName="updatedBy" id="updatedBy">
+      <input type = "hidden" readonly class="form-control" formControlName="createdAt" id="createdAt">
+      <input type = "hidden" readonly class="form-control" formControlName="updatedAt" id="updatedAt">
+      </div>
+      </div>
+      
+      
+   <div class="form-group row">
+    <label for="IsActive" class="col-sm-4 col-form-label">Is Active</label>
+    <div class="col-sm-8">
+     
+ 
+    <input type="checkbox" formControlName="isActive" [checked]=isActive id="isActive" />
+    </div>
+    </div>
+    <div class="form-group row">
+
+   <label for="PackageName" class="col-sm-4 col-form-label">Package Name</label>
+   <div class="col-sm-8">
+   <input type = "text" maxlength="20" class="form-control" formControlName="packageName" id="packageName" [ngClass]  ="{ 'is-invalid': isSubmitted && packageFormControl.packageName.errors }" />
+   <div *ngIf="isSubmitted && packageFormControl.packageName.errors" class="invalid-feedback">
+    <div *ngIf="editPackageForm.controls['packageName'].errors.required">Package Name cannot be Blank</div>
+  </div>
+   </div>
+   </div>
+   <div class="form-group row">
+   <label for="Description" class="col-sm-4 col-form-label">Description</label>
+   <div class="col-sm-8">
+   <input type = "text" maxlength="50" class="form-control" formControlName="description" id="description" [ngClass]  ="{ 'is-invalid': isSubmitted && packageFormControl.description.errors }" />
+   <div *ngIf="isSubmitted && packageFormControl.description.errors" class="invalid-feedback">
+    <div *ngIf="editPackageForm.controls['description'].errors.required">Package Description cannot be Blank</div>
+  </div>
+   </div>
+   </div>
+   
+   
+       
+      
+      <div class="modal-footer">
+       <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+       <button type="submit" class="btn btn-primary"
+       [disabled]="editPackageForm.invalid"
+       >Save changes</button>
+      </div>
+     </form>
+    </div>
+   </ng-template>
+   
+   
+   

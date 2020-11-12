@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Freigt_Easy.Core;
 using Freigt_Easy.Core.DBHelper;
 using Freigt_Easy.Core.Entities;
+using Freigt_Easy.Core.Helpers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -50,12 +52,21 @@ namespace Freigt_Easy.Controllers
         public async Task<ActionResult<Package>> Post(Package package)
         {
 
+            string eMail = string.Empty;
+            using (Utility util = new Utility())
+            {
+                eMail = util.GetEmailclaim(User.Identity as ClaimsIdentity);
+            }
+
+
             if (package.Id > 0)
             {
+                package.UpdatedBy = eMail;
                 await _repository.UpdateAsync<Package>(package);
             }
             else
             {
+                package.CreatedBy = eMail;
 
                 await _repository.AddAsync<Package>(package);
 

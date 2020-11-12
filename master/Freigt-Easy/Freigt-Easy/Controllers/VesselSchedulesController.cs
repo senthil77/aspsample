@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Freigt_Easy.Core;
 using Freigt_Easy.Core.DBHelper;
@@ -106,15 +107,23 @@ namespace Freigt_Easy.Controllers
         public async Task<ActionResult<VesselSchedule>> Post(VesselSchedule vesselSchedule)
         {
 
-          
+            string eMail = string.Empty;
+            using (Utility util = new Utility())
+            {
+                eMail = util.GetEmailclaim(User.Identity as ClaimsIdentity);
+
+            }
 
             if (vesselSchedule.Id > 0)
             {
+                vesselSchedule.UpdatedBy = eMail;
+                vesselSchedule.Details.ForEach(i => i.UpdatedBy = eMail);
                 await _repository.UpdateAsync<VesselSchedule>(vesselSchedule);
             }
             else
             {
-
+                vesselSchedule.CreatedBy = eMail;
+                vesselSchedule.Details.ForEach(i => i.CreatedBy = eMail);
                 await _repository.AddAsync<VesselSchedule>(vesselSchedule);
 
 

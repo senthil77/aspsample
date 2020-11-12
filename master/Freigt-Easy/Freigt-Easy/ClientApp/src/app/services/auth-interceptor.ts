@@ -13,8 +13,13 @@ export class AuthInterceptor  implements HttpInterceptor {
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-      
+      this.authService.isAuthenticated()
+      .then ((authenticated: boolean) => {
+       if (authenticated)
+
+       {
         const token = this.authService.getToken();
+   
         if (token) {
  
          
@@ -24,7 +29,11 @@ export class AuthInterceptor  implements HttpInterceptor {
             }
           });
         }
-        return next.handle(request)
       }
+      
+    });
+        return next.handle(request)
+       
+    }
      
 }

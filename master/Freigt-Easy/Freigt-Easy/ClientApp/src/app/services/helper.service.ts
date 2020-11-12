@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -11,14 +12,37 @@ import { ApiClientService } from './api-client.service';
 })
 export class HelperService {
 
-  constructor(private store:StoreService) { 
+  constructor(private store:StoreService, private dp: DatePipe) { 
 
      
   }
   
+ 
+   inFuture = (date: Date) => {
+   
+    return date > new Date(new Date().setDate(new Date().getDate()))
+};
+
+
+  formatDate(dtValue: Date) {
+    //return new Date(dtValue).toISOString().slice(0,10);
+    let myDate = dtValue.toString().replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3")
+    return this.dp.transform(myDate, 'yyyy-MM-dd', 'es-ES');
 
 
 
+
+  }
+
+  getCurrentDate() {
+    const date = new Date();
+return  date.toLocaleDateString('en-GB', {
+  day: 'numeric', month: 'short', year: 'numeric'
+}).replace(/ /g, '-');
+
+
+
+  }
   calculateTotal(charges:any[])
   {
     return charges.reduce((sum, current) => sum + current, 0);

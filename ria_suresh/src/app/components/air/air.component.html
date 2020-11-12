@@ -1,0 +1,102 @@
+<div class="row">
+    <div class="col-md-12">
+      <form [formGroup]="airFrm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="pol">Departure Airport</label>
+            <select formControlName="dep_Airport" id="pol" class="form-control form-control-sm">
+              <option *ngFor="let city of cities"  value="{{city.short_desc}}">{{city.long_desc}}</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="pod" class=" font-weight-bold">Arrival Airport</label>
+            <select formControlName="arr_Airport" id="pod" class="form-control form-control-sm">
+              <option *ngFor="let city of cities" value="{{city.short_desc}}">{{city.long_desc}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="pol">Pick up Location</label>
+            <select formControlName="pick_location" id="pol" class="form-control form-control-sm">
+              <option *ngFor="let city of cities"  value="{{city.short_desc}}">{{city.long_desc}}</option>
+            </select>
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="pod" class=" font-weight-bold">Delivery Location</label>
+            <select formControlName="del_location" id="pod" class="form-control form-control-sm">
+              <option *ngFor="let city of cities" value="{{city.short_desc}}">{{city.long_desc}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="commodity" class=" font-weight-bold">Commodity</label>
+            <input type="text" formControlName="commodity" id="commodity" class="form-control form-control-sm">
+          </div>
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="noofPackages" class=" font-weight-bold">No of Packages</label>
+            <input type="text" formControlName="noofPackages" id="noofPackages" class="form-control form-control-sm">
+          </div>
+        </div>
+       
+  
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="dimensions" class=" font-weight-bold">Dimensions in CM</label>
+            <div class="row">
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="L">
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="W">
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="H">
+              </div>
+              or 
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="L">
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="W">
+              </div>
+              <div class="col-md-1 col-lg-1 col-sm-1 col-xs-12">
+                <input type="button" value="H">
+              </div>
+            </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+              <label for="cargoType" class=" font-weight-bold">Cargo Type</label>
+              <div class="switch-container">
+                <span class="switch">
+                  <label for="idChk-normal" class=" font-weight-bold"> Non Hazardous</label>
+                  <input type="checkbox" class="switch" id="idChk-normal">
+                  <label for="idChk-normal" class=" font-weight-bold">Hazardous</label>
+              </span>
+            </div>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+            <label for="grosWeight" class=" font-weight-bold">Gross in Weight</label>
+            <input type="text" formControlName="grosWeight" id="grosWeight" class="form-control form-control-sm">
+            </div>
+            <div class="col-md-6 col-lg-6 col-sm-6 col-xs-12">
+              <label for="netWeight" class=" font-weight-bold">Net Weight</label>
+              <input type="text" formControlName="netWeight" id="netWeight" class="form-control form-control-sm">
+              </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <button class="btn btn-primary btn-sm" type="submit">Get Fares</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 m-0 p-0">
+      
+    </div>
+  </div>

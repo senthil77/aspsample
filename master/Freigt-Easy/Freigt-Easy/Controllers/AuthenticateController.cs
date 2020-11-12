@@ -40,7 +40,7 @@ namespace Freigt_Easy.Controllers
         {
           
             IActionResult response = BadRequest("user does not Exist");
-            var user = _repository.GetByIdAsync<User>((x => x.Email == login.UserName), new string[] { "UserRole" ,"Partner"}).Result;
+            var user = _repository.GetByIdAsync<User>((x => x.Email == login.UserName && x.ValidUpTo > DateTime.Now ), new string[] { "UserRole" ,"Partner"}).Result;
 
 
 

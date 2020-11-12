@@ -1,0 +1,272 @@
+<section class="body-container">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        Vessel-Charges
+        <select class="form-control col-md-2 pull-right" (click)="onchangeVessel($event);">
+          <option value="">Choose Vessel</option>
+          <option *ngFor="let vessel of vesselList" value="{{vessel.vesselScheduleId}}">{{vessel.vesselName}}</option>
+        </select>
+      </div>
+      <div class="col-12">
+        <div class="card table-data d-lg-none d-md-none" *ngFor="let item of vesscharges  |  sortBy: sortDirection : sortingName |filter:{vesselScheduleId: searchText} : false;  let index = index;">
+          <div>
+            <label>S.No</label>
+            <i *ngIf="item.isActive ===true" class="fa fa-check"></i> {{index +1 }} </div>
+          <div>
+            <label>Vessel Name </label>{{item.vesselSchedule.vesselName}} - {{item.vesselSchedule.voyageNo}}</div>
+          <div>
+            <label>From</label>
+            <span>
+              <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}
+              <strong>{{item.originPort.portCode}}</strong>
+              <span class="font-sm brand-sec-fore-color">
+                <strong class="d-block"> {{item.originPort.portDescription}}</strong>
+              </span>
+            </span>
+          </div>
+          <div>
+            <label>Transits</label>
+            <span>{{ item.transitDays}} days</span>
+          </div>
+          <div>
+            <label>To</label>
+            <span>
+              <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}
+              <strong>{{item.destinationPort.portCode}}</strong>
+              <span class="font-sm brand-sec-fore-color">
+                <strong class="d-block"> {{item.destinationPort.portDescription}}</strong>
+              </span>
+            </span>
+          </div>
+          <div>
+            <label>Package</label>
+            <span>{{item.package.packageName }}</span>
+            {{item.chargeAmount |currency:item.currency.currencyCode}}</div>
+          <div>
+            <button class="btn btn-dark  btn-sm pull-right" (click)="openModal(editCurrencyModal,item)">Quote Charges
+              <i class="fa fa-plus"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body  d-none d-md-block d-lg-block">
+        <table class="table table-responsive-sm ">
+          <thead>
+            <tr>
+              <th>S.No</th>
+              <th>Vessel Name
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('vesselScheduleId');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>From
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('startDate');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>Transits
+
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('transitDays');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>To</th>
+              <th>Package
+                <button class="btn btn-sm btn-outline-light active" type="button" (click)="sort('packageId');">
+                  <i class='fa fa-sort'></i>
+                </button>
+              </th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of vesscharges  |  sortBy: sortDirection : sortingName |filter:{vesselScheduleId: searchText} : false;  let index = index;">
+              <td> 
+                <h3> <i *ngIf="item.isActive ===true" class="fa fa-check"></i> {{index +1 }} </h3>
+               
+              </td>
+              <td>
+
+                <h5>
+                  <strong>{{item.vesselSchedule.vesselName}}</strong>
+                  <small class="list-group-item-text"> {{item.vesselSchedule.voyageNo}}</small>
+                </h5>
+              </td>
+              <td>
+                <strong class="d-block brand-fore-color">
+                  <i class="fa fa-calendar"></i> {{item.startDate |date:'mediumDate'}}</strong>
+                <strong class="d-block"> {{item.originPort.portDescription}}</strong>
+                <span class="font-sm brand-sec-fore-color">
+                  <strong>{{item.originPort.portCode}}</strong>
+                </span>
+              </td>
+              <td>
+                <span class="day-count mt-1">{{item.transitDays}} days</span>
+
+              </td>
+              <td>
+
+                <strong class="d-block brand-fore-color">
+                  <i class="fa fa-calendar"></i> {{item.endDate |date:'mediumDate'}}</strong>
+                <strong class="d-block">{{item.destinationPort.portDescription}}</strong>
+                <span class="font-sm brand-sec-fore-color">
+                  <strong>{{item.destinationPort.portCode}}</strong>
+                </span>
+              </td>
+              <td>
+                <div class="badge-package brand-color">{{item.package.packageName }}</div>
+                <p class="pull-left text-danger">
+                  <strong>{{item.chargeAmount |currency:item.currency.currencyCode}}</strong>
+                </p>
+
+              </td>
+              <td>
+                <button class="btn btn-sm   btn-secondary font-sm" (click)="openModal(editVesselChargeModal,item)">
+                  <i class="fa fa-plus"></i>Edit Charge</button>
+                <button class="btn btn-sm   btn-secondary font-sm" (click)="viewFares(item)">Fares
+                  <i class="fa fa-arrow-right"></i>
+                </button>
+
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<div class="mb-50"></div>
+<ng-template #editVesselChargeModal let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="editVesselChargeLabel">Edit VesselCharge</h5>
+    <button type="button" class="close" (click)="modal.dismiss()" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <form [formGroup]="editVesselChargeForm" (ngSubmit)="onSubmit()">
+
+      <div class="form-group row">
+        <label for="IsActive" class="col-sm-4 col-form-label">IsActive</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="updatedAt" id="updatedAt">
+          <input type="hidden" class="form-control" formControlName="id" id="id">
+          <input type="hidden" class="form-control" formControlName="createdBy" id="createdBy">
+          <input type="hidden" class="form-control" formControlName="updatedBy" id="updatedBy">
+          <input type="hidden" class="form-control" formControlName="createdAt" id="createdAt">
+          <input type="checkbox" formControlName="isActive" value={{isActive}} [checked]=isActive id="isActive" />
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="ChargeDetail" class="col-sm-4 col-form-label">ChargeDetail</label>
+        <div class="col-sm-8">
+
+
+          <input type="text" class="form-control" formControlName="chargeDetail" id="chargeDetail">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ChargedAt" class="col-sm-4 col-form-label">ChargedAt</label>
+        <div class="col-sm-8">
+          <select formControlName="chargedAtId" class="form-control form-control-sm">
+
+            <option *ngFor="let charge of chargedAt" selected="{{chargedAtId===charge.id}}" value="{{charge.id}}">{{charge.name}}</option>
+
+
+
+
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ChargeAmount" class="col-sm-4 col-form-label">ChargeAmount</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="chargeAmount" id="chargeAmount">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ChargeType" class="col-sm-4 col-form-label">ChargeType</label>
+        <div class="col-sm-8">
+          <input type="text" class="form-control" formControlName="chargeType" id="chargeType">
+
+
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="packageId" class="col-sm-4 col-form-label">packageId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="packageId" id="packageId"> {{vesselDetail.package.packageName}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="ScheduleId" class="col-sm-4 col-form-label">ScheduleId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="vesselScheduleId" id="scheduleId"> {{vesselDetail.vesselSchedule.vesselName}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="PartnerId" class="col-sm-4 col-form-label">PartnerId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="partnerId" id="partnerId"> {{vesselDetail.partner.partnerName}}
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="startDate" class="col-sm-4 col-form-label">startDate</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="startDate" id="startDate"> {{vesselDetail.startDate}}
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <label for="endDate" class="col-sm-4 col-form-label">endDate</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="endDate" id="endDate"> {{vesselDetail.endDate}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="CurrecyId" class="col-sm-4 col-form-label">CurrecyId</label>
+        <div class="col-sm-8">
+
+          <select formControlName="currencyId" class="form-control form-control-sm">
+
+            <option *ngFor="let currency of currencyList" selected="{{currency.id===currencyId}}" value="{{currency.id}}">{{currency.currencyCode}}</option>
+
+
+
+
+          </select>
+
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="OriginPortId" class="col-sm-4 col-form-label">OriginPortId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="originPortId" id="originPortId"> {{vesselDetail.originPort.portDescription}}
+        </div>
+      </div>
+      <div class="form-group row">
+        <label for="DestinationPortId" class="col-sm-4 col-form-label">DestinationPortId</label>
+        <div class="col-sm-8">
+          <input type="hidden" class="form-control" formControlName="destinationPortId" id="destinationPortId"> {{vesselDetail.destinationPort.portDescription}}
+        </div>
+      </div>
+
+
+
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+        <button type="submit" class="btn btn-primary">Save changes</button>
+      </div>
+    </form>
+  </div>
+</ng-template>
