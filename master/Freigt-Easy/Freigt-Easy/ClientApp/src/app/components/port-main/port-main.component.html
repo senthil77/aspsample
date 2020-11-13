@@ -32,7 +32,13 @@
                            <tr *ngFor ="let port of  portList |  sortBy:'asc':'id'">
                     
                       <td data-title="Id">{{port.id}}</td>
-                      <td data-title="Is Active"><input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=port.isActive /></td>
+                      <td data-title="Is Active">
+                        
+                            <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+                              <input class="c-switch-input" type="checkbox" [disabled]=true     [checked]=port.isActive><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+                         
+                              </label>  
+                        </td>
                       
                       <td data-title="Port Code">{{port.portCode}}</td>
                       <td data-title="City Code">{{port.cityCode}}</td>
@@ -45,7 +51,7 @@
                       <td data-title="Updated By">{{port.updatedBy}}</td>
                       <td data-title="Created At">{{port.createdAt  | date:'medium'}}</td>
                       <td data-title="Updated At">{{port.updatedAt | date:'medium'}}</td>
-                      <td><button type="button" class="btn btn-primary" (click)="openModal(editPortModal,port)">Edit</button>
+                      <td><button type="button" class="btn btn-primary" (click)="openModal(editPortModal,port)"> <i class="fa fa-edit"></i></button>
                          <button type="button" class="btn btn-danger"
                          (click)="delete(port.id, index);"><i class="fa fa-trash"></i></button>
                            

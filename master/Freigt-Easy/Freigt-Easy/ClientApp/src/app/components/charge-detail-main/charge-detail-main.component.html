@@ -6,24 +6,16 @@
           <i class="fa fa-plus"></i> Add New</button>
       </div>
      
-      <!-- <div class="card table-data d-lg-none d-md-none" *ngFor="let chargedetail of  chargeDetailList">
-        <div><label>S.No</label> <input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=chargedetail.isActive />{{chargedetail.id }}        </div>
-        <div><label>Name</label>{{chargedetail.name}}</div>
-        <div><label>Charge Type</label>{{chargedetail.chargedAt.name}}</div>
-        <div><label>Created By</label>{{chargedetail.createdBy}}</div>
-        <div><label>Updated By</label>{{chargedetail.updatedBy}}</div>
-        <div><label>Created at</label>{{chargedetail.createdAt | date:'medium' }}</div>
-        <div><label>Updated at</label>{{chargedetail.updatedAt | date:'medium' }}</div>
-        <div>  <button  class="btn btn-dark  btn-sm pull-right" (click)="openModal(editChargeDetailModal,chargedetail)">Edit</button></div>
-        </div> -->
+     
       <div class="card-body">
         <table class="table my-responsive table-striped  table-responsive-sm ">
           <thead class="cf">
             <tr>
               <th>#</th>
+              <th>Is Active</th>
               <th>Name</th>
               <th>ChargeType</th>
-              <th>Is Active</th>
+           
               <th>CreatedBy</th>
               <th>UpdatedBy</th>
               <th>CreatedAt</th>
@@ -34,17 +26,22 @@
           <tbody>
             <tr *ngFor="let chargedetail of  chargeDetailList">
               <td data-title="From">{{chargedetail.id }}</td>
+              <td data-title="Is Active">
+ 
+                <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+                  <input class="c-switch-input" type="checkbox" [disabled]=true     [checked]="chargedetail.isActive"><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+             
+                  </label> 
+              </td>
               <td data-title="Name">{{chargedetail.name}}</td>
               <td data-title="ChargeType">{{chargedetail.chargedAt.name}}</td>
-              <td data-title="Is Active">
-                <input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=chargedetail.isActive />
-              </td>
+             
               <td data-title="CreatedBy">{{chargedetail.createdBy}}</td>
               <td data-title="UpdatedBy">{{chargedetail.updatedBy}}</td>
               <td data-title="CreatedAt">{{chargedetail.createdAt | date:'medium' }}</td>
               <td data-title="UpdatedAt">{{chargedetail.updatedAt | date:'medium' }}</td>
               <td>
-                <button type="button" class="btn btn-primary" (click)="openModal(editChargeDetailModal,chargedetail)">Edit</button>
+                <button type="button" class="btn btn-primary" (click)="openModal(editChargeDetailModal,chargedetail)"> <i class="fa fa-edit"></i></button>
             </tr>
           </tbody>
         </table>
@@ -74,9 +71,14 @@
       </div>
 
       <div class="form-group row">
-        <label for="IsActive" class="col-sm-4 col-form-label">IsActive</label>
+        <label for="IsActive" class="col-sm-4 col-form-label">Is Active</label>
         <div class="col-sm-8">
-          <input type="checkbox" formControlName="isActive" [checked]=isActive id="isActive" />
+          <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+            <input class="c-switch-input" type="checkbox"   formControlName="isActive"   [checked]="isActive"><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+       
+            </label> 
+
+       
         </div>
       </div>
 

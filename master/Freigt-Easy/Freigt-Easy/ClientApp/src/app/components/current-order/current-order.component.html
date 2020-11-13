@@ -1,3 +1,82 @@
+<div class="container-fluid p-0">
+
+<div class="list-group-item p-0 clearfix">
+  <div class="row pb-0">
+    
+    
+    <div class="col-md-3 col-sm-12 text-center">
+      <span class="list-group-item-heading"> {{itemData.vesselSchedule.vesselName}}</span>
+
+    </div>
+
+
+    <div class="col text-center ">
+      <span class="list-group-item-heading"> <i class="fa fa-calendar"></i> {{itemData.startDate |date:'mediumDate'}}</span>
+    
+      <p> <span class="summaryTitle">{{itemData.originPort.portCode}}</span></p>
+      <p class="list-group-item-text"> {{itemData.originPort.portDescription}}</p>
+    
+    </div>
+    <div class="col text-center-sm">
+      <strong>{{itemData.transitDays}} <i>days</i></strong>
+      <!-- <svg height="5" width="125">
+        <line x1="0" y1="0" x2="120" y2="0" style="stroke:#6190b0;stroke-width:4" />
+      </svg>
+      -->
+      <p class="list-group-item-text">
+          <i>
+          {{transi.tranMessage}} <br> 
+           {{transi.tranPorts}}
+          
+          </i>
+
+            
+      
+      </p>
+    </div>
+    <div class="col text-center">
+      <span class="list-group-item-heading"> <i class="fa fa-calendar"></i> {{itemData.endDate |date:'mediumDate'}}</span>
+      <p><span class="summaryTitle">{{itemData.destinationPort.portCode}}</span></p>
+      <p class="list-group-item-text ">  {{itemData.destinationPort.portDescription}}</p>
+    
+          
+    </div>
+    <div class="col-md-2 col-sm-12">
+      <div class="row">
+
+        
+        
+        <div class="col">
+          <div class="badge-package brand-color">        
+            {{(itemData.chargeAmount * searchItem.qty)  |currency }}
+          </div>
+        </div>
+        <div class="col padLeft">
+          <div class="badge-package brand-color">        
+            {{(itemData.chargeAmount * searchItem.qty)  |currency }}
+          </div>
+        </div>
+      
+      </div>
+    
+          
+    </div>
+   
+    <div class="col-md-2 col-sm-12 content-center p-3">
+      <div class="badge-package brand-color">        
+        {{((itemData.chargeAmount * searchItem.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}
+      </div>
+      
+      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#summaryDetails" aria-expanded="false" aria-controls="summaryDetails">
+        Details<i class="fa fa-ellipsis-v"></i>
+      </button>
+        
+    </div>
+     
+  </div>
+</div>
+
+<div id="summaryDetails"  class="collapse" >
 <div class="card pt-3" *ngIf="itemData"> 
   <div class="bg-white">
        <span class="mt-5 summary">Summary</span>
@@ -34,4 +113,6 @@
 </span>
 </div>
 
+</div>
+</div>
 </div>

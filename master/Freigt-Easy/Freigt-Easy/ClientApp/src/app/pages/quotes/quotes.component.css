@@ -14,13 +14,8 @@
   font-weight: 700
 }
 
-.selected-tab {
-  background-color: rgb(231, 234, 238)
-}
-.ria-active
-{
-  border-bottom: 3px solid #355b84;
-}
+ 
+ 
 
 
 @media(max-width:767px) {
@@ -31,10 +26,7 @@
       color: black;
       font-size: 13px
   }
-  .ria-active
-  {
-    border-bottom: 3px solid #355b84;
-  }
+   
    
 }
 
@@ -45,10 +37,7 @@
       padding-left: 5px;
       padding-right: 5px;
   }
-  .ria-active
-  {
-    border-bottom: 3px solid #355b84;
-  }
+  
    
 }
 

@@ -179,6 +179,7 @@ namespace Freigt_Easy.Controllers
             user.Partner.IsActive = activateUser.isActive;
             user.Partner.ValidUpTo = activateUser.validUpTo;
             user.Partner.IsSusbcribed = activateUser.isSubscribed;
+            user.ActivationCode = null;
             await _repository.UpdateAsync<User>(user);
 
             return user;

@@ -12,26 +12,22 @@ export class AuthInterceptor  implements HttpInterceptor {
     constructor(public authService: LoginService, private router:Router) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
-      this.authService.isAuthenticated()
-      .then ((authenticated: boolean) => {
-       if (authenticated)
-
-       {
+ 
+      
+       //keep it simple alwways
         const token = this.authService.getToken();
    
         if (token) {
- 
-         
+      
           request = request.clone({
             setHeaders: {
-              Authorization: `Bearer ${token}`
+              Authorization: `Bearer ${token}`,
             }
           });
-        }
+        
       }
       
-    });
+    
         return next.handle(request)
        
     }

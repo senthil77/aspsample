@@ -1,23 +1,36 @@
-.bg-blue {
-    background: blue
+
+.list-group-item-heading
+{
+    font-size: 16px;
+    color: #355b83;
+    font-weight: 700;
+}
+.padLeft
+{
+    padding-left: 3rem;
+}
+@media   (min-width: 1400px){
+.padLeft
+{
+    padding-left: 9rem;
+}
+}
+@media   (max-width: 400px){
+    .list-group-item 
+    {
+        font-size: 12px;
+    }
+
+    .list-group-item-heading
+    {
+        font-size: 12px;
+    color: #355b83;
+    font-weight: 800;
+    }
+
+    .padLeft
+{
+    padding-left: 0;
 }
 
-.dotted-line {
-    border: 1px dashed #fff
-}
-
-.img-fluid {
-    width: 114px;
-    height: auto
-}
-
-.bg-top {
-    /* background: #bdade2 */
-    background: rgb(6, 90, 146);
-    border: black;
-}
-.bg-white {
-    /* background: #bdade2 */
-    background: whitesmoke;
-    border: black;
 }

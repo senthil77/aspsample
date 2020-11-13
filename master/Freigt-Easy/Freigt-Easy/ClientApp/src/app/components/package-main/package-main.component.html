@@ -24,8 +24,10 @@
             <tr *ngFor="let package of packageList">
               <td data-title="Id">{{package.id}}</td>
               <td data-title="Is Active">
-                <input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=package.isActive
-                                                />
+                <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+                  <input class="c-switch-input" type="checkbox" [disabled]=true     [checked]="package.isActive"><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+             
+                  </label>  
               </td>
               <td data-title="Name">{{package.packageName}}</td>
               <td data-title="Description">{{package.description}}</td>
@@ -37,7 +39,7 @@
               <td data-title="Updated At">{{package.updatedAt|date:'medium'}}</td>
               <td>
                 <button type="button" class="btn btn-primary" (click)="openModal(editPackageModal,package)">
-                  <i class="fa fa-pencil"></i> Edit</button>
+                  <i class="fa fa-edit"></i></button>
                 <button type="button" class="btn btn-danger" (click)="delete(package.id, index);">
                   <i class="fa fa-trash"></i>
                 </button>
@@ -76,9 +78,12 @@
       <div class="form-group row">
         <label for="IsActive" class="col-sm-4 col-form-label">Is Active</label>
         <div class="col-sm-8">
+          <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+            <input class="c-switch-input" type="checkbox"   formControlName="isActive"   [checked]="isActive"><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+       
+            </label> 
 
-
-          <input type="checkbox" formControlName="isActive" [checked]=isActive id="isActive" />
+       
         </div>
       </div>
       <div class="form-group row">

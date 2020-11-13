@@ -35,8 +35,12 @@
 
                                           <td data-title="Id" [hidden]="!hideBE">{{partner.id}}</td>
                                           <td data-title="Is Active">
-                                                <input type="checkbox" onclick="return false;" onkeydown="return false;" [checked]=partner.isActive
-                                                />
+                                               
+
+                                                <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+                                                      <input class="c-switch-input" type="checkbox" [disabled]=true     [checked]="partner.isActive"><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+                                                 
+                                                      </label>  
                                           </td>
                                           <td data-title="CreatedBy" [hidden]="!hideBE">{{partner.createdBy}}</td>
                                           <td data-title="UpdatedBy" [hidden]="!hideBE">{{partner.updatedBy}}</td>
@@ -54,7 +58,7 @@
                                           <td data-title="Phone2">{{partner.phone2}}</td>
                                           <td data-title="Contact1">{{partner.contact1}}</td>
                                           <td data-title="Contact2">{{partner.contact2}}</td>
-                                          <td><button type="button" class="btn btn-primary"  *ngIf="partner.partnerName !=='ADMIN'" (click)="openModal(editPartnerModal,partner)">Edit</button></td>
+                                          <td><button type="button" class="btn btn-primary"  *ngIf="partner.partnerName !=='ADMIN'" (click)="openModal(editPartnerModal,partner)"> <i class="fa fa-edit"></i></button></td>
                                     </tr>
                               </tbody>
                         </table>
