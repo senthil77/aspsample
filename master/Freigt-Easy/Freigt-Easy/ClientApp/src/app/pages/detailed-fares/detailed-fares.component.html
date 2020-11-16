@@ -228,58 +228,21 @@
             
             </div>
       </div>
-      <div class="col-md-4">
-        <div class="card pt-3">
-            <div class="bg-white">
-                 <span class="mt-5 summary">Summary</span>
-            </div>
-      
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Pol</span> <span class="summaryTitle">{{itemData.originPort.cityDescription}} ({{itemData.originPort.cityCode}})</span> </div>
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Pod</span> <span class="summaryTitle">{{itemData.destinationPort.cityDescription}} ({{itemData.destinationPort.cityCode}})</span> </div>
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Sailing Date</span> <span class="summaryTitle">{{itemData.startDate  |date:'mediumDate'}}</span> </div>
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Vessel Name</span> <span class="summaryTitle">{{ itemData.vesselSchedule.vesselName}}</span> </div>
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">ETA</span> <span class="summaryTitle">{{itemData.endDate  |date:'mediumDate'}}</span> </div>
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Transit</span> <span class="summaryTitle">{{transi.tranMessage}}</span> <br> <span class="summaryTitle"> <i> {{transi.tranPorts}}</i></span></div> 
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Frieght</span> <span class="summaryTitle">{{itemData.chargeAmount *searchParams.qty  |currency: 'USD'}}</span> </div> 
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Local Charges</span> <span class="summaryTitle">
-          {{itemData.charges.originCharges |currency :itemData.charges.originCurrency.currencyCode }}</span>
-          <span class="summaryTitle">
-            {{itemData.charges.originCharges /oriFxVal |currency }}
-          </span> 
-        </div> 
-          
+      <div class="col-md-4 col-sm-14 p-0">
 
-        
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Destination Charges</span> <span class="summaryTitle">
-          {{itemData.charges.destinationCharges |currency :itemData.charges.destinationCurrency.currencyCode }}</span>
-          <span class="summaryTitle">
-          {{itemData.charges.destinationCharges/destFxVal |currency }}</span>
-
-          
-        </div> 
-           
-                
-        <div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Total Charges</span>
-          <span class="summaryTitle">
-            {{((itemData.chargeAmount *searchParams.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}
-          </span>
-        </div>
- 
-    </div>
+     
+        <app-summary [itemData]  = "itemData"  [searchParams]="searchParams" [oriFxVal]="oriFxVal" [destFxVal]="destFxVal"></app-summary>
+       </div>
      </div>
 
-     <div class="row g-0">
-      <div class="col-md-4">
+     <!-- <div class="row g-0">
+      <div class="col-md-12">
         
-      </div>
-      <div class="col-md-4">
        
-      </div>
-      <div class="col-md-4">
         <button class="bnt btn-sm btn-success pull-right" (click)="gotoNext();"> <i class="fa fa-check"></i>  Continue & Book Now</button>
           
       </div>
-      </div>
+      </div> -->
 
 </div>
 

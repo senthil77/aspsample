@@ -5,10 +5,28 @@ import {ModelMapper} from '../../utils/model-mapper';
 import { PortPartnerCharge } from 'src/app/models/port-partner-charge';
 import { ApiClientService } from 'src/app/services/api-client.service';
 import {HelperService} from '../../services/helper.service';
+import { animation, trigger, state, transition, animate, style, group, query, useAnimation, stagger } from '@angular/animations';
 @Component({
   selector: 'app-search-item',
   templateUrl: './search-item.component.html',
-  styleUrls: ['./search-item.component.css']
+  styleUrls: ['./search-item.component.css'],
+  
+  animations: [
+    trigger('testAnimation', [
+      transition('* => *', [
+        query('*', style({ opacity: 0 })),
+        query('*', stagger('50ms', [animate('1s', style({ opacity: 1 }))]))
+      ])
+    ])
+    /*
+    trigger('testAnimation', [
+      transition('* => *', [
+        query('*', stagger('500ms', useAnimation(fadeAnimation, { params: {duration: '1250ms', to: 1}})))
+      ])
+    ])
+    */    
+  ]  
+
 })
 export class SearchItemComponent implements OnInit {
   @Input() searchvalues: {};
@@ -64,14 +82,14 @@ viewFares(e){
 
  
 
+showMyContainer: boolean = false;
+// showVesselSchedule(event) {
+// this.showMyContainer=!this.showMyContainer;
+//  var val = (event.target as HTMLButtonElement).textContent;
+//   if(val === "Hide Details")   
 
-showVesselSchedule(event) {
- 
- var val = (event.target as HTMLButtonElement).textContent;
-  if(val === "Hide Details")   
-
-  (event.target as HTMLButtonElement).textContent = "View Details"
-    else
-    (event.target as HTMLButtonElement).textContent = "Hide Details"
-}
+//   (event.target as HTMLButtonElement).textContent = "View Details"
+//     else
+//     (event.target as HTMLButtonElement).textContent = "Hide Details"
+// }
 }

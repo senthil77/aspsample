@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { tokenUser } from 'src/app/models/user';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -9,19 +10,10 @@ import { LoginService } from 'src/app/services/login.service';
 export class HeaderComponent implements OnInit {
 
   constructor(public service:LoginService ) { }
-
+user:tokenUser;
   ngOnInit(): void {
 
-    if (this.service.currentUser== null)    {
-
-   
-
-      this.service.currentUser = this.service.getCurrentUser();
- 
-  
-      this.service.userSubj.next(this.service.currentUser);
-    }
-     
+   // this.service.getCurrentUser().subscribe(name => this.user = name);
   }
 
 }

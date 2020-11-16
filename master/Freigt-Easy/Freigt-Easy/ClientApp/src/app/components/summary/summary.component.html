@@ -1,0 +1,36 @@
+<div class="container mt-3 d-flex justify-content-center p-0">
+    <div class="card">
+        
+        <h4 class="pl-3 pt-3 text-dark">{{ itemData.vesselSchedule.vesselName}} </h4> <span class="pl-3 uptxt">
+            Starts: {{itemData.startDate  |date:'mediumDate'}} | ETA: {{itemData.endDate  |date:'mediumDate'}}</span>
+
+            <div class="d-flex flex-row">
+                <div class="d-flex flex-column pl-3"> <i class="fa fa-location-arrow text-success icon"></i> <span class="txt">Pol: {{itemData.originPort.cityDescription}} ({{itemData.originPort.cityCode}})</span> </div>
+                <div class="d-flex flex-column pl-5"> {{transi.tranMessage}} <span class="txt"> {{transi.tranPorts}} </span> </div>
+                <div class="d-flex flex-column pl-5"> <i class="fa fa-ship text-primary icon"></i> <span class="txt">Pod: {{itemData.destinationPort.cityDescription}} ({{itemData.destinationPort.cityCode}}) </span> </div>
+     
+            </div>
+
+
+        <h4 class="pl-3 pt-3 text-dark"> {{(((itemData.chargeAmount *searchParams.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) *oriFxVal) |currency :itemData.charges.originCurrency.currencyCode }}</h4> <span class="pl-3 uptxt">
+            {{((itemData.chargeAmount *searchParams.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}            </span>
+            <div class="d-flex flex-row">
+                <div class="d-flex flex-column pl-3"> Origin Charges: {{itemData.charges.originCharges /oriFxVal |currency }} <span class="txt">{{itemData.charges.originCharges |currency :itemData.charges.originCurrency.currencyCode }}</span> </div>
+                <div class="d-flex flex-column pl-5"> Dest.Charges: {{itemData.charges.destinationCharges/destFxVal |currency }} <span class="txt">   {{itemData.charges.destinationCharges |currency :itemData.charges.destinationCurrency.currencyCode }} </span> </div>
+                <div class="d-flex flex-column pl-5"> Freight Charges:  <span class="txt">{{itemData.chargeAmount *searchParams.qty  |currency: 'USD'}} </span> </div>
+     
+            </div>
+               
+        <div class="text-center px-3 pt-3"> 
+            
+            <button type="button" class="btn btn-primary btn-block btn1"> Charge Me later</button> 
+            <button type="button" class="btn btn-primary btn-block btn1"> Exclude Destination Charges</button> 
+            <button type="button" class="btn btn-light btn-block btn23"> Got Quries :Chat with support</button> 
+   
+        </div>
+        <div class="py-3 px-3 pt-3 text-center">
+            <div class="border-top text-center pt-3"> <button type="button" (click)="gotoNext();" class="btn btn-light btn4 btn-block"><i class="fa fa-check-square-o verify"></i>Continue & Book Now</button> <span class="dwntxt">Got Coupouns?</span> </div>
+        </div>
+       
+    </div>
+</div>

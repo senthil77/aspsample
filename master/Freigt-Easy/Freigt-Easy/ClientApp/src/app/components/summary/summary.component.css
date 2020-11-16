@@ -1,0 +1,62 @@
+
+
+.card {
+    
+    border-radius: 10px;
+    background-color: #fff
+}
+
+.uptxt {
+    color: #bfc4cc;
+    font-size: 12px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    position: relative;
+    bottom: 8px
+}
+
+.icon {
+    font-size: 15px !important;
+    color: #333333 !important
+}
+
+.txt {
+    font-size: 12px;
+    font-weight: bolder
+}
+
+.btn {
+   
+    color: #000;
+    font-size: 11px;
+    font-weight: bold
+}
+
+.btn1 {
+    border-color: #3d8ee6;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #fff
+}
+
+.btn23 {
+    border-color: hsl(197deg 1% 53%);
+    margin-top: 10px;
+    margin-bottom: 10px
+}
+
+.btn4 {
+    background-color: #f2f6f9;
+    color: #161617
+}
+
+.verify {
+    font-size: 15px !important;
+    position: relative;
+    right: 10px
+}
+
+.dwntxt {
+    font-size: 10px;
+    color: #8b96a0
+}

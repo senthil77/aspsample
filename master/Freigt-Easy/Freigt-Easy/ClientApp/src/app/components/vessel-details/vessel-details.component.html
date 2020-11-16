@@ -324,7 +324,7 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
         <button type="submit" class="btn btn-primary" 
-          [disabled]="editVesselScheduleForm.invalid || TransitListForm.invalid">Submit</button>
+         >Submit</button>
           <button type="submit" class="btn btn-primary"  *ngIf="!editVesselScheduleForm.controls['isActive']" (click)="saveData();"
           [disabled]="editVesselScheduleForm.invalid || TransitListForm.invalid">Save changes</button>
       </div>

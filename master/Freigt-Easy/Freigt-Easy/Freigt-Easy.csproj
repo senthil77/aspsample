@@ -14,6 +14,11 @@
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20201111121338_initialcreate.cs" />
+    <Compile Remove="Migrations\20201111121338_initialcreate.Designer.cs" />
+  </ItemGroup>
   <ItemGroup>
     <Folder Include="ClientApp\dist\" />
  

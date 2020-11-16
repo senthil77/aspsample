@@ -87,6 +87,17 @@ export class LoginService {
       var decoded = jwt_decode(tokenData);
    
    var loggedUser= new ModelMapper(tokenUser).map(decoded);
+
+   if (loggedUser!=null)
+   {
+    this.loggedIn = true;
+    this.loggedInSubj.next(true);
+    
+    this.currentUser = loggedUser;
+    
+
+    this.userSubj.next(this.currentUser);
+
    if (loggedUser.role=="ADMIN")
    {
      this.isAdmin=true;
@@ -97,6 +108,7 @@ export class LoginService {
      this.isAdminSupport=true;
      this.isAdminSupportSubj.next(true);
    }
+  }
      return loggedUser;
 
     }
@@ -110,6 +122,15 @@ export class LoginService {
     {
       var loggedUser= new ModelMapper(tokenUser).map(decoded);
       
+      this.loggedIn = true;
+      this.loggedInSubj.next(true);
+      
+      this.currentUser = loggedUser;
+      
+  
+      this.userSubj.next(this.currentUser);
+
+
     
       if (loggedUser.role=="ADMIN")
    {

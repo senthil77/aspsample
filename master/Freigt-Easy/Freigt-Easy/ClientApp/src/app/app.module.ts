@@ -53,7 +53,9 @@ import { AccountActivateComponent } from './pages/account-activate/account-activ
 import { FilterNestedPipe } from './pipes/order-by.pipe';
 import {AuthInterceptor} from './services/auth-interceptor';
 import { UserMainComponent } from './components/user-main/user-main.component';
-import { HeaderComponent } from './components/header/header.component'
+import { HeaderComponent } from './components/header/header.component';
+import { SummaryComponent } from './components/summary/summary.component';
+import { PaymentPageComponent } from './components/payment-page/payment-page.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -114,7 +116,11 @@ import { HeaderComponent } from './components/header/header.component'
   
     UserMainComponent,
   
-    HeaderComponent
+    HeaderComponent,
+  
+    SummaryComponent,
+  
+    PaymentPageComponent
   ],
   imports: [
     NgbModule,

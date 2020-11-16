@@ -83,7 +83,7 @@ return  date.toLocaleDateString('en-GB', {
       createdAt: [''],
       updatedAt: [''],
       vesselName: ['', Validators.required,],
-      voyageNo: ['', Validators.required,],
+      voyageNo: ['', Validators.required],
       originCity: ['', Validators.required],
       destinationCity: ['', Validators.required],
       originTerminal: [''],
@@ -91,11 +91,11 @@ return  date.toLocaleDateString('en-GB', {
       estBerthDate: [''],
       estGateOpenDate: [''],
       estCutOffDate: [''],
-      estDepDate: ['', Validators.required,],
+      estDepDate: ['', Validators.required],
       destinationTerminal: [''],
-      estArrDestDate: ['', Validators.required,],
+      estArrDestDate: ['', Validators.required],
       originPortId: ['', Validators.required],
-      destinationPortId: ['', Validators.required,],
+      destinationPortId: ['', Validators.required],
     });
 
     this.portsSub = this.utils.activePorts$.subscribe(data =>
@@ -141,10 +141,10 @@ return  date.toLocaleDateString('en-GB', {
       updatedBy: [''],
       createdAt: [''],
       updatedAt: [''],
-      vesselName: ['', Validators.required,],
-      voyageNo: ['', Validators.required,],
-      originCity: ['', Validators.required],
-      destinationCity: ['', Validators.required],
+      vesselName: ['', [Validators.required]],
+      voyageNo: ['', [Validators.required]],
+      originCity: ['',[Validators.required] ],
+      destinationCity: [''],
       originTerminal: [''],
       estArrOriDate: [ new Date().toISOString().split('T')[0]],
       estBerthDate: [ new Date().toISOString().split('T')[0]],
@@ -360,11 +360,11 @@ return  date.toLocaleDateString('en-GB', {
             isLoadingAvailable: new FormControl(dat[x].isLoadingAvailable, [Validators.required]),
             isDeliveryAvailable: new FormControl(dat[x].isDeliveryAvailable, [Validators.required]),
             transitRouteNo: new FormControl(dat[x].transitRouteNo),
-            createdBy: new FormControl(dat[x].createdBy, [Validators.required]),
-            updatedBy: new FormControl(dat[x].updatedBy, [Validators.required]),
-            createdAt: new FormControl(dat[x].createdAt, [Validators.required]),
-            updatedAt: new FormControl(dat[x].updatedAt, [Validators.required]),
-            isActive: new FormControl(dat[x].isActive, [Validators.required]),
+            createdBy: new FormControl(dat[x].createdBy ),
+            updatedBy: new FormControl(dat[x].updatedBy ),
+            createdAt: new FormControl(dat[x].createdAt ),
+            updatedAt: new FormControl(dat[x].updatedAt),
+            isActive: new FormControl(dat[x].isActive),
 
 
           }))
@@ -425,10 +425,10 @@ return  date.toLocaleDateString('en-GB', {
 
     //controls. get('vesselName').
 
-
-    if (this.editVesselScheduleForm.invalid || this.TransitListForm.invalid)
+    console.log(this.TransitListForm.value.items);
+    if (this.editVesselScheduleForm.invalid ||  this.TransitListForm.invalid)
     {
-      console.log(this.editVesselScheduleForm.errors);
+      console.log(this.TransitListForm.value.items);
       return false;
     }
     else
@@ -457,11 +457,10 @@ return  date.toLocaleDateString('en-GB', {
       destinationPortId: parseInt(this.editVesselScheduleForm.value.destinationPortId),
       details: this.TransitListForm.value.items
     }
-    console.log(x);
+  
     //TODO: onsuccess : Refresh the data
     this.apiClient.postMethod<VesselHeader>(x, 'VesselSchedules').toPromise().then((data => { 
-      console.log(data);
-
+     
 
       if (data.id == x.id){
 

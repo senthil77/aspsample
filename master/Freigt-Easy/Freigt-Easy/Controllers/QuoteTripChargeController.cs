@@ -95,6 +95,12 @@ namespace Freigt_Easy.Controllers
             }
             catch (Exception e)
             { throw e; }
+
+
+
+
+
+            quoteTripCharge.ChargeDetails.OrderBy(x => x.ChargeDetail.ChargedAtId).ThenBy(y=>y.IsActive);
             return quoteTripCharge;
         }
 

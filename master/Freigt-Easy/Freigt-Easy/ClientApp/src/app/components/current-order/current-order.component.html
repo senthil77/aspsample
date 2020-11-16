@@ -1,118 +1,188 @@
-<div class="container-fluid p-0">
+<div class="container-fluid p-1">
 
 <div class="list-group-item p-0 clearfix">
   <div class="row pb-0">
     
-    
-    <div class="col-md-3 col-sm-12 text-center">
+    <div class="col-md-1 col-sm-12 ">
+                         
+      <div class="badge-package brand-color text-center">{{index+1}} </div>
+    </div>
+    <div class="col-md-2 col-sm-12">
       <span class="list-group-item-heading"> {{itemData.vesselSchedule.vesselName}}</span>
 
     </div>
 
 
-    <div class="col text-center ">
+    <div class="col">
       <span class="list-group-item-heading"> <i class="fa fa-calendar"></i> {{itemData.startDate |date:'mediumDate'}}</span>
     
       <p> <span class="summaryTitle">{{itemData.originPort.portCode}}</span></p>
       <p class="list-group-item-text"> {{itemData.originPort.portDescription}}</p>
     
     </div>
-    <div class="col text-center-sm">
-      <strong>{{itemData.transitDays}} <i>days</i></strong>
+    <div class="col">
+      <small><strong>{{itemData.transitDays}} <i>days</i></strong></small>
       <!-- <svg height="5" width="125">
         <line x1="0" y1="0" x2="120" y2="0" style="stroke:#6190b0;stroke-width:4" />
       </svg>
       -->
       <p class="list-group-item-text">
+        <small>
           <i>
           {{transi.tranMessage}} <br> 
            {{transi.tranPorts}}
           
           </i>
-
+        </small>
             
       
       </p>
     </div>
-    <div class="col text-center">
+    <div class="col">
       <span class="list-group-item-heading"> <i class="fa fa-calendar"></i> {{itemData.endDate |date:'mediumDate'}}</span>
       <p><span class="summaryTitle">{{itemData.destinationPort.portCode}}</span></p>
       <p class="list-group-item-text ">  {{itemData.destinationPort.portDescription}}</p>
     
           
     </div>
-    <div class="col-md-2 col-sm-12">
+    <div class="col-md-4 col-sm-12" *ngIf="!destFxVal&&!oriFxVal">
       <div class="row">
 
-        
+        <div class="col">
+          <small>  Origin Charges</small>
+          <div class="badge-package brand-color p-0"> 
+                
+            {{itemData.charges.originCharges |currency:itemData.charges.originCurrency.currencyCode }}
+          </div>
+        </div>
         
         <div class="col">
-          <div class="badge-package brand-color">        
+          <small>  Freight Charges</small>
+          <div class="badge-package brand-color p-0"> 
+             
             {{(itemData.chargeAmount * searchItem.qty)  |currency }}
           </div>
         </div>
-        <div class="col padLeft">
-          <div class="badge-package brand-color">        
-            {{(itemData.chargeAmount * searchItem.qty)  |currency }}
-          </div>
+        <div class="col">
+          
+            <button   class="btn btn-solid btn-sm mt-0 btn-secondary font-sm" (click)="isShowDetails=!isShowDetails"  >Details<i class="fa fa-ellipsis-v"></i></button><br>
+
+         
+             <button  class="btn btn-solid btn-sm mt-0 btn-secondary font-sm"  (click) = "viewFares(itemData)">Fares<i class="fa fa-arrow-right"></i></button>
+                             
+           
         </div>
+     
       
       </div>
     
           
     </div>
    
-    <div class="col-md-2 col-sm-12 content-center p-3">
-      <div class="badge-package brand-color">        
-        {{((itemData.chargeAmount * searchItem.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}
+    <div class="col-md-4 col-sm-12" *ngIf="destFxVal&&oriFxVal">
+      <div class="row">
+
+        <div class="col">
+          <div class="badge-package brand-color">        
+            {{((itemData.chargeAmount * searchItem.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}
+          </div>
+          
+          </div>
+          <div class="col">
+            <div class="badge-package brand-color">        
+              {{((itemData.chargeAmount * searchItem.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}
+            </div>
+            
+            </div>
+
+            <div class="col">
+              <button class="btn btn-primary" type="button" (click)="isShowSummary=!isShowSummary">
+              Details<i class="fa fa-ellipsis-v"></i>
+            </button>
+              
+              </div>
       </div>
-      
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#summaryDetails" aria-expanded="false" aria-controls="summaryDetails">
-        Details<i class="fa fa-ellipsis-v"></i>
-      </button>
+    
+     
         
     </div>
      
   </div>
 </div>
 
-<div id="summaryDetails"  class="collapse" >
-<div class="card pt-3" *ngIf="itemData"> 
-  <div class="bg-white">
-       <span class="mt-5 summary">Summary</span>
-  </div>
 
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Pol</span> <span class="summaryTitle">{{itemData.originPort.cityDescription}} ({{itemData.originPort.cityCode}})</span> </div>
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Pod</span> <span class="summaryTitle">{{itemData.destinationPort.cityDescription}} ({{itemData.destinationPort.cityCode}})</span> </div>
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Sailing Date</span> <span class="summaryTitle">{{itemData.startDate  |date:'mediumDate'}}</span> </div>
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Vessel Name</span> <span class="summaryTitle">{{ itemData.vesselSchedule.vesselName}}</span> </div>
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">ETA</span> <span class="summaryTitle">{{itemData.endDate  |date:'mediumDate'}}</span> </div>
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Transit</span> <span class="summaryTitle">{{transi.tranMessage}}</span> <br> <span class="summaryTitle"> <i> {{transi.tranPorts}}</i></span></div> 
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Frieght</span> <span class="summaryTitle">{{itemData.chargeAmount *searchItem.qty  |currency: 'USD'}}</span> </div> 
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Local Charges</span> <span class="summaryTitle">
-{{itemData.charges.originCharges |currency :itemData.charges.originCurrency.currencyCode }}</span>
-<span class="summaryTitle">
-  {{itemData.charges.originCharges /oriFxVal |currency }}
-</span> 
-</div> 
+<div id="demo"  *ngIf="isShowDetails">
+           
+  <div class="track">
+
+  
+    <div class="{{itemData.vesselSchedule.originPort.portCode == itemData.originPort.portCode? 'step active': 'step'}}"> 
+      <span class="icon"> <i class="fa fa-ship"></i> </span> <span class="text">{{itemData.vesselSchedule.originPort.portCode}}</span> 
+    </div>
+  
+     <div   *ngFor="let detail of itemData.vesselSchedule.details | sortBy:'asc':'expDeparture'" class="{{detail.transitPort.portCode ==itemData.originPort.portCode || detail.transitPort.portCode ==itemData.destinationPort.portCode ? 'step active': 'step'}}" ><span class="icon"> <i class="fa fa-ship"></i> </span> <span class="text"> {{detail.transitPort.portCode}}</span> </div>
+    
+    
+    <div class="{{itemData.vesselSchedule.destinationPort.portCode ==itemData.destinationPort.portCode? 'step active': 'step'}}"> <span class="icon"> <i class="fa fa-ship"></i> </span> <span class="text">{{itemData.vesselSchedule.destinationPort.portCode}}</span> </div>
+</div>
 
 
 
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Destination Charges</span> <span class="summaryTitle">
-{{itemData.charges.destinationCharges |currency :itemData.charges.destinationCurrency.currencyCode }}</span>
-<span class="summaryTitle">
-{{itemData.charges.destinationCharges/destFxVal |currency }}</span>
+<ul class="row">
+  <li class="col">
+    <figure class="itemside mb-3">
+       
+        <figcaption class="info align-self-center">
+            <p class="title">Origin city : {{itemData.vesselSchedule.originPort.cityDescription}} <br>Origin Port :{{itemData.vesselSchedule.originPort.portDescription}}
+            <br>Origin Country : {{itemData.vesselSchedule.originPort.countryDescription}}</p>
+            <span class="text-muted">Arrival Date : {{itemData.vesselSchedule.estArrOriDate |date:'mediumDate'}} <br>
+             Berth Date:{{itemData.vesselSchedule.estBerthDate |date:'mediumDate'}}<br>
+             CutOff Date :{{itemData.vesselSchedule.estCutOffDate |date:'mediumDate'}}</span>
+            <p class="title">Departure Date:{{itemData.vesselSchedule.estDepDate |date:'mediumDate'}}</p>
 
+        </figcaption>
+    </figure>
+</li>
 
-</div> 
+    <li class="col" *ngFor="let detail of itemData.vesselSchedule.details | sortBy:'asc':'expDeparture'">
+        <figure class="itemside mb-3" >
+            <figcaption class="info align-self-center">
+                <p class="title">Transit City : {{detail.transitPort.cityDescription}}<br> Transit Port : {{detail.transitPort.portDescription}}
+                <br>Transit Country : {{detail.transitPort.countryDescription}}
+                </p> <span class="text-muted">Arrival Date: {{detail.expArrival |date:'mediumDate'}} </span>
+                <p class="title">Departure Date:{{detail.expDeparture |date:'mediumDate'}}</p>
+            </figcaption>
+        </figure>
+    </li>
+   
+    <li class="col">
+        <figure class="itemside mb-3">
+
+            <figcaption class="info align-self-center">
+              <p class="title">Destination city : {{itemData.vesselSchedule.destinationPort.cityDescription}} <br>
+                Destination Port : {{itemData.vesselSchedule.destinationPort.portDescription}}<br>
+                Destination Country : {{itemData.vesselSchedule.destinationPort.countryDescription}}</p>
+           
+                <p class="title">Arrival Date:{{itemData.vesselSchedule.estArrDestDate  |date:'mediumDate'}}</p>
+            </figcaption>
+        </figure>
+    </li>
+  
+</ul>
+
  
-      
-<div class="border-top border-bottom p-3 bg-white transaction"> <span class="summaryDetail mr-3">Total Charges</span>
-<span class="summaryTitle">
-  {{((itemData.chargeAmount * searchItem.qty) + (itemData.charges.destinationCharges/destFxVal)   + (itemData.charges.originCharges/oriFxVal)) |currency }}
-</span>
-</div>
 
 </div>
+<div id="summaryDetails" *ngIf="isShowSummary" >
+  <div class="row">
+    <div class="col-8 col-md-8 col-sm-12">
+      <app-payment-page></app-payment-page>
+    </div>
+    <div class="col-4 col-md-4 col-sm-12">
+      <app-summary [itemData]  = "itemData"  [searchParams]="searchItem" [oriFxVal]="oriFxVal" [destFxVal]="destFxVal"></app-summary>
+    </div>
+  </div>
+ 
 </div>
+ 
 </div>

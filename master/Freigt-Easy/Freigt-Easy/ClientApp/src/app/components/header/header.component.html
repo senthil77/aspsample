@@ -38,18 +38,18 @@
                       </span>
             </a>
         </li>
-        <li class="c-header-nav-item dropdown" *ngIf= "service.loggedIn;" >
+        <li class="c-header-nav-item dropdown" *ngIf= "service.loggedIn" >
             <a class="c-header-nav-link user-icon" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="c-avatar">
                         <i class="fa fa-user fa-1x"></i>
-                        <span *ngIf= "service.loggedIn;">
-                          {{service.currentUser.fullName}}
+                        <span *ngIf= "service.loggedIn">
+                            {{service.currentUser.fullName}}
                         </span>
                 </div>
             </a>
             <div class="dropdown-menu dropdown-menu-right pt-0">
                 <div class="dropdown-header bg-light py-2">
-                    <strong *ngIf= "service.loggedIn;"> Account {{service.currentUser.sub}}</strong>
+                    <strong *ngIf= "service.loggedIn"> Account {{service.currentUser.sub}}</strong>
                 </div>
                 <a class="dropdown-item" href="#">
                     <svg class="c-icon mr-2">
@@ -93,15 +93,16 @@
             </div>
         </li>
     </ul>
-    <div class="c-subheader px-3">
         <!-- Breadcrumb-->
+    <!-- <div class="c-subheader px-3">
+    
         <ol class="breadcrumb border-0 m-0">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item">
                 <a href="#">Admin</a>
             </li>
             <li class="breadcrumb-item active">Dashboard</li>
-            <!-- Breadcrumb Menu-->
+       
         </ol>
-    </div>
+    </div> -->
 </header>

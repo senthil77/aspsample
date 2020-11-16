@@ -20,8 +20,10 @@ export class NavMenuComponent implements OnInit {
 
       this.service.currentUser = this.service.getCurrentUser();
  
-  
+  if (!this.service.currentUser ==null)
       this.service.userSubj.next(this.service.currentUser);
+      else
+      this.service.userSubj.next(null);
     }
   
   }

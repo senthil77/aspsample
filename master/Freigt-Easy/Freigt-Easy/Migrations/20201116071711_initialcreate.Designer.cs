@@ -10,7 +10,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Freigt_Easy.Migrations
 {
     [DbContext(typeof(RiaDBContext))]
-    [Migration("20201111121338_initialcreate")]
+    [Migration("20201116071711_initialcreate")]
     partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
