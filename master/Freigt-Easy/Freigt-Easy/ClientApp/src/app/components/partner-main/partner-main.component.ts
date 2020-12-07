@@ -140,14 +140,14 @@ export class PartnerMainComponent implements OnInit {
           const catTmp = this.partnerList[catIndex];
           this.partnerList[catIndex] = this.partnerEntry;
           // this.vesschargesSub.next(this.vesscharges.slice());
-          console.log('modified');
+      
         } else {
-          console.log('added');
+      
 
           this.partnerList.push(this.partnerEntry);
 
           //this.currenciesSub.next(this.currencies.slice());
-          console.log('added');
+     
         }
       })
       .catch((err) => {
