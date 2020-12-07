@@ -32,6 +32,8 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { AccountActivateComponent } from './pages/account-activate/account-activate.component';
 import {UserMainComponent} from './components/user-main/user-main.component';
+import { PaymentsComponent } from './components/payments/payments.component';
+ 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
@@ -57,8 +59,9 @@ const routes: Routes = [
   {path:'welcome', component:WelcomePageComponent},
   {path:'activate', component:AccountActivateComponent},
   {path:'user', component:UserMainComponent},
-  
-  {path:'Vessel-subscribe', component: SubscribeComponent, canActivate: [AuthGuardService]},
+  {path:'subscribe', component: VesselSubscriptionComponent },
+  {path:'payment', component: PaymentsComponent },
+  {path:'Vessel-subscribe', component: SubscribeComponent},
   {
     path: 'quotes',
     component: QuotesComponent,

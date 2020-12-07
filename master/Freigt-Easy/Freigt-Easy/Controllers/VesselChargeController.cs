@@ -39,14 +39,7 @@ namespace Freigt_Easy.Controllers
 
             var result = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x=>x.IsActive, new string[] { "DestinationPort", "Currency", "OriginPort", "Package", "Partner", "VesselSchedule", "ChargedAt" });
 
-
-            if (result.Count == 0)
-            {
-                returnList = result;
-            }
-
-            else
-            {
+ 
                 var allTrips = await _repository.ListAllAsyncConditionInclude<VesselSchedule>(x => x.IsActive == true, new string[] {
                 "Details", "OriginPort", "DestinationPort", "Details.TransitPort"});
                 var currencyCode = _config["BaseValues:CurrencyCode"];
@@ -79,7 +72,7 @@ namespace Freigt_Easy.Controllers
 
                     returnList = result;
                 }
-            }
+            
             return returnList;
 
 

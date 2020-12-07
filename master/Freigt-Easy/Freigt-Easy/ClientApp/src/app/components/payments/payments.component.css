@@ -1,0 +1,25 @@
+ 
+.dots {
+    height: 50px;
+    width: 50px;
+    background-color: green;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 29px;
+    display: inline-block
+}
+.dots-failed{
+    height: 50px;
+    width: 50px;
+    background-color: red;
+    border-radius: 50%;
+    color: #fff;
+    font-size: 29px;
+    display: inline-block
+}
+.btn:focus,
+.form-check-input:focus,
+.input-text:focus,
+.text-area:focus {
+    box-shadow: none
+}

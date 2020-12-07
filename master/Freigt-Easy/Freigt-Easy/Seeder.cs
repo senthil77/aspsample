@@ -77,6 +77,7 @@ namespace Freigt_Easy
                     Phone1 = "9886249389",
                     ZipCode = "600008",
                     Contact2 = "ADMIN",
+                    IsCreditAllowed=true,
                     Email2 = string.Empty,
                     IsSusbcribed = true,
                     ValidUpTo = DateTime.Now.AddYears(100),
@@ -111,6 +112,7 @@ namespace Freigt_Easy
                     UpdatedBy = "senthil",
                     UpdatedAt = DateTime.Now,
                     ValidUpTo= DateTime.Now.AddYears(100), 
+                   
 
                 }); ;
                 #endregion

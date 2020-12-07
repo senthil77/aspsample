@@ -214,23 +214,41 @@ namespace Freigt_Easy.Core.Helpers
             int iTimeOut = 15;
             bool b = int.TryParse(_config["Jwt:TimeOut"], out iTimeOut);
             int partnerId = 0;
+
+            Claim partnerClaim =null;
+            
+
             if (userInfo.Partner != null)
             {
                 partnerId = userInfo.Partner.Id;
+
+                if (userInfo.Partner.IsCreditAllowed)
+                {
+                    partnerClaim = new Claim("isCreditAllowed", userInfo.Partner.IsCreditAllowed.ToString());
+                }
             }
+
+
             var claims = new[]
+ 
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userInfo.CompanyName),
                 new Claim("firstName", userInfo.FirstName.ToString()),
                 new Claim("email",userInfo.Email),
                 new Claim("roleName",userInfo.UserRole.RoleName.ToString()),
-                    new Claim("role",userInfo.UserRole.RoleName.ToString()),
+                new Claim("role",userInfo.UserRole.RoleName.ToString()),
+                
                 new Claim("userId", userInfo.Id.ToString()),
                 new Claim("fullName", userInfo.FirstName.ToString() + " " + userInfo.LastName),
                 new Claim("partnerId", partnerId.ToString())
                
                // new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
             };
+
+            if (partnerClaim != null)
+            {
+                claims.Append(partnerClaim);
+            }
             var token = new JwtSecurityToken(
               issuer: _config["Jwt:Issuer"],
               audience: _config["Jwt:Audience"],
@@ -614,7 +632,7 @@ namespace Freigt_Easy.Core.Helpers
 
 
             var pckList = _repository.ListAllAsyncWhere<Package>(x => x.IsActive == true).Result;
-            var partnerList = _repository.ListAllAsyncWhere<Partner>(x => x.IsActive == true && x.PartnerName!="ADMIN").Result;
+            var partnerList = _repository.ListAllAsyncWhere<Partner>(x => x.IsActive == true && x.PartnerName!="ADMIN" ).Result;
 
             //Source and DEstination x Partner X Package 
             foreach (Package pck in pckList)

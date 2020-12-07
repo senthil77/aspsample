@@ -34,6 +34,7 @@ namespace Freigt_Easy.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+ 
         }
     }
 }

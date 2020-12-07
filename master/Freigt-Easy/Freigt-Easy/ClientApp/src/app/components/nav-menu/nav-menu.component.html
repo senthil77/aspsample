@@ -28,7 +28,7 @@
             </button>
             Custom Quote</a>
     </li>
-    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown" *ngIf= "service.isAdmin">
+    <li class="c-sidebar-nav-item c-sidebar-nav-dropdown" *ngIf= "service.isAdminSupport">
         <a class="c-sidebar-nav-link c-sidebar-nav-dropdown-toggle" href="#">
             <button>
                 <i class="fa fa-asterisk" aria-hidden="true"></i>
@@ -63,13 +63,13 @@
                     </button>
                     Partner</a>
             </li>
-            <li class="c-sidebar-nav-item">
+            <!-- <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" routerLink="/vesselcharges">
                     <button>
                         <i class="fa fa-money" aria-hidden="true"></i>
                     </button>
                     Operator Vesel Charges</a>
-            </li>
+            </li> -->
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" routerLink="/currency">
                     <button>
@@ -84,12 +84,12 @@
                     </button>
                     ChargeDetails</a>
             </li>
-            <li class="c-sidebar-nav-item">
+            <!-- <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" routerLink="/partnerPort">
                     <button>
                             <i class="fa fa-fort-awesome" aria-hidden="true"></i>
                     </button>Port Charges</a>
-            </li>
+            </li> -->
 
             <li class="c-sidebar-nav-item">
                 <a class="c-sidebar-nav-link" routerLink="/user">
@@ -120,6 +120,15 @@
                     </button>
                     Invoice</a>
             </li>
+            <li class="c-sidebar-nav-item">
+                <a class="c-sidebar-nav-link" routerLink="/subscribe">
+                    <button>
+                        <i class="fa fa-book" aria-hidden="true"></i>
+                    </button>
+                    subscribe</a>
+            </li>
+
+ 
 
         </ul>
     </li>

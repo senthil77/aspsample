@@ -87,7 +87,8 @@ namespace Freigt_Easy.Migrations
                     Contact1 = table.Column<string>(nullable: true),
                     Contact2 = table.Column<string>(nullable: true),
                     IsSusbcribed = table.Column<bool>(nullable: false),
-                    ValidUpTo = table.Column<DateTime>(nullable: false)
+                    ValidUpTo = table.Column<DateTime>(nullable: false),
+                    IsCreditAllowed = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -344,6 +345,41 @@ namespace Freigt_Easy.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    IsActive = table.Column<bool>(nullable: false),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    UpdatedBy = table.Column<string>(nullable: true),
+                    CreatedAt = table.Column<DateTime>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: true),
+                    OrderUNId = table.Column<string>(nullable: true),
+                    BlCount = table.Column<int>(nullable: false),
+                    Commodity = table.Column<string>(nullable: true),
+                    CommodityType = table.Column<string>(nullable: true),
+                    Qty = table.Column<int>(nullable: false),
+                    OriginFxValue = table.Column<float>(nullable: false),
+                    DestFxValue = table.Column<float>(nullable: false),
+                    OrderDate = table.Column<DateTime>(nullable: false),
+                    TotalCharges = table.Column<float>(nullable: false),
+                    RzOrderId = table.Column<string>(nullable: true),
+                    RzPaymentId = table.Column<string>(nullable: true),
+                    VesselChargeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Orders_VesselCharges_VesselChargeId",
+                        column: x => x.VesselChargeId,
+                        principalTable: "VesselCharges",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "QuoteTripCharges",
                 columns: table => new
                 {
@@ -419,6 +455,11 @@ namespace Freigt_Easy.Migrations
                 name: "IX_ChargeDetails_ChargedAtId",
                 table: "ChargeDetails",
                 column: "ChargedAtId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Orders_VesselChargeId",
+                table: "Orders",
+                column: "VesselChargeId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_QuoteTripChargeDetails_ChargeDetailId",
@@ -514,6 +555,9 @@ namespace Freigt_Easy.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Orders");
+
             migrationBuilder.DropTable(
                 name: "QuoteTripChargeDetails");
 

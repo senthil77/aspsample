@@ -22,8 +22,8 @@ namespace Freigt_Easy.Core
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //13.90.197.172
-            string conString = @"Host=localhost;Port=5432; Username=postgres; Password=admin; Database=ria-ship; ";
-            //            string conString = @"Host=localhost;Port=5432; Username=postgres; Password=postgres; Database= ria-ship; ";
+           // string conString = @"Host=13.90.197.172;Port=5432; Username=postgres; Password=postgres; Database=ria-ship; ";
+                   string conString = @"Host=localhost;Port=5432; Username=postgres; Password=admin; Database= ria-ship; ";
             // string conString = @"Host=localhost;Port=5432;Username=postgres;Password=admin;Database=ria-ship;";
 
             optionsBuilder.UseNpgsql(conString);
@@ -47,6 +47,7 @@ namespace Freigt_Easy.Core
 
         public DbSet<QuoteTripCharge> QuoteTripCharges { get; set; }
         public DbSet<QuoteTripChargeDetail> QuoteTripChargeDetails { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -70,7 +71,7 @@ namespace Freigt_Easy.Core
             modelBuilder.Entity<QuoteTripCharge>().HasKey(x => x.Id);
             modelBuilder.Entity<QuoteTripChargeDetail>().HasKey(x => x.Id);
 
-
+            modelBuilder.Entity<Order>().HasKey(x => x.Id);
             base.OnModelCreating(modelBuilder);
         }
 
@@ -94,7 +95,7 @@ namespace Freigt_Easy.Core
                 if (entity.State == EntityState.Added)
                 {
                     ((BaseEntity)entity.Entity).CreatedAt = DateTime.Now;
-               
+                   
                 }
 
                 ((BaseEntity)entity.Entity).UpdatedAt = DateTime.Now;

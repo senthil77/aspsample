@@ -21,12 +21,12 @@
         </li>
         <li class="c-header-nav-item d-md-down-none mx-2">
             <a class="c-header-nav-link" href="#">
-                    <i class="fa fa-cog mr-2"></i>
+                    <i class="fa fa-cog mr-2"></i>About us
             </a>
         </li>
         <li class="c-header-nav-item d-md-down-none mx-2">
             <a class="c-header-nav-link" href="#">
-                    <i class="fa fa-cog mr-2"></i>  
+                    <i class="fa fa-mobile mr-2"></i>  Contact us
             </a>
         </li>
         <li class="c-header-nav-item d-md-down-none mx-2" *ngIf= "!service.loggedIn">
@@ -37,12 +37,24 @@
                         Login
                       </span>
             </a>
+           
+        
+        </li>
+
+        <li class="c-header-nav-item d-md-down-none mx-2" *ngIf= "!service.loggedIn">
+            <a class="c-header-nav-link"   routerLink="/signUp">
+                <i class="fa fa-user-o mr-2"></i>  
+
+                <span>
+                    Sign up
+                  </span>
+        </a>
         </li>
         <li class="c-header-nav-item dropdown" *ngIf= "service.loggedIn" >
             <a class="c-header-nav-link user-icon" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                 <div class="c-avatar">
                         <i class="fa fa-user fa-1x"></i>
-                        <span *ngIf= "service.loggedIn">
+                        <span *ngIf= "service.loggedIn && service.currentUser!=undefined">
                             {{service.currentUser.fullName}}
                         </span>
                 </div>

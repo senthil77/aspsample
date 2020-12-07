@@ -81,13 +81,14 @@ export class LoginPageComponent implements OnInit {
             }
             else
             {
-              
+              this.submitted = false;
+              this.loading = false;
               this.error ="Something went wrong";
             }
         
             }).catch((error)=>
             {
-              return;
+             
               this.submitted = false;
               this.loading = false;
               if (error instanceof HttpErrorResponse) {

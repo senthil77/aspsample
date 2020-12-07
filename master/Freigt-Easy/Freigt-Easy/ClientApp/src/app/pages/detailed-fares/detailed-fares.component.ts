@@ -15,8 +15,7 @@ import { HelperService } from 'src/app/services/helper.service';
   styleUrls: ['./detailed-fares.component.css']
 })
 export class DetailedFaresComponent implements OnInit {
-
-  public state$: Observable<string>;
+public state$: Observable<string>;
 itemData:any
 searchParams:any;
 originSummary: [];
@@ -34,6 +33,8 @@ if ( this.router.getCurrentNavigation().extras.state!=null)
     this.itemData = allData.resultData;
     this.searchParams=allData.searchData;
 
+   
+
 this.originSummary= this.itemData.charges.chargeDetails.filter(x=>x.chargeDetail.chargedAt.name =='ORIGIN' && x.isActive==true);
 this.destinationSummary= this.itemData.charges.chargeDetails.filter(x=>x.chargeDetail.chargedAt.name =='DESTINATION' && x.isActive==true);
 this.itemData.charges.originCharges =this.itemData.charges.chargeDetails.filter(x=>x.chargeDetail.chargedAt.name =='ORIGIN' && x.isActive==true  && x.chargeDetail.name!='BL fee' ).map(this.utils.pick('chargeAmount', 'chargeDetail.name'))
@@ -45,8 +46,9 @@ this.itemData.charges.originCharges =this.itemData.charges.chargeDetails.filter(
     this.itemData.charges.destinationCharges=this.itemData.charges.chargeDetails.filter(x=>x.chargeDetail.chargedAt.name =='DESTINATION' && x.isActive==true ).map(this.utils.pick('chargeAmount', 'chargeDetail.name'))
     .reduce((sum, current) => sum + current.chargeAmount * this.searchParams.qty, 0);
      //console.log(this.itemData.charges.destinationCharges+this.itemData.charges.originCharges );
-
-
+   
+     console.log(this.itemData);
+     console.log(this.searchParams);
 
 }
 else
@@ -104,6 +106,7 @@ this.destFxVal=      data.filter(x=>x.key === this.destCucode)[0].rate;
     
  
   }
+
   gotoNext() {
    
 

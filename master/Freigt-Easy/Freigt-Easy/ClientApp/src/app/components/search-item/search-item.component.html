@@ -44,13 +44,14 @@
                   <div class="col md-1 text-center">Action</div>
           </div>
            
-        <div *ngFor="let item of data;let index = index;">
-            
- 
+        <div *ngFor="let item of data;let index = index;"> 
             <div class="card">
                 <app-current-order [index]=index [itemData]  = "item"  [searchItem]="searchvalues" [oriFxVal]=null [destFxVal]=null></app-current-order>
              </div>
-          
+             
+             
+
+             
       
       </div>
     </div>

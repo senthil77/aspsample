@@ -109,6 +109,7 @@ export class LoginService {
      this.isAdminSupportSubj.next(true);
    }
   }
+  console.log(loggedUser);
      return loggedUser;
 
     }
@@ -159,11 +160,11 @@ export class LoginService {
    
     this.loggedInSubj.next(false);
     this.userSubj.next(null);
- 
+    
     this.router.navigate(['./login'])
-    // .then(() => {
-    //   window.location.reload();
-    // })
+    .then(() => {
+       window.location.reload();
+     })
 
 
   

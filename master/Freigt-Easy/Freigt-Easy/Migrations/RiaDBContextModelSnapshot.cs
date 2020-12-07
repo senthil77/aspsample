@@ -117,6 +117,71 @@ namespace Freigt_Easy.Migrations
                     b.ToTable("Currencies");
                 });
 
+            modelBuilder.Entity("Freigt_Easy.Core.Entities.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("BlCount")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Commodity")
+                        .HasColumnType("text");
+
+                    b.Property<string>("CommodityType")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<float>("DestFxValue")
+                        .HasColumnType("real");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateTime>("OrderDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("OrderUNId")
+                        .HasColumnType("text");
+
+                    b.Property<float>("OriginFxValue")
+                        .HasColumnType("real");
+
+                    b.Property<int>("Qty")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("RzOrderId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("RzPaymentId")
+                        .HasColumnType("text");
+
+                    b.Property<float>("TotalCharges")
+                        .HasColumnType("real");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("text");
+
+                    b.Property<int>("VesselChargeId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VesselChargeId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("Freigt_Easy.Core.Entities.Package", b =>
                 {
                     b.Property<int>("Id")
@@ -185,6 +250,9 @@ namespace Freigt_Easy.Migrations
                         .HasColumnType("text");
 
                     b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<bool>("IsCreditAllowed")
                         .HasColumnType("boolean");
 
                     b.Property<bool>("IsSusbcribed")
@@ -630,6 +698,15 @@ namespace Freigt_Easy.Migrations
                     b.HasOne("Freigt_Easy.Core.Entities.ChargedAt", "ChargedAt")
                         .WithMany()
                         .HasForeignKey("ChargedAtId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Freigt_Easy.Core.Entities.Order", b =>
+                {
+                    b.HasOne("Freigt_Easy.Core.Entities.VesselCharge", "VesselCharge")
+                        .WithMany()
+                        .HasForeignKey("VesselChargeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

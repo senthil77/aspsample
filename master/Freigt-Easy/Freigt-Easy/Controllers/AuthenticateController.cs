@@ -40,7 +40,7 @@ namespace Freigt_Easy.Controllers
         {
           
             IActionResult response = BadRequest("user does not Exist");
-            var user = _repository.GetByIdAsync<User>((x => x.Email == login.UserName && x.ValidUpTo > DateTime.Now ), new string[] { "UserRole" ,"Partner"}).Result;
+            var user = _repository.GetByIdAsync<User>((x => x.Email == login.UserName && x.ValidUpTo > DateTime.Now), new string[] { "UserRole" ,"Partner"}).Result;
 
 
 
@@ -60,17 +60,23 @@ namespace Freigt_Easy.Controllers
                         int iTimeOut = 15;
                         bool b = int.TryParse(_config["Jwt:TimeOut"], out iTimeOut);
 
-
-                        var tokenString = new Utility(_repository, _config).GenerateJWT(user);
-
-                        user.Password = null;
-                        response = Ok(new
+                        if (user.Partner != null && user.Partner.IsSusbcribed && user.Partner.IsActive)
                         {
-                           
-                            token = tokenString,
-                            user = user,
-                            //expires = DateTime.Now.AddMinutes(iTimeOut),
-                        });;
+                            var tokenString = new Utility(_repository, _config).GenerateJWT(user);
+
+                            user.Password = null;
+                            response = Ok(new
+                            {
+
+                                token = tokenString,
+                                // user = user,
+                                //expires = DateTime.Now.AddMinutes(iTimeOut),
+                            }); ;
+                        }
+                        else
+                        {
+                            return NotFound(new ApiResponse(404, $"user Ascociated Partner Account is not Subscribed or Not Active!! Call customer support"));
+                        }
                     }
 
                     else

@@ -55,7 +55,8 @@ import {AuthInterceptor} from './services/auth-interceptor';
 import { UserMainComponent } from './components/user-main/user-main.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SummaryComponent } from './components/summary/summary.component';
-import { PaymentPageComponent } from './components/payment-page/payment-page.component'
+import { PaymentPageComponent } from './components/payment-page/payment-page.component';
+import { PaymentsComponent } from './components/payments/payments.component'
 @NgModule({
   declarations: [
     AppComponent,
@@ -120,7 +121,9 @@ import { PaymentPageComponent } from './components/payment-page/payment-page.com
   
     SummaryComponent,
   
-    PaymentPageComponent
+    PaymentPageComponent,
+  
+    PaymentsComponent
   ],
   imports: [
     NgbModule,

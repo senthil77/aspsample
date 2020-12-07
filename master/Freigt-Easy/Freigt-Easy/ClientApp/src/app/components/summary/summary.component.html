@@ -23,13 +23,13 @@
                
         <div class="text-center px-3 pt-3"> 
             
-            <button type="button" class="btn btn-primary btn-block btn1"> Charge Me later</button> 
+            <button type="button" class="btn btn-primary btn-block btn1" (click)="createOrder(true)"> Charge Me later</button> 
             <button type="button" class="btn btn-primary btn-block btn1"> Exclude Destination Charges</button> 
-            <button type="button" class="btn btn-light btn-block btn23"> Got Quries :Chat with support</button> 
+            <!-- <button type="button" class="btn btn-light btn-block btn23"> Got Quries :Chat with support</button>  -->
    
         </div>
         <div class="py-3 px-3 pt-3 text-center">
-            <div class="border-top text-center pt-3"> <button type="button" (click)="gotoNext();" class="btn btn-light btn4 btn-block"><i class="fa fa-check-square-o verify"></i>Continue & Book Now</button> <span class="dwntxt">Got Coupouns?</span> </div>
+            <div class="border-top text-center pt-3"> <button type="button" (click)="createOrder(false)" class="btn btn-light btn4 btn-block"><i class="fa fa-check-square-o verify"></i>Continue & Book Now</button> <span class="dwntxt">Got Coupouns?</span> </div>
         </div>
        
     </div>

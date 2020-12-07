@@ -10,7 +10,7 @@ import { Injectable, Pipe, PipeTransform } from '@angular/core';
 })
 export class FilterPipe implements PipeTransform {
   transform(items: any, filter: any, defaultFilter: boolean): any {
- 
+ console.log(filter);
     if (!filter) {
       return items;
     }

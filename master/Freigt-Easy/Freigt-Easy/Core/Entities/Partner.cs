@@ -21,7 +21,7 @@ namespace Freigt_Easy.Core.Entities
         public string Contact2 { get; set; }
         public bool IsSusbcribed { get; set; }
         public DateTime ValidUpTo { get; set; }
-
+        public bool IsCreditAllowed { get; set; }
  
 
 

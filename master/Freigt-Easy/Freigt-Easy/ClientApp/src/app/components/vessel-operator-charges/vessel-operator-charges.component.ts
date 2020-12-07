@@ -104,8 +104,10 @@ gotoPortCharges()
   this.router.navigateByUrl('/partnerPort');
 }
 onchangeVessel(event: Event) {
-
+  console.log(event);
   const selVessel = (event.target as HTMLSelectElement).value;
+
+  console.log(selVessel);
   this.searchText= selVessel;
   }
 onSubmit() {
@@ -190,11 +192,13 @@ if (this.editVesselChargeForm.getRawValue()['isActive']==false) {
   //     console.log(this.vesscharges);
    
   // });
-    this.apiClient.get('VesselSchedules').subscribe((res)=>{
-      this.vesselList= res;
+    // this.apiClient.get('VesselSchedules').subscribe((res)=>{
+    //   this.vesselList= res;
+
+    //   console.log(res);
      
 
-    });
+    // });
 
     this.apiClient.get('Partner').subscribe((res)=>{
       this.partnerList= res;

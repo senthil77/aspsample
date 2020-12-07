@@ -53,15 +53,16 @@ namespace Freigt_Easy
 
             services.AddControllersWithViews();
             services.AddControllers();
-        
- 
+
+    
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
  
                 builder
-                .WithOrigins("http://localhost:4200")
+              //  .WithOrigins("http://localhost:4200", "*")
                   .AllowAnyMethod()
                 .AllowAnyHeader()
+                .SetIsOriginAllowed((host) => true)
                 .AllowCredentials();
             }));
             services.AddControllers().AddNewtonsoftJson(options =>

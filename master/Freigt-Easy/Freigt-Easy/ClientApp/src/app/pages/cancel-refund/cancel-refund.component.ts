@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { SubscribeComponent } from 'src/app/components/subscribe/subscribe.component';
 import { ApiClientService } from 'src/app/services/api-client.service';
 
 @Component({
@@ -25,7 +26,7 @@ export class CancelRefundComponent implements OnInit {
   this.oriFxVal=allData.fxOriginCharge;
   this.destFxVal=allData.fxDestCharge;
  
- console.log(this.oriFxVal);
+ console.log(this.itemData);
 }
 else
 {
@@ -33,6 +34,16 @@ else
   this.router.navigate(['/home']);
 
 }
+  }
+
+  bookMyOrder()
+  {
+    this.apiService.postMethodAction('','Payment', 'initialize').toPromise().then((succ)=>{
+
+      console.log(succ);
+    }).catch((err)=>{
+      console.log(err);
+    })
   }
 
   ngOnInit() {

@@ -2,9 +2,9 @@
     <div class="card">
       <div class="card-header">
         Vessel-Charges
-        <select class="form-control col-md-2 pull-right" (click)="onchangeVessel($event);">
+        <select class="form-control col-md-2 pull-right" [(ngModel)]="searchText">
           <option value="">Choose Vessel</option>
-          <option *ngFor="let vessel of vesselList" value="{{vessel.vesselScheduleId}}">{{vessel.vesselName}}</option>
+          <option *ngFor="let vessel of vesselList" value="{{vessel.id}}">{{vessel.vesselName}}</option>
         </select>
       </div>
   
@@ -44,7 +44,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of vesscharges  |  sortBy: sortDirection : sortingName |filter:{vesselScheduleId: searchText} : false;  let index = index;">
+            <tr *ngFor="let item of vesscharges | filter:{vesselScheduleId: searchText} : false;  let index = index;">
               <td data-title="Id"> 
                 <h3> <i *ngIf="item.isActive ===true" class="fa fa-check"></i> {{index +1 }} </h3>
               </td>
