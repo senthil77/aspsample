@@ -1,5 +1,6 @@
 ﻿using Freigt_Easy.Core;
 using Freigt_Easy.Core.Entities;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Freigt_Easy
 
         public void Seed()
         {
-
+  
             using (var db = new RiaDBContext())
             {
                 #region User

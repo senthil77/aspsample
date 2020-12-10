@@ -6,31 +6,28 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
-import { FooterComponent } from './components/footer/footer.component';
+import { NavMenuComponent } from './components/layout/nav-menu/nav-menu.component';
+import { FooterComponent } from './components/layout/footer/footer.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { AirComponent } from './components/air/air.component';
 import { FclComponent } from './components/fcl/fcl.component';
 import { LclComponent } from './components/lcl/lcl.component';
 import { SearchSchedulesComponent } from './pages/search-schedules/search-schedules.component';
-import { ChargeDetailMainComponent } from './components/charge-detail-main/charge-detail-main.component';
-import { CurrencyMainComponent } from './components/currency-main/currency-main.component';
-import { PackageMainComponent } from './components/package-main/package-main.component';
-import { PartnerMainComponent } from './components/partner-main/partner-main.component';
-import { PortMainComponent } from './components/port-main/port-main.component';
+import { ChargeDetailMainComponent } from './components/maint/charge-detail-main/charge-detail-main.component';
+import { CurrencyMainComponent } from './components/maint/currency-main/currency-main.component';
+import { PackageMainComponent } from './components/maint/package-main/package-main.component';
+import { PartnerMainComponent } from './components/maint/partner-main/partner-main.component';
+import { PortMainComponent } from './components/maint/port-main/port-main.component';
 import { PortPartnerChargesComponent } from './components/port-partner-charges/port-partner-charges.component';
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { SearchScheduleListComponent } from './components/search-schedule-list/search-schedule-list.component';
  
-import { EditableComponent } from './components/editable/editable.component';
-import { EditOnEnterDirective } from './components/editable/edit-on-enter.directive';
-import { EditModeDirective } from './components/editable/edit-mode.directive';
-import { ViewModeDirective } from './components/editable/view-mode.directive';
+
 import { VesselOperatorChargesComponent } from './components/vessel-operator-charges/vessel-operator-charges.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPipe } from './pipes/filter.pipe';
 import { SortByPipe } from './pipes/sort-by.pipe';
-import { VesselDetailsComponent } from './components/vessel-details/vessel-details.component';
+import { VesselDetailsComponent } from './components/maint/vessel-details/vessel-details.component';
 import { ApiClientService } from './services/api-client.service';
 import { QuotesComponent } from './pages/quotes/quotes.component';
 import { ToastrModule } from 'ngx-toastr';
@@ -39,7 +36,7 @@ import { PartnerHomeComponent } from './pages/partner-home/partner-home.componen
 import { PartnerAccountComponent } from './pages/partner-account/partner-account.component';
 import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
 import { DetailedFaresComponent } from './pages/detailed-fares/detailed-fares.component';
-import { CancelRefundComponent } from './pages/cancel-refund/cancel-refund.component';
+import { CancelRefundComponent } from './components/cancel-refund/cancel-refund.component';
 import { CurrentOrderComponent } from './components/current-order/current-order.component';
 import { BillOfLandingComponent } from './pages/bill-of-landing/bill-of-landing.component';
 import { BolInvoiceComponent } from './pages/bol-invoice/bol-invoice.component';
@@ -52,11 +49,13 @@ import { WelcomePageComponent } from './pages/welcome-page/welcome-page.componen
 import { AccountActivateComponent } from './pages/account-activate/account-activate.component';
 import { FilterNestedPipe } from './pipes/order-by.pipe';
 import {AuthInterceptor} from './services/auth-interceptor';
-import { UserMainComponent } from './components/user-main/user-main.component';
-import { HeaderComponent } from './components/header/header.component';
+import { UserMainComponent } from './components/maint/user-main/user-main.component';
+import { HeaderComponent } from './components/layout/header/header.component';
 import { SummaryComponent } from './components/summary/summary.component';
-import { PaymentPageComponent } from './components/payment-page/payment-page.component';
-import { PaymentsComponent } from './components/payments/payments.component'
+import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
+import { PaymentsComponent } from './components/payments/payments.component';
+import { CurrencyPipe } from '@angular/common';
+import { PaymentStatusComponent } from './pages/payment-status/payment-status.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,10 +76,7 @@ import { PaymentsComponent } from './components/payments/payments.component'
     SearchScheduleListComponent,
  
     SortByPipe,
-    EditableComponent,
-    EditOnEnterDirective,
-    EditModeDirective,
-    ViewModeDirective,
+   
     PartnerMainComponent,
     VesselOperatorChargesComponent,
     FilterPipe,
@@ -123,7 +119,9 @@ import { PaymentsComponent } from './components/payments/payments.component'
   
     PaymentPageComponent,
   
-    PaymentsComponent
+    PaymentsComponent,
+  
+    PaymentStatusComponent
   ],
   imports: [
     NgbModule,
@@ -141,7 +139,7 @@ import { PaymentsComponent } from './components/payments/payments.component'
     ReactiveFormsModule,
   
   ],
-  providers: [ApiClientService,FilterPipe, DatePipe,FilterNestedPipe,{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
+  providers: [ApiClientService,FilterPipe,CurrencyPipe, DatePipe,FilterNestedPipe,{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

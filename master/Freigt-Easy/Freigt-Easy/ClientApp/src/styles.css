@@ -390,3 +390,12 @@ line-height: 1rem;
   font-weight: 600;
   letter-spacing: -0.5px;
 }
+
+.bg-brand
+{
+  background-color:#355b84 ;
+}
+.bg-brand-secondary
+{
+  background-color: #bacbdc;
+}

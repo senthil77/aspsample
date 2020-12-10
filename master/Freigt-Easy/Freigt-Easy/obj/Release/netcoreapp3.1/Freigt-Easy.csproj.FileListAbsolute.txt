@@ -1,7 +1,6 @@
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\appsettings.Development.json
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\appsettings.json
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\package-lock.json
-C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\Properties\launchSettings.json
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\Freigt-Easy.exe
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\Freigt-Easy.xml
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\welcomeTemplate.html
@@ -142,3 +141,6 @@ C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\staticweba
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\Freigt-Easy.dll
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\Freigt-Easy.pdb
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\Freigt-Easy.genruntimeconfig.cache
+C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\RazorPay Core.dll
+C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\Freigt-Easy.csproj.CoreCompileInputs.cache
+C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\scopedcss\bundle\Freigt-Easy.styles.css

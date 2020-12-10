@@ -46,10 +46,10 @@ namespace Freigt_Easy.Controllers
         }
 
         [HttpPost]
-        [Route("confirm")]
-        public async Task<IActionResult> ConfirmPayment(ConfirmPaymentPayload confirmPayment)
+ 
+        public async Task<IActionResult> ConfirmPayment([FromBody]ConfirmPaymentPayload confirmPayment)
         {
-            var attributes = new Dictionary<string, string>
+            var attributes = new Dictionary<string, string> 
         {
             { "razorpay_payment_id", confirmPayment.razorpay_payment_id },
             { "razorpay_order_id", confirmPayment.razorpay_order_id },
@@ -57,7 +57,12 @@ namespace Freigt_Easy.Controllers
         };
             try
             {
-                Utils.verifyPaymentSignature(attributes);
+                Razorpay.Api.Utils.ValidatePaymentSignature(attributes);
+
+
+
+
+               // utils.verifyPaymentSignature(attributes);
                 // OR
                 var isValid = Utils.ValidatePaymentSignature(attributes);
                 if (isValid)
@@ -72,6 +77,7 @@ namespace Freigt_Easy.Controllers
             }
             catch (Exception ex)
             {
+                var s = ex;
                 return StatusCode(StatusCodes.Status500InternalServerError);
             }
             return StatusCode(StatusCodes.Status500InternalServerError);

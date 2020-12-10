@@ -13,9 +13,9 @@ namespace Freigt_Easy
     {
         public static void Main(string[] args)
         {
-              CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
          //Seeder seeder = new Seeder();
-         //   seeder.Seed();
+         // seeder.Seed();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

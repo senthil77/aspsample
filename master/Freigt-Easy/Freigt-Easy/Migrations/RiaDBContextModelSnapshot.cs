@@ -163,8 +163,14 @@ namespace Freigt_Easy.Migrations
                     b.Property<string>("RzPaymentId")
                         .HasColumnType("text");
 
+                    b.Property<string>("RzSignature")
+                        .HasColumnType("text");
+
                     b.Property<float>("TotalCharges")
                         .HasColumnType("real");
+
+                    b.Property<string>("TransactionStatus")
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("timestamp without time zone");

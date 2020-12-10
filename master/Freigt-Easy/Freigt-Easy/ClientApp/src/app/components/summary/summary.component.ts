@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiClientService } from 'src/app/services/api-client.service';
 import { HelperService } from 'src/app/services/helper.service';
-
+import {Order} from '../../models/order'
 @Component({
   selector: 'app-summary',
   templateUrl: './summary.component.html',
@@ -13,6 +13,7 @@ export class SummaryComponent implements OnInit {
   @Input() searchParams: any;
   @Input() oriFxVal: any;
   @Input() destFxVal: any;
+  @Input() mode: any;
   constructor( private utils: HelperService, private router:Router,private apiService:ApiClientService) { }
   transi:any;
   ngOnInit(): void {
@@ -57,17 +58,39 @@ export class SummaryComponent implements OnInit {
    console.log(this.totalCharges);
    console.log(orderData);
 
-   this.apiService.postMethod(orderData,'order').toPromise().then((data)=>{console.log(data);
-  this.gotoNext(data.rzOrderId,data.rzrKey)
+   this.apiService.postMethod<Order>(orderData,'order').toPromise().then((data)=>{console.log(data.vesselCharge);
+  this.gotoNext(data.rzOrderId,data.rzrKey,data.orderUNId,data.vesselCharge.partner.email1,data.vesselCharge.partner.phone1, data.vesselCharge.partner.partnerName)
   }).catch((err)=>{console.log(err);})
   }
-  gotoNext(orderId,key) {
+
+  gotoNextOld() {
+   
+
+    let dataPassed=
+    {
+      selectedOrder : this.itemData,
+      searchData: this.searchParams,
+      fxOriginCharge: this.oriFxVal,
+      fxDestCharge: this.destFxVal,
+   
+   
+    }
+ 
+     this.router.navigate(['/refund'], { 
+       state: { example: dataPassed } 
+     });
+  }
+  gotoNext(orderId,key,orderUid,email,contact,partnerName) {
    
 
     let dataPassed=
     {
       selectedOrder : orderId,
-      selectedKey:key
+      selectedKey:key,
+      selectedUid:orderUid,
+      email:email,
+      contactNo:contact,
+      partnerName:partnerName
       
    
    

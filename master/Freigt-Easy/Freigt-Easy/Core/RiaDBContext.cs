@@ -1,5 +1,7 @@
 ﻿using Freigt_Easy.Core.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +12,13 @@ namespace Freigt_Easy.Core
 {
     public class RiaDBContext : DbContext
     {
-        public RiaDBContext()
-        { }
+
+      
+        public RiaDBContext( )
+
+        {
+         
+        }
 
         public RiaDBContext(DbContextOptions<RiaDBContext> options) : base(options)
         {
@@ -21,10 +28,17 @@ namespace Freigt_Easy.Core
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //13.90.197.172
-           // string conString = @"Host=13.90.197.172;Port=5432; Username=postgres; Password=postgres; Database=ria-ship; ";
-                   string conString = @"Host=localhost;Port=5432; Username=postgres; Password=admin; Database= ria-ship; ";
-            // string conString = @"Host=localhost;Port=5432;Username=postgres;Password=admin;Database=ria-ship;";
+            HostingEnvironment hosting = new HostingEnvironment();
+            IConfigurationBuilder configurationBuilder = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+
+
+            IConfigurationRoot configurationRoot = configurationBuilder.Build();
+
+
+  
+            string conString = configurationRoot.GetConnectionString("DefaultConnection");
 
             optionsBuilder.UseNpgsql(conString);
             base.OnConfiguring(optionsBuilder);

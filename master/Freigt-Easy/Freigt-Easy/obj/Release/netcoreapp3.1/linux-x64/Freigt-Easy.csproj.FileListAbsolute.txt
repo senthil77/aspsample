@@ -1,7 +1,6 @@
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\linux-x64\appsettings.Development.json
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\linux-x64\appsettings.json
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\linux-x64\package-lock.json
-C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\linux-x64\Properties\launchSettings.json
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\linux-x64\Freigt-Easy
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\linux-x64\Freigt-Easy.xml
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\linux-x64\welcomeTemplate.html
@@ -141,3 +140,6 @@ C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\linux-x64\
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\linux-x64\Freigt-Easy.dll
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\linux-x64\Freigt-Easy.pdb
 C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\linux-x64\Freigt-Easy.genruntimeconfig.cache
+C:\aspsample\master\Freigt-Easy\Freigt-Easy\bin\Release\netcoreapp3.1\linux-x64\RazorPay Core.dll
+C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\linux-x64\Freigt-Easy.csproj.CoreCompileInputs.cache
+C:\aspsample\master\Freigt-Easy\Freigt-Easy\obj\Release\netcoreapp3.1\linux-x64\scopedcss\bundle\Freigt-Easy.styles.css

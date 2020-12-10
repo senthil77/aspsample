@@ -1,12 +1,12 @@
-<div class="container mt-3 d-flex justify-content-center p-0">
+<div class="container p-3">
     <div class="card">
         
-        <h4 class="pl-3 pt-3 text-dark">{{ itemData.vesselSchedule.vesselName}} </h4> <span class="pl-3 uptxt">
+        <h4 class="pl-3 text-dark">{{ itemData.vesselSchedule.vesselName}} </h4> <span class="pl-3 uptxt">
             Starts: {{itemData.startDate  |date:'mediumDate'}} | ETA: {{itemData.endDate  |date:'mediumDate'}}</span>
 
             <div class="d-flex flex-row">
                 <div class="d-flex flex-column pl-3"> <i class="fa fa-location-arrow text-success icon"></i> <span class="txt">Pol: {{itemData.originPort.cityDescription}} ({{itemData.originPort.cityCode}})</span> </div>
-                <div class="d-flex flex-column pl-5"> {{transi.tranMessage}} <span class="txt"> {{transi.tranPorts}} </span> </div>
+                <div class="d-flex flex-column pl-5"><span class="txt">{{transi.tranMessage}}</span>  <span class="txt"> {{transi.tranPorts}} </span> </div>
                 <div class="d-flex flex-column pl-5"> <i class="fa fa-ship text-primary icon"></i> <span class="txt">Pod: {{itemData.destinationPort.cityDescription}} ({{itemData.destinationPort.cityCode}}) </span> </div>
      
             </div>
@@ -21,15 +21,16 @@
      
             </div>
                
-        <div class="text-center px-3 pt-3"> 
+        <div class="text-center px-3 pt-3" *ngIf="mode"> 
             
             <button type="button" class="btn btn-primary btn-block btn1" (click)="createOrder(true)"> Charge Me later</button> 
-            <button type="button" class="btn btn-primary btn-block btn1"> Exclude Destination Charges</button> 
+            <button type="button" class="btn btn-primary btn-block btn1">Charge me for Freight Only</button> 
+          
             <!-- <button type="button" class="btn btn-light btn-block btn23"> Got Quries :Chat with support</button>  -->
    
         </div>
-        <div class="py-3 px-3 pt-3 text-center">
-            <div class="border-top text-center pt-3"> <button type="button" (click)="createOrder(false)" class="btn btn-light btn4 btn-block"><i class="fa fa-check-square-o verify"></i>Continue & Book Now</button> <span class="dwntxt">Got Coupouns?</span> </div>
+        <div class="py-3 px-3 pt-3 text-center" *ngIf="mode" >
+            <div class="border-top text-center pt-3"> <button type="button" (click)="createOrder(false)" class="btn btn-light btn4 btn-block"><i class="fa fa-check-square-o verify"></i>Accept & Pay Now</button> <span class="dwntxt">Got Coupouns?</span> </div>
         </div>
        
     </div>

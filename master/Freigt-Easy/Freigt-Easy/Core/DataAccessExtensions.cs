@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Freigt_Easy.Core
@@ -38,6 +39,19 @@ namespace Freigt_Easy.Core
                 userData.Password = null;
             }
             return userData;
+        }
+
+
+        public static string HmacSha256Digest(this string message, string secret)
+        {
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] keyBytes = encoding.GetBytes(secret);
+            byte[] messageBytes = encoding.GetBytes(message);
+            System.Security.Cryptography.HMACSHA256 cryptographer = new System.Security.Cryptography.HMACSHA256(keyBytes);
+
+            byte[] bytes = cryptographer.ComputeHash(messageBytes);
+
+            return BitConverter.ToString(bytes).Replace("-", "").ToLower();
         }
     }
 

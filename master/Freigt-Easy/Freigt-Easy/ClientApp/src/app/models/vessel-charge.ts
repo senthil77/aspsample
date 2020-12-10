@@ -1,4 +1,4 @@
- 
+ import {Partner} from './partner';
 export class VesselCharge
 {
 chargeDetail:string;
@@ -20,4 +20,5 @@ updatedAt:Date;
 startDate:Date;
 endDate: Date
 transitDays:number;
+partner:Partner;
 }

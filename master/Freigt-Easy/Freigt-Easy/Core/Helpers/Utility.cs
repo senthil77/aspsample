@@ -201,7 +201,22 @@ namespace Freigt_Easy.Core.Helpers
             }
             return emailName;
         }
+        /// <summary>
+        /// Get Email from Claims
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <returns></returns>
+        public bool IsAdminOrSupport(ClaimsIdentity identity)
+        {
 
+            string emailName = string.Empty;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                emailName = claims.Where(p => p.Type.Contains("roleName")).FirstOrDefault()?.Value;
+            }
+            return (emailName == "ADMIN") || (emailName == "SUPPORT");
+        }
         /// <summary>
         /// Genereate JWT Token
         /// </summary>

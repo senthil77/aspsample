@@ -21,13 +21,15 @@ namespace Freigt_Easy.Core.Entities
 
         public string RzOrderId{get;set;}
         public string RzPaymentId { get; set; }
-        
- 
+        public string RzSignature{ get; set; }
+
         [ForeignKey("VesselChargeOrder")]
         public int VesselChargeId { get; set; }
         public VesselCharge VesselCharge { get; set; }
-
+ 
         public string TransactionStatus { get; set; }
+
+
 
         [NotMapped]
         public string IsCreditAllowed { get; set; }

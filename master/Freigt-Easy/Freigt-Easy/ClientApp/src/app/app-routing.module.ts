@@ -6,20 +6,20 @@ import { LclComponent } from './components/lcl/lcl.component';
 import { HomeComponent } from './pages/home/home.component';
 import { QuotesComponent } from './pages/quotes/quotes.component';
 
-import { CurrencyMainComponent } from './components/currency-main/currency-main.component';
+import { CurrencyMainComponent } from './components/maint/currency-main/currency-main.component';
 import { SearchSchedulesComponent } from './pages/search-schedules/search-schedules.component';
-import { PackageMainComponent } from './components/package-main/package-main.component';
-import { PortMainComponent } from './components/port-main/port-main.component';
+import { PackageMainComponent } from './components/maint/package-main/package-main.component';
+import { PortMainComponent } from './components/maint/port-main/port-main.component';
  
-import { PartnerMainComponent } from './components/partner-main/partner-main.component';
-import { ChargeDetailMainComponent } from './components/charge-detail-main/charge-detail-main.component';
-import { VesselDetailsComponent } from './components/vessel-details/vessel-details.component';
+import { PartnerMainComponent } from './components/maint/partner-main/partner-main.component';
+import { ChargeDetailMainComponent } from './components/maint/charge-detail-main/charge-detail-main.component';
+import { VesselDetailsComponent } from './components/maint/vessel-details/vessel-details.component';
 import { PartnerHomeComponent } from './pages/partner-home/partner-home.component';
 import { PartnerAccountComponent } from './pages/partner-account/partner-account.component';
 
 import {DetailedFaresComponent} from './pages/detailed-fares/detailed-fares.component';
 import { PortPartnerChargesComponent } from './components/port-partner-charges/port-partner-charges.component';
-import { CancelRefundComponent } from './pages/cancel-refund/cancel-refund.component';
+ 
 import { VesselOperatorChargesComponent } from './components/vessel-operator-charges/vessel-operator-charges.component';
 import { BillOfLandingComponent } from './pages/bill-of-landing/bill-of-landing.component';
 import { SearchItemComponent } from './components/search-item/search-item.component';
@@ -31,15 +31,16 @@ import {AuthGuardService} from './services/auth-guard.service';
 import { SignUpComponent } from './pages/sign-up/sign-up.component';
 import { WelcomePageComponent } from './pages/welcome-page/welcome-page.component';
 import { AccountActivateComponent } from './pages/account-activate/account-activate.component';
-import {UserMainComponent} from './components/user-main/user-main.component';
+import {UserMainComponent} from './components/maint/user-main/user-main.component';
 import { PaymentsComponent } from './components/payments/payments.component';
- 
+ import {PaymentPageComponent} from './pages/payment-page/payment-page.component';
+ import {PaymentStatusComponent} from './pages/payment-status/payment-status.component';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
    
   { path: 'searchschedule', component: SearchSchedulesComponent,    canActivate: [AuthGuardService] },
-  { path: 'refund', component: CancelRefundComponent, canActivate: [AuthGuardService] },
+ 
   { path: 'pack', component: PackageMainComponent, canActivate: [AuthGuardService] },
   { path: 'port', component: PortMainComponent, canActivate: [AuthGuardService] },
  
@@ -61,7 +62,10 @@ const routes: Routes = [
   {path:'user', component:UserMainComponent},
   {path:'subscribe', component: VesselSubscriptionComponent },
   {path:'payment', component: PaymentsComponent },
+  {path:'payment-request', component:PaymentPageComponent},
   {path:'Vessel-subscribe', component: SubscribeComponent},
+  {path:'partner-home', component:PartnerHomeComponent},
+  {path:'pay-status', component:PaymentStatusComponent},
   {
     path: 'quotes',
     component: QuotesComponent,

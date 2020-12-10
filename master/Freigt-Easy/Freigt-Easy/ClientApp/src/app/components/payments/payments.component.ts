@@ -14,6 +14,11 @@ export class PaymentsComponent implements OnInit {
   order_id:any;
   isSuccess:any;
   rzrKey:any;
+  orderUid:any;
+
+  primEmail:any;
+  primContact:any;
+  primPartner:any;
   constructor(private winRef: WindowRefService, private router:Router,private ngZone: NgZone) {
 
     if ( this.router.getCurrentNavigation().extras.state!=null)
@@ -21,8 +26,18 @@ export class PaymentsComponent implements OnInit {
       var allData = this.router.getCurrentNavigation().extras.state.example;
      
       this.order_id = allData.selectedOrder;
-      this.rzrKey= allData.selectedKey
+      this.rzrKey= allData.selectedKey;
+      this.orderUid= allData.selectedUid;
+      this.primEmail= allData.email;
+      this.primContact= allData.contactNo;
+      this.primPartner=allData.partnerName;
       this.isSuccess=0;
+      console.log(allData);
+  }
+  
+  else
+  {
+    this.router.navigate(['./home']);
   }
 }
 
@@ -38,7 +53,7 @@ export class PaymentsComponent implements OnInit {
       key: this.rzrKey,   
       name: 'FreightoGix', // company name or product name
       description: 'Booking',  // product description
-      image: './assets/logo.png', // company logo or product image
+      image: '../../../assets/images/Logo.JPG', // company logo or product image
       order_id: val, // order_id created by you in backend
       modal: {
         // We should prevent closing of the form when esc key is pressed.
@@ -46,33 +61,46 @@ export class PaymentsComponent implements OnInit {
       },
 
       prefill: {
-        name: "senthil Kumar",
-        "email": "k.sendilkumar@gmail.com",
-        "contact": "9886249389"
+        name: this.primPartner,
+        "email": this.primEmail,
+        "contact": this.primContact
     },
       notes: {
-        "my_store_id": "ref#123123123",
-        "my_user_id": "user_0316"
+        "my_store_id": this.orderUid
+       
       },
       theme: {
         color: '#355b83'
       }
     };
     options.handler = ((response, error) => {
-      options.response = response;
-      console.log(response);
-      console.log(options);
 
+      let dataPassed={
+        orderId: this.orderUid,
+        payResponse:null
+
+        }
+      if (!error)
+      {
+        options.response = response;
+        console.log(response);
+        dataPassed.payResponse= response;
+
+      }
+      else
+      {
+        dataPassed.payResponse=error;
+      }
   
+      // console.log(options);
+
+      // console.log(options.error);
+      
       // call your backend api to verify payment signature & capture transaction
 
-      this.ngZone.run(() => {
-        setTimeout(() => {
-    
- 
-          this.router.navigate(['./home']);// ideally this should be Orders
-          }, 5000)
-        });
+      this.router.navigate(['./pay-status'], { 
+        state: { example: dataPassed } 
+      });
     
     });
 
@@ -81,14 +109,9 @@ export class PaymentsComponent implements OnInit {
       // handle the case when user closes the form while transaction is in progress
       console.log('Transaction cancelled.');
  
-
+      this.router.navigate(['./home']);
      
-     setTimeout(() => {
-
-
-      this.router.navigate(['./home']);// ideally this should be Orders and automail
-    
-      }, 5000);
+   
     });
     const rzp = new this.winRef.nativeWindow.Razorpay(options);
     rzp.open();
