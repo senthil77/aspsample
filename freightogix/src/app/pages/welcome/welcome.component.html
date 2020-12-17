@@ -1,0 +1,180 @@
+<div class="example-container mat-elevation-z8 mt-100 p-15">
+<mat-carousel
+timings="200ms ease-in"
+[autoplay]="true"
+interval="600"
+color="white"
+>
+<mat-carousel-slide
+  *ngFor="let slide of slides; let i = index"
+  [image]="slide.image"
+ 
+  [hideOverlay]="false"
+></mat-carousel-slide>
+</mat-carousel></div>
+ 
+
+<mat-card class="margin-zero font-Ship">
+  <mat-tab-group >
+      <!-- Tab 1 -->
+      <mat-tab label="Activity">
+          <mat-card-content>
+
+
+              <div   *ngFor='let activity of activityData' >
+          
+                  <div class="p-b-20 b-b">
+                      <h4 class="m-b-10">{{activity.name}}
+                          <small class="text-muted">({{activity.commentTime}})</small>
+                      </h4>
+                      <!-- <button  mat-raised-button color="{{activity.buttonColor}}">Check Fares</button> -->
+                      <!-- <p class="text-muted">{{activity.comment}}</p> -->
+
+                      <div fxLayout="row wrap" >
+                          <div fxFlex.gt-sm="100" fxFlex="100">
+                              <div fxLayout="row wrap">
+                              <div fxFlex.gt-sm="45" fxFlex="45" class="text-left">
+                                  <p class="margin-zero font-Ship"> <mat-icon>calendar_today</mat-icon>23-Oct-2020</p>
+                                  <p class="margin-zero font-Ship">Chennai </p>
+                                  <p class="margin-zero font-Ship"> INMAA</p>
+               
+
+                               </div>
+                       
+                              <div fxFlex.gt-sm="10" fxFlex="10" class="text-center">
+                                  <small class="text-muted">
+                                  <p class="margin-zero font-Ship">15</p> 
+                                  <hr class="brandColor">
+                                  <p class="margin-zero font-Ship">days</p> 
+                                  </small>
+                              </div>
+                              <div fxFlex.gt-sm="45" fxFlex="45" class="text-right">
+                                  <p class="margin-zero font-Ship"> <mat-icon>calendar_today</mat-icon>23-Oct-2020</p>
+                                  <p class="margin-zero font-Ship">Port of Jebel ali </p>
+                                  <p class="margin-zero font-Ship"> INMAA</p>
+                                 
+                               </div>
+
+                               
+                              </div>
+
+
+                          </div>
+                       
+
+                       
+                            
+                                   
+                           
+                      </div>
+                      
+                      <div fxLayout="row wrap" >
+                          <!-- <div fxFlex.gt-sm="40" fxFlex="100">
+                              <div fxLayout="row wrap">
+                              <div fxFlex.gt-sm="35" fxFlex="30">
+                                  col 3
+                               </div>
+                       
+                              <div fxFlex.gt-sm="35" fxFlex="35">
+                                 col 11111
+                              </div>
+                              <div fxFlex.gt-sm="30" fxFlex="35">
+                                  col 23333
+                               </div>
+                              </div>
+
+
+                          </div>
+                          <div fxFlex.gt-sm="40" fxFlex="100">
+                              <div fxLayout="row wrap">
+                                  <div fxFlex.gt-sm="33.33%" fxFlex="33.33%">
+                                      col 3
+                                   </div>
+                           
+                                  <div fxFlex.gt-sm="33.33%" fxFlex="33.33%">
+                                     col 11111
+                                  </div>
+                                  <div fxFlex.gt-sm="33.33%" fxFlex="33.33%">
+                                      col 23333
+                                   </div>
+                                  </div>
+  
+                           </div> -->
+                          <div fxFlex.gt-sm="50" fxFlex="50">
+                              <button class="font-Ship" mat-raised-button color="{{activity.buttonColor}}">Details</button>  
+                          </div>
+                          <div fxFlex.gt-sm="50" fxFlex="50" class="text-right">
+                              
+                              <button  class="font-Ship"  mat-raised-button color="{{activity.buttonColor}}">Check Fares</button>
+                          </div>
+                     
+                          
+                            
+                                   
+                           
+                      </div>
+                   
+
+                       
+                  </div>
+              </div>
+          </mat-card-content>
+      </mat-tab>
+      <!-- End Tab 1 -->
+      <!-- Tab 2 -->
+      <mat-tab label="Profile">
+          <mat-card-content>
+              <mat-card-title>Form Basic Layouts</mat-card-title>
+              <!-- ============================================================== -->
+              <!-- column -->
+              <!-- ============================================================== -->
+              <form class="basic-form">
+                  <div fxLayout="row wrap">
+                      <!-- column -->
+                      <div fxFlex.gt-sm="100" fxFlex="100">
+                          <mat-form-field>
+                              <input matInput placeholder="Some text value">
+                          </mat-form-field>
+                      </div>
+                      <!-- column -->
+                      <div fxFlex.gt-sm="100" fxFlex="100">
+                          <mat-form-field>
+                              <input matInput placeholder="EmailId" type="email">
+                          </mat-form-field>
+                      </div>
+                      <!-- column -->
+                      <div fxFlex.gt-sm="100" fxFlex="100">
+                          <mat-form-field>
+                              <input matInput placeholder="Password" type="password">
+                          </mat-form-field>
+                      </div>
+
+                      <!-- column -->
+                      <div fxFlex.gt-sm="100" fxFlex="100">
+                          <mat-form-field>
+                              <mat-select placeholder="Select">
+                                  <mat-option value="option">Option</mat-option>
+                                  <mat-option value="option">Option2</mat-option>
+                                  <mat-option value="option">Option3</mat-option>
+                              </mat-select>
+                          </mat-form-field>
+                      </div>
+
+                      <!-- column -->
+                      <div fxFlex.gt-sm="100" fxFlex="100">
+                          <mat-form-field>
+                              <textarea matInput placeholder="Textarea"></textarea>
+                          </mat-form-field>
+                      </div>
+                      <!-- column -->
+                      <div fxFlex.gt-sm="100" fxFlex="100">
+                          <button mat-raised-button color="primary">Update Profile</button>
+                      </div>
+                  </div>
+              </form>
+          </mat-card-content>
+      </mat-tab>
+  </mat-tab-group>
+</mat-card>
+
+ 

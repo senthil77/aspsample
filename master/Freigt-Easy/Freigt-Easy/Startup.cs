@@ -101,7 +101,7 @@ namespace Freigt_Easy
             }
          
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
  
             app.UseStaticFiles();

@@ -46,8 +46,8 @@ export class DetailedFaresComponent implements OnInit {
         .reduce((sum, current) => sum + current.chargeAmount * this.searchParams.qty, 0);
       //console.log(this.itemData.charges.destinationCharges+this.itemData.charges.originCharges );
 
-      console.log(this.itemData);
-      console.log(this.searchParams);
+      //console.log(this.itemData);
+      //console.log(this.searchParams);
 
     }
     else {

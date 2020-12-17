@@ -63,7 +63,9 @@ namespace Freigt_Easy.Controllers
         [HttpGet("{id}", Name = "GetOrder")]
         public  ActionResult<Order> GetOrder(int id)
         {
-            var order =  _repository.FindSingle<Order>(x=>x.Id ==id, new string[] { "VesselCharge", "VesselCharge.Partner" });
+            var order =  _repository.FindSingle<Order>(x=>x.Id ==id, new string[] { "VesselCharge", "VesselCharge.Partner",
+            "VesselCharge.DestinationPort",  "VesselCharge.OriginPort", "VesselCharge.Package", "VesselCharge.VesselSchedule", "VesselCharge.ChargedAt"
+            });
 
             if (order == null)
             {

@@ -184,12 +184,26 @@ namespace Freigt_Easy.Core.Helpers
             }
             return finalList;
         }
+        public string GetPartnerId(ClaimsIdentity identity)
+        {
 
-       /// <summary>
-       /// Get Email from Claims
-       /// </summary>
-       /// <param name="identity"></param>
-       /// <returns></returns>
+            string emailName = string.Empty;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                emailName = claims.Where(p => p.Type.Contains("partner")).FirstOrDefault()?.Value;
+
+
+            }
+            return emailName;
+        }
+
+
+        /// <summary>
+        /// Get Email from Claims
+        /// </summary>
+        /// <param name="identity"></param>
+        /// <returns></returns>
         public string GetEmailclaim(ClaimsIdentity identity)
         {
 
@@ -198,6 +212,8 @@ namespace Freigt_Easy.Core.Helpers
             {
                 IEnumerable<Claim> claims = identity.Claims;
                 emailName = claims.Where(p => p.Type.Contains("email")).FirstOrDefault()?.Value;
+
+  
             }
             return emailName;
         }

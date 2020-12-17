@@ -12,6 +12,8 @@ import { ApiClientService } from 'src/app/services/api-client.service';
 export class PaymentStatusComponent implements OnInit {
 rxResponse:any;
 orderId:any;
+
+currOrder:Order;
 private _isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(private apiService:ApiClientService, private router:Router, private changeDetector : ChangeDetectorRef ) {
 
@@ -21,7 +23,7 @@ private _isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(fal
       var allData = this.router.getCurrentNavigation().extras.state.example;
       this.rxResponse=allData.payResponse;
       this.orderId = allData.orderId;
-      console.log(allData);
+     // console.log(allData);
       let confirmPayment=
       {
            razorpay_payment_id : this.rxResponse.razorpay_payment_id,
@@ -31,28 +33,31 @@ private _isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(fal
       };
       this.apiService.postMethodAction<Order>(confirmPayment,'Order', 'confirm') 
       .toPromise().then((data)=>{
+        //console.log(data);
+        this.currOrder=data;
         if (data.transactionStatus =="Sucesss")
         {
-        this.success=true;}
+        this.success=true;  
+      }
         else
         {
           this.success=false
         }
         this.changeDetector.detectChanges();
-        console.log(this.success);
+        //console.log(this.success);
       }).catch((err)=> {console.log(err);
         this.success=false;
       });
    
     
     }
-    //else
+    else
 
-    // {
+    {
       
-    //     this.router.navigate(['./home']);
+        this.router.navigate(['./home']);
       
-    // }
+    }
   }
   success:boolean;
   ngOnInit() {

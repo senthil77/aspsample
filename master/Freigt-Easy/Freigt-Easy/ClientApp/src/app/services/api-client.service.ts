@@ -29,7 +29,7 @@ export class ApiClientService {
   }
   public postMethodAction<T>(appData, url,actionName) {
  
-    console.log(appData);
+  //  console.log(appData);
     return this._http.post<any>(this.getUrl(url) + "/" + actionName, appData);
   }  
   

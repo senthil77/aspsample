@@ -6,10 +6,10 @@
             <div class="card card-body p-3">
                 <div class="media align-items-center align-items-md-start flex-column flex-md-row"> <a href="#" class="text-success mr-md-3 align-self-md-center marginon-top" data-abc="true"> <i class="fa fa-check-circle-o fa-4x"></i> </a>
                     <div class="media-body text-center text-md-left">
-                        <h6 class="media-title font-weight-semibold">Your Payment for Order No</h6>
-                        <h4>ORDERNI@#II#II#I</h4>
+                        <h6 class="media-title font-weight-semibold">{{currOrder.vesselCharge.partner.partnerName}}</h6>
+                        <h4>Your Payment for Order No {{orderId}}</h4>
                         <p>
-                            <span class="bg-success">success</span>, An email to your Email Id [k.sendilkumar@gmail.com] has been sent
+                            <span class="bg-success">success</span>, An email to your Email Id {{currOrder.vesselCharge.partner.email1}} has been sent
                         </p>
                        
                     </div> <a href="#" class="btn align-self-md-center ml-md-3 mt-md-0 ticket-button" data-abc="true"><i class="fa fa-check-square-o verify"></i> Orders</a>
@@ -25,29 +25,29 @@
                           <div class="p-4 bg-brand">
                               <div class="d-flex flex-row justify-content-between">
                                   <div class="d-flex flex-column justify-content-between align-items-center">
-                                      <h1>IND</h1><span class="mb-2">Indianapolis</span><span>Thu, Aug 17</span><span>07:00 PM</span>
+                                      <h1> {{currOrder.vesselCharge.originPort.portCode }} </h1><span class="mb-2"> {{currOrder.vesselCharge.originPort.portDescription}}</span><span>{{currOrder.vesselCharge.startDate|date:'medium'}}</span>
                                   </div>
-                                  <div class="d-flex flex-column justify-content-center"><i class="fa fa-plane fa-3x"></i></div>
+                                  <div class="d-flex flex-column justify-content-center"><i class="fa fa-ship fa-3x"></i></div>
                                   <div class="d-flex flex-column justify-content-between align-items-center">
-                                      <h1>CDG</h1><span class="mb-2">Paris</span><span>Thu, Aug 17</span><span>03:00 AM</span>
+                                      <h1>{{currOrder.vesselCharge.destinationPort.portCode }} </h1><span class="mb-2">{{currOrder.vesselCharge.destinationPort.portDescription}}</span><span>{{currOrder.vesselCharge.endDate|date:'medium'}}</span>
                                   </div>
                               </div>
                           </div>
                           <div class="bg-brand-secondary p-4">
                               <div class="d-flex flex-column justify-content-between">
                                   <div class="d-flex flex-row justify-content-between text-center">
-                                      <div><span class="d-block font-weight-bold">Flight</span><span>NJ-045</span></div>
-                                      <div><span class="d-block font-weight-bold">Gate</span><span>12</span></div>
-                                      <div><span class="d-block font-weight-bold">Terminal</span><span>B</span></div>
-                                      <div><span class="d-block font-weight-bold">Boarding Time</span><span>7:00 AM</span></div>
+                                      <div><span class="d-block font-weight-bold">Arrival</span><span> {{currOrder.vesselCharge.originPort.cityCode }} </span></div>
+                                      <div><span class="d-block font-weight-bold">City</span><span>{{currOrder.vesselCharge.originPort.cityDescription }} </span></div>
+                                      <div><span class="d-block font-weight-bold">Destination</span><span> {{currOrder.vesselCharge.destinationPort.cityCode }}</span></div>
+                                      <div><span class="d-block font-weight-bold">Boarding Time</span><span>{{currOrder.vesselCharge.destinationPort.cityDescription }}</span></div>
                                   </div>
                                   <div class="doted-lines">
                                       <hr class="dotted-line">
                                   </div>
                                   <div class="d-flex flex-row justify-content-between">
                                       <div class="d-flex flex-column">
-                                          <div><span class="d-block font-weight-bold">Passenger</span><span>Eric Rigs</span></div>
-                                          <div class="mt-3"><span class="d-block font-weight-bold">Seat</span><span>7C</span></div>
+                                          <div><span class="d-block font-weight-bold">Booked For </span><span>{{currOrder.vesselCharge.partner.partnerName}}</span></div>
+                                          <div class="mt-3"><span class="d-block font-weight-bold">{{currOrder.vesselCharge.package.packageName}}</span><span>Qty: {{currOrder.qty}}</span></div>
                                       </div>
                                       <div class="d-flex flex-column justify-content-between"><img class="img-fluid" src="https://i.imgur.com/DlgOLIW.png"></div>
                                   </div>

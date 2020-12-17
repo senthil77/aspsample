@@ -235,7 +235,12 @@ namespace Freigt_Easy.Controllers
             List<VesselCharge> finalSet = new List<VesselCharge>();
             List<int> portIds = new List<int> { vesselSchedule.OriginCity, vesselSchedule.DestinationCity };
 
+            string partId = string.Empty;
+            using (Utility util = new Utility())
+            {
+                partId = util.GetPartnerId(User.Identity as ClaimsIdentity);
 
+            }
             try
             {
 
@@ -243,10 +248,13 @@ namespace Freigt_Easy.Controllers
                 var allSchdules = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x =>
                     x.IsActive == true
                   && x.Charges != null
+                  && x.PartnerId.ToString() == partId
                  && x.StartDate >= vesselSchedule.ExpectedDeparture
                  && x.OriginPortId == vesselSchedule.OriginCity
                  && x.DestinationPortId == vesselSchedule.DestinationCity
+
                  && x.PackageId == vesselSchedule.PackageId,
+                 
 
 
                 new string[]

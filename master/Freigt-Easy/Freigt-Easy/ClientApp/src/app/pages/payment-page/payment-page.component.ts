@@ -27,7 +27,7 @@ export class PaymentPageComponent implements OnInit {
   this.oriFxVal=allData.fxOriginCharge;
   this.destFxVal=allData.fxDestCharge;
  
- console.log(this.itemData);
+ //console.log(this.itemData);
 }
 else
 {

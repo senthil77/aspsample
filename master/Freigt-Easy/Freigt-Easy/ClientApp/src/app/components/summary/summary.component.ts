@@ -26,7 +26,7 @@ export class SummaryComponent implements OnInit {
   {
 
   
-    this.totalCharges =(this.itemData.charges.originCharges/this.oriFxVal  + this.itemData.charges.destinationCharges/this.destFxVal+ this.itemData.chargeAmount *this.searchParams.qty)*this.oriFxVal;
+    this.totalCharges = Math.floor(this.itemData.charges.originCharges/this.oriFxVal  + this.itemData.charges.destinationCharges/this.destFxVal+ this.itemData.chargeAmount *this.searchParams.qty)*this.oriFxVal;
 
     let orderData={
       id:0,
@@ -55,10 +55,11 @@ export class SummaryComponent implements OnInit {
     }
 
     
-   console.log(this.totalCharges);
-   console.log(orderData);
+   //console.log(this.totalCharges);
+   //console.log(orderData);
 
-   this.apiService.postMethod<Order>(orderData,'order').toPromise().then((data)=>{console.log(data.vesselCharge);
+   this.apiService.postMethod<Order>(orderData,'order').toPromise().then((data)=>{
+     //console.log(data.vesselCharge);
   this.gotoNext(data.rzOrderId,data.rzrKey,data.orderUNId,data.vesselCharge.partner.email1,data.vesselCharge.partner.phone1, data.vesselCharge.partner.partnerName)
   }).catch((err)=>{console.log(err);})
   }

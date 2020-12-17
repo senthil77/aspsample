@@ -1,0 +1,77 @@
+<div class="container">
+    <div class="header">
+        <div class="header-wrapper"  fxLayout="row" fxLayoutAlign="space-between center">
+            <div class="logo">
+          
+          
+              </div> 
+            <div fxLayout="row">
+                <mat-toolbar-row fxHide fxShow.gt-sm class="container" fxLayout="row"  fxLayout.xs="row" fxLayoutAlign="space-between center">
+                    <div class="main-menu" fxLayout="row" fxHide fxShow.gt-sm>
+                    
+                     
+                        <a  mat-button class="mat-button"  [routerLink]="['/home/one']">Home</a>
+                        <a  mat-button class="mat-button"  [routerLink]="['/pages/about']">About Us</a>
+                        <a  mat-button class="mat-button"  [routerLink]="['/pages/about']">Search</a>
+                     
+
+                        <a  mat-button mat-button [matMenuTriggerFor]="blog" class="mat-button">Services<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+                        <mat-menu #blog="matMenu" [overlapTrigger]="false" class="app-dropdown">
+                            <a mat-menu-item [routerLink]="['/blog/blog-list']">Quotes</a>
+                            <a mat-menu-item [routerLink]="['/blog/blog-column']">Custom Quotes</a>
+                       
+                  
+                        </mat-menu>
+
+
+                        <a  mat-button [matMenuTriggerFor]="Maitenance" class="mat-button">Maitenance<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+                        <mat-menu #Maitenance="matMenu" [overlapTrigger]="false" class="app-dropdown">
+                          <a [routerLink]="['/pages/about']" mat-menu-item>Packages</a>
+                          <a mat-menu-item [routerLink]="['/pages/faq']" >Charge Details</a>
+                          <a mat-menu-item [routerLink]="['/pages/contact']">Port</a>
+                          <a mat-menu-item [routerLink]="['/pages/wishlist']">Currency</a>
+                          <a mat-menu-item [routerLink]="['/pages/checkout']">User</a>
+                          <a mat-menu-item [routerLink]="['/pages/cart']">Partner</a>
+                          <a mat-menu-item [routerLink]="['/pages/my-account']">Vessel Managment</a>
+                          <a mat-menu-item [routerLink]="['/pages/error']">404</a>
+                      </mat-menu>
+                        
+                        <a  mat-button [matMenuTriggerFor]="Admin" class="mat-button">Admin<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+                        <mat-menu #Admin="matMenu" [overlapTrigger]="false" class="app-dropdown">
+                          <a [routerLink]="['/pages/about']" mat-menu-item>Bookings Today</a>
+                          <a mat-menu-item [routerLink]="['/pages/faq']" >New Customers</a>
+                          <a mat-menu-item [routerLink]="['/pages/contact']">Notifications</a>
+                          <a mat-menu-item [routerLink]="['/pages/wishlist']">Follow up</a>
+                          <a mat-menu-item [routerLink]="['/pages/checkout']">DashBoard</a>
+   
+                      </mat-menu>
+
+                      <a  mat-button [matMenuTriggerFor]="Support" class="mat-button">Support<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+                      <mat-menu #Support="matMenu" [overlapTrigger]="false" class="app-dropdown">
+                        <a [routerLink]="['/pages/about']" mat-menu-item>Bookings Today</a>
+                        <a mat-menu-item [routerLink]="['/pages/faq']" >New Customers</a>
+                        <a mat-menu-item [routerLink]="['/pages/contact']">Notifications</a>
+                        <a mat-menu-item [routerLink]="['/pages/wishlist']">Follow up</a>
+                        <a mat-menu-item [routerLink]="['/pages/checkout']">DashBoard</a>
+ 
+                    </mat-menu>
+                      <a [routerLink]="['/pages/contact']"  [matMenuTriggerFor]="contact" routerLinkActive="router-link-active"   mat-button class="mat-button">Contact<mat-icon class="caret">arrow_drop_down</mat-icon></a>
+                     
+                      <mat-menu #contact="matMenu" [overlapTrigger]="false" class="app-dropdown">                       
+                      <a mat-menu-item [routerLink]="['/blog/blog-list']">FAQ</a>
+                      <a mat-menu-item [routerLink]="['/blog/blog-column']">Mail us</a>
+                      <a mat-menu-item [routerLink]="['/blog/blog-details']">Call us</a>
+                    </mat-menu>
+                
+                      </div>
+               </mat-toolbar-row>
+                  
+                  
+               
+            </div>
+  
+          </div>
+    </div>
+  
+  
+  </div>

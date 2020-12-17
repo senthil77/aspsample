@@ -32,7 +32,7 @@ export class PaymentsComponent implements OnInit {
       this.primContact= allData.contactNo;
       this.primPartner=allData.partnerName;
       this.isSuccess=0;
-      console.log(allData);
+      //console.log(allData);
   }
   
   else
@@ -83,7 +83,7 @@ export class PaymentsComponent implements OnInit {
       if (!error)
       {
         options.response = response;
-        console.log(response);
+        //console.log(response);
         dataPassed.payResponse= response;
 
       }
