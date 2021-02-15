@@ -1,4 +1,4 @@
-<section class="body-container">
+<div class="container-fluid pt-5 bg-white">
     <div class="card">
       <div class="card-header">
         <strong>List of ChargeDetail</strong>
@@ -7,6 +7,7 @@
       </div>
      
      
+  
       <div class="card-body">
         <table class="table my-responsive table-striped  table-responsive-sm ">
           <thead class="cf">
@@ -24,7 +25,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let chargedetail of  chargeDetailList">
+            <tr *ngFor="let chargedetail of  pagedItems |  sortBy:'asc':'id'| slice:(pager-1);let i=index;">
               <td data-title="From">{{chargedetail.id }}</td>
               <td data-title="Is Active">
  
@@ -46,8 +47,28 @@
           </tbody>
         </table>
       </div>
+      <div class="col-lg-12 col-md-12 col-sm-4 col-xs-4 left" *ngIf="chargeDetailList">
+        <ul *ngIf="pager.pages && pager.pages.length" class="women_pagenation">
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1,false)"><i class="fa fa-step-backward"></i></a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1,false)"><i class="fa fa-step-backward"></i></a>
+          </li>
+          <li [ngClass]="{active:pager.currentPage === pager.currentPage}">
+            <a (click)="setPage(pager.currentPage,false)">{{pager.currentPage}} of {{pager.pages.length}}</a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1,false)"><i class="fa fa-step-forward"></i></a>
+          </li>
+          <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages,false)"><i class="fa fa-step-forward"></i></a>
+          </li>
+        </ul>
+      </div>
+        <div class="clearfix"></div>
     </div>
-</section>
+  </div>
 
 <ng-template #editChargeDetailModal let-modal>
   <div class="modal-header">

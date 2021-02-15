@@ -1,14 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './components/layout/nav-menu/nav-menu.component';
-import { FooterComponent } from './components/layout/footer/footer.component';
-import { BannerComponent } from './components/banner/banner.component';
+import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { ToastrModule } from 'ngx-toastr';
 import { AirComponent } from './components/air/air.component';
 import { FclComponent } from './components/fcl/fcl.component';
 import { LclComponent } from './components/lcl/lcl.component';
@@ -21,8 +20,6 @@ import { PortMainComponent } from './components/maint/port-main/port-main.compon
 import { PortPartnerChargesComponent } from './components/port-partner-charges/port-partner-charges.component';
 import { SearchItemComponent } from './components/search-item/search-item.component';
 import { SearchScheduleListComponent } from './components/search-schedule-list/search-schedule-list.component';
- 
-
 import { VesselOperatorChargesComponent } from './components/vessel-operator-charges/vessel-operator-charges.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FilterPipe } from './pipes/filter.pipe';
@@ -30,7 +27,7 @@ import { SortByPipe } from './pipes/sort-by.pipe';
 import { VesselDetailsComponent } from './components/maint/vessel-details/vessel-details.component';
 import { ApiClientService } from './services/api-client.service';
 import { QuotesComponent } from './pages/quotes/quotes.component';
-import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HomeComponent } from './pages/home/home.component';
 import { PartnerHomeComponent } from './pages/partner-home/partner-home.component';
 import { PartnerAccountComponent } from './pages/partner-account/partner-account.component';
@@ -50,7 +47,7 @@ import { AccountActivateComponent } from './pages/account-activate/account-activ
 import { FilterNestedPipe } from './pipes/order-by.pipe';
 import {AuthInterceptor} from './services/auth-interceptor';
 import { UserMainComponent } from './components/maint/user-main/user-main.component';
-import { HeaderComponent } from './components/layout/header/header.component';
+ 
 import { SummaryComponent } from './components/summary/summary.component';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
 import { PaymentsComponent } from './components/payments/payments.component';
@@ -61,7 +58,7 @@ import { PaymentStatusComponent } from './pages/payment-status/payment-status.co
     AppComponent,
     NavMenuComponent,
     FooterComponent,
-    BannerComponent,
+ 
     AirComponent,
     FclComponent,
     LclComponent,
@@ -113,7 +110,7 @@ import { PaymentStatusComponent } from './pages/payment-status/payment-status.co
   
     UserMainComponent,
   
-    HeaderComponent,
+   
   
     SummaryComponent,
   

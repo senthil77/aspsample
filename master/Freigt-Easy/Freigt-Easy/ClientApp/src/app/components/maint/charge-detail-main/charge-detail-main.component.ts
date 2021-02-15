@@ -12,6 +12,7 @@ import { ChargeDetail } from '../../../models/charge-detail';
 import { Subscription } from 'rxjs';
 import { StoreService } from 'src/app/utils/store-service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { AutoPagerService } from 'src/app/services/auto-pager.service'
 @Component({
   selector: 'app-charge-detail-main',
   templateUrl: './charge-detail-main.component.html',
@@ -24,16 +25,43 @@ export class ChargeDetailMainComponent implements OnInit {
   chargeDetailEntry: ChargeDetail;
   chargedAt: any[];
   chargedAtSub: Subscription;
+  pager: any = {};
+  pageSize= 5;
+  pagedItems: any[];
+  overAllSize= 0; 
   constructor(
     private fb: FormBuilder,
     private modalService: NgbModal,
     private apiClientService: ApiClientService,
     private store: StoreService,
-    private notify: NotificationService
+    private notify: NotificationService,
+    private pagerService:AutoPagerService,
   ) {}
+  setPage(page: number, firsttime: boolean) {
+    // get pager object from service
+
+    this.pager = this.pagerService.getPager(this.overAllSize, page, this.pageSize);
+
+     
+
+    if (firsttime) {
+
+      this.pagedItems = this.chargeDetailList.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    
+    } else {
+
+        
+        this.pagedItems = this.chargeDetailList.slice(this.pager.startIndex, this.pager.endIndex + 1);
+    }
+
+    // get current page of items
+
+}
   ngOnInit() {
     this.apiClientService.get('ChargeDetail').subscribe((data) => {
       this.chargeDetailList = data;
+      this.overAllSize = this.chargeDetailList.length;
+      this.setPage(1, true);
     });
 
     this.chargedAtSub = this.store.chargedAt$.subscribe((chargedAT) => {
@@ -96,14 +124,20 @@ export class ChargeDetailMainComponent implements OnInit {
       .postMethod<ChargeDetail>(this.editChargeDetailForm.value, 'ChargeDetail')
       .toPromise()
       .then((data) => {
+
+        console.log(data);
         if (data.id == chargeDetailId) {
+
+          console.log(data);
           this.chargeDetailList = this.chargeDetailList.map((u) =>
             u.id !== data.id ? u : data
           );
           this.notify.showSuccess('Modified Charge Detail');
         } else {
-          this.chargeDetailList.push(this.chargeDetailEntry);
-          this.notify.showSuccess('Added Charge Detail');
+
+          console.log(data + 'super');
+           this.chargeDetailList.push(data);
+           this.notify.showSuccess('Added Charge Detail');
         }
       })
       .catch((err) => {

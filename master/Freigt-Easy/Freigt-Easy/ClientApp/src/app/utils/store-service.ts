@@ -28,7 +28,7 @@ export class StoreService {
   readonly ports$ = this._ports.asObservable();
 
   private readonly _packages = new BehaviorSubject<Package[]>([]);
-  private packages$ = this._packages.asObservable();
+  readonly packages$ = this._packages.asObservable();
 
 
   private readonly _currencies = new BehaviorSubject<Currency[]>([]);

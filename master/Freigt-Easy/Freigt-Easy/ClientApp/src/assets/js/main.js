@@ -1,0 +1,24 @@
+$(document).ready(function(){
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        autoplay:true,
+        margin:30,
+        nav:true,
+        navText: ['<i class="fx-left-arrow"></i>', '<i class="fx-right-arrow"></i>'],
+        responsive:{
+            0:{
+                items:1,
+                nav:false,
+                dots:true,
+                margin:30
+            },
+            600:{
+                items:3
+            },
+            1000:{
+                items:4,
+                dots:false
+            }
+        }
+    })
+});

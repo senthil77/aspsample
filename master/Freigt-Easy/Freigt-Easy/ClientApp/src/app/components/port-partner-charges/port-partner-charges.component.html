@@ -152,7 +152,11 @@
           <tbody>
             <tr *ngFor="let x of ToDoListForm.get('items').controls;let i=index;trackBy:track;" [formGroupName]="i">
               <td [hidden]="!hideBE" data-title="id" ><input class="form-control-sm" type="hidden" formControlName="id"></td>
-              <td data-title="isActive"><input class="form-control-sm" type="checkbox" formControlName="isActive"></td>
+              <td data-title="isActive">     <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+                <input class="c-switch-input" type="checkbox"   formControlName="isActive"   [checked]="isActive"><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+           
+                </label> 
+    </td>
             <td [hidden]="!hideBE" data-title="chargeDetailId" ><input type = "text" class="form-control-sm" formControlName="chargeDetailId"></td>
    
             <td [hidden]="!hideBE"  data-title="chargedAtId" ><input type = "text" readonly class="form-control-sm" formControlName="chargedAtId"> </td>

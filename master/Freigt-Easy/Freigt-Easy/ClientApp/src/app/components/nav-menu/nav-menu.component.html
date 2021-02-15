@@ -1,0 +1,139 @@
+ 
+<div class="top_bar">
+    <div class="container">
+        <div class="row">
+            <div class="col d-flex flex-row">
+                <div class="top_bar_contact_item">
+                    
+                </div>
+                <div class="top_bar_contact_item">
+                    <a href="#" class="icotext"><i class="fx-call"></i>+91 99999 99999</a>
+                </div>
+                <div class="top_bar_contact_item">
+                    <a href="#" class="icotext"><i class="fx-mail"></i>info@freightogix.com</a>
+                </div>
+                <div class="top_bar_content ml-auto">
+                    <div class="top_bar_menu">
+                        <ul class="standard_dropdown top_bar_dropdown">
+                            <li> <a href="#">English<i class="fa fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="#">Italian</a></li>
+                                    <li><a href="#">Spanish</a></li>
+                                    <li><a href="#">Japanese</a></li>
+                                </ul>
+                            </li>
+                            <li> <a href="#">$ US dollar<i class="fa fa-chevron-down"></i></a>
+                                <ul>
+                                    <li><a href="#">EUR Euro</a></li>
+                                    <li><a href="#">GBP British Pound</a></li>
+                                    <li><a href="#">JPY Japanese Yen</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="top_bar_user">
+                        <div class="user_icon"><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" alt=""></div>
+                        <div><a  routerLink="/signUp">Register</a> 
+                         <a class="ml-3" routerLink="/login">Sign in</a></div>
+                   
+                           
+                      
+                    </div>
+                    <!-- <div class="top_bar_user">
+                        <div><a href="#" class="fx-facebook" style="color:#3b5998"></a></div>
+                        <div><a href="#" class="fx-twitter" style="color:#3b5998"></a></div>
+                        <div><a href="#" class="fx-linkedin" style="color:#3b5998"></a></div>  
+                    </div> -->
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- Header Main -->
+
+<nav class="navbar navbar-expand-md navbar-light  sidebarNavigation" data-sidebarClass="navbar-light">
+    <div class="container-fluid">
+        <div class="navbar-brand" href="#">
+            <img src="/assets/img/logo.png" class="d-none d-md-block imgLogo">
+            <div class="row">
+
+                <div class="col-3">
+                    <button id="slideToggle" class="navbar-toggler leftNavbarToggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                    aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                </div>
+                <div class="col-7">
+                    <img src="/assets/img/logo-white.png" class=" mobile-logo d-block d-md-none">
+                </div>
+                <div class="col-2 pull-right">
+                    <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1560918647/user.svg" class="d-block d-md-none rounded-circle" width="30"> 
+                </div>
+            </div>
+           
+           
+        </div>
+  
+
+  
+
+    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+        <ul class="nav navbar-nav nav-flex-icons pull left ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home
+                    <span class="sr-only">(current)</span>
+                </a>
+            </li>
+            <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" (click)="closeme();" routerLink="/searchschedule">Search</a>
+              </li>
+              <li class="nav-item" routerLinkActive="active">
+                <a class="nav-link" (click)="closeme();" routerLink="/quotes">Quotes</a>
+              </li>
+
+              
+          
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="https://example.com" id="dropdown01" data-toggle="dropdown"
+                 aria-haspopup="true"
+                    aria-expanded="false">Master-Data</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="nav-link" routerLink="/port">Port</a>
+                    <a class="nav-link" routerLink="/vesselDetails">Vessel Management</a>
+                    <a  class="nav-link" routerLink="/partner">Partner</a>
+                    <a class="nav-link" routerLink="/vesselcharges" >Operator Vesel Charges</a>
+                    <a   class="nav-link" routerLink="/currency" >Currency</a>
+                    <a class="nav-link" routerLink="/chargeDetails">ChargeDetails</a>
+                    <a  class="nav-link" routerLink="/partnerPort" >Port Charges</a>
+                    <a  class="nav-link" routerLink="/pack" >Packages</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown dropdown-slide">
+                <a class="nav-link dropdown-toggle" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Listing 
+                </a>
+                <!-- Dropdown list -->
+                <div class="dropdown-menu dropdown-menu-right">
+                  <a class="dropdown-item" (click)="closeme();" routerLink="/bol">Bill of Landing</a>
+                  <a class="dropdown-item" (click)="closeme();" routerLink="/invoice" >Invoice</a>
+                  <a class="dropdown-item" (click)="closeme();" routerLink="/Vessel-subscribe">Something else here</a>
+                </div>
+              </li>
+        </ul>
+
+        
+       <!--  <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+    </div>
+</div>
+</nav>

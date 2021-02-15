@@ -131,7 +131,11 @@
           <input type="hidden" class="form-control" formControlName="createdBy" id="createdBy">
           <input type="hidden" class="form-control" formControlName="updatedBy" id="updatedBy">
           <input type="hidden" class="form-control" formControlName="createdAt" id="createdAt">
-          <input type="checkbox" formControlName="isActive" value={{isActive}} [checked]=isActive id="isActive" />
+          <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+            <input class="c-switch-input" type="checkbox"   formControlName="isActive"   [checked]="isActive"><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+       
+            </label> 
+
         </div>
       </div>
 

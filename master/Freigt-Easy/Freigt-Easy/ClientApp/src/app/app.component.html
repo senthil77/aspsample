@@ -1,28 +1,15 @@
-<div class="c-app">
-    <div class="c-sidebar c-sidebar-dark c-sidebar-fixed c-sidebar-lg-hide" id="sidebar">
-        <div class="c-sidebar-brand d-lg-down-none">
-    
-          </div>
-         <app-nav-menu></app-nav-menu>
-        <button class="c-sidebar-minimizer c-class-toggler" type="button" data-target="_parent" data-class="c-sidebar-minimized"></button>
-    </div>
-    
+ 
+<app-nav-menu></app-nav-menu> 
+<router-outlet> </router-outlet>
+
+ 
+<!-- https://www.freakyjolly.com/ngx-ui-switch-tutorial/#.YClTk2gzaM8 -->
   
-    <div class="c-wrapper c-fixed-components">
-     <app-header></app-header>
-        <div class="c-body">
-            <main class="c-main">
-                <div class="container-fluid">
-                    <router-outlet></router-outlet>
-                    <ng-http-loader></ng-http-loader>
-                    <div class="fade-in">
-                        <div class="card-columns cols-2">
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <app-footer></app-footer>
-        </div>
-    </div>
-</div>
-<ng-http-loader></ng-http-loader>
+<div class="container-fluid pt-1 bg-white">
+ 
+  
+ </div>
+
+ <router-outlet> </router-outlet>
+<app-footer></app-footer>
+ 

@@ -34,7 +34,7 @@ updatedAt: [''],
   // this.packageList = this.apiService.packageTypes;
 
    
-    this.packageSub = this.service.activePackages$.subscribe((packData) => {
+    this.packageSub = this.service.packages$.subscribe((packData) => {
       this.packageList = packData;
     });
   

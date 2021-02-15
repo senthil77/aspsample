@@ -1,0 +1,36 @@
+.footer {
+    position: relative;
+    padding: 70px 0; }
+    .footer .logo {
+      margin-bottom: 15px; }
+    .footer h4 {
+      font-weight: 500;
+      margin-bottom: 30px;
+      display: block; }
+    .footer li {
+      line-height: 24px; }
+      .footer li i {
+        font-style: normal;
+        color: #336799;
+        padding-right: 15px; }
+      .footer li a {
+        color: #172b4d; }
+    .footer .footer-bottom {
+      background: #2f485e;
+      position: absolute;
+      width: 100%;
+      bottom: 0;
+      padding: 10px 0;
+      font-weight: 400;
+      color: #fff; }
+      .footer .footer-bottom .text-blue {
+        color: #26abdf !important; }
+      .footer .footer-bottom li {
+        line-height: normal; }
+        .footer .footer-bottom li a {
+          color: #fff; }
+          .footer .footer-bottom li a:hover, .footer .footer-bottom li a:focus {
+            color: #fff; }
+  
+  /*# sourceMappingURL=footer.component.css.map */
+  

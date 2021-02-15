@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ria-hip": {
+    "freightgix": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist",
+            "outputPath": "dist/freightgix",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -24,17 +24,24 @@
               "src/assets"
             ],
             "styles": [
+                 
+     
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/swiper/css/swiper.css",             
+              "node_modules/swiper/css/swiper.css", 
+              "src/assets/libs/owl-carousel/owl.carousel.min.css",
+              "src/assets/libs/owl-carousel/owl.theme.default.min.css",
               "node_modules/@coreui/coreui/dist/css/coreui.min.css",
               "src/styles.css"
+              
             ],
             "scripts": [
-
+              
               "node_modules/jquery/dist/jquery.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              "node_modules/@coreui/coreui/dist/js/coreui.bundle.min.js"
+             
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "src/assets/libs/owl-carousel/owl.carousel.min.js"
+              
             ]
           },
           "configurations": {
@@ -71,18 +78,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ria-hip:build"
+            "browserTarget": "freightgix:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ria-hip:build:production"
+              "browserTarget": "freightgix:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ria-hip:build"
+            "browserTarget": "freightgix:build"
           }
         },
         "test": {
@@ -119,19 +126,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "ria-hip:serve"
+            "devServerTarget": "freightgix:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "ria-hip:serve:production"
+              "devServerTarget": "freightgix:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "ria-hip",
+  "defaultProject": "freightgix",
   "cli": {
-    "analytics": "7696cd9a-e09d-4447-80ef-faf219577630"
+    "analytics": "3ed79ba2-5325-409f-91dd-5aa430b56318"
   }
 }

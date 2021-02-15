@@ -1,0 +1,36 @@
+
+
+ul.women_pagenation.dc_paginationA.dc_paginationA06 {
+    float: right;
+    padding: 0;
+    list-style: none;
+  }
+  
+  ul.women_pagenation li {
+    float: left;
+    margin: 0px;
+    margin-left: 5px;
+    padding: 0px;
+    list-style: none;
+    font-size: 14px;
+  }
+  
+    ul.women_pagenation li a {
+      color: #336799 ;
+      display: block;
+      padding: 4px 8px;
+      text-decoration: none;
+      font-size: 0.7125em;
+      text-transform: uppercase;
+    }
+  
+      ul.women_pagenation li.active a, ul.women_pagenation li a:hover {
+        background: #336799 ;
+        color: #fff;
+        transition: 0.5s all;
+        -webkit-transition: 0.5s all;
+        -o-transition: 0.5s all;
+        -moz-transition: 0.5s all;
+        -ms-transition: 0.5s all;
+      }
+  

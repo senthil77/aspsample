@@ -1,4 +1,4 @@
-<section class="body-container">
+<div class="container-fluid pt-5 bg-white">
             <div class="card">
                   <div class="card-header">
                         <strong>List of Partner</strong>
@@ -64,7 +64,7 @@
                         </table>
                   </div>
             </div>
-</section>
+      </div>
 
 
 <ng-template class="modal-width" #editPartnerModal let-modal>
@@ -87,9 +87,10 @@
                         <input type="hidden" class="form-control" formControlName="updatedAt" id="updatedAt">
                         <input type="hidden" class="form-control" formControlName="partnerTypeId" id="partnerTypeId">
                         <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
-                              <label for="IsActive">IsActive</label>
-                              <br>
-                              <input type="checkbox" formControlName="isActive" value={{isActive}} [checked]=isActive id="isActive" />
+                              <label class="c-switch c-switch-label c-switch-pill c-switch-primary">
+                                    <input class="c-switch-input" type="checkbox"   formControlName="isActive"   [checked]="isActive"><span class="c-switch-slider" data-checked="yes" data-unchecked="No"></span>
+                               
+                                    </label> 
                         </div>
                         <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group">
                               <label for="PartnerName">PartnerName</label>
