@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { tokenUser } from './models/user';
+ 
+import { StoreService } from './utils/store-service';
 declare var $:any;
 @Component({
   selector: 'app-root',
@@ -7,10 +10,21 @@ declare var $:any;
 })
 export class AppComponent implements OnInit {
   title = 'freightgix';
+  isAuthenticated: boolean;
+  roleName:string;
+  fullName:string;
+constructor(private store:StoreService)
+{
 
+  
+  
+ 
+
+ 
+}
   ngOnInit()
   {
-
+ 
     // $(document).ready(function(){$(".sidebarNavigation .navbar-collapse").hide().clone().appendTo("body").
     // removeAttr("class").addClass("sideMenu").show();
     // $("body").append("<div class='overlay'></div>");$(".navbar-toggle, .navbar-toggler").on("click",function()

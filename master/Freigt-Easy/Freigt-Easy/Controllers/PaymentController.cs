@@ -20,7 +20,7 @@ namespace Freigt_Easy.Controllers
 
         [HttpPost]
         [Route("initialize")]
-        public async Task<IActionResult> InitializePayment()
+        public IActionResult InitializePayment()
         {
             var options = new Dictionary<string, object>
         {
@@ -47,7 +47,7 @@ namespace Freigt_Easy.Controllers
 
         [HttpPost]
  
-        public async Task<IActionResult> ConfirmPayment([FromBody]ConfirmPaymentPayload confirmPayment)
+        public  IActionResult ConfirmPayment([FromBody]ConfirmPaymentPayload confirmPayment)
         {
             var attributes = new Dictionary<string, string> 
         {

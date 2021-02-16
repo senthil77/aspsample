@@ -59,7 +59,7 @@ namespace Freigt_Easy
             {
  
                 builder
-              //  .WithOrigins("http://localhost:4200", "*")
+                .WithOrigins("http://localhost:4200", "*")
                   .AllowAnyMethod()
                 .AllowAnyHeader()
                 .SetIsOriginAllowed((host) => true)
@@ -114,8 +114,14 @@ namespace Freigt_Easy
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCors("CorsPolicy");
-        
+
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+
+            app.UseHttpsRedirection();
+
 
             app.UseEndpoints(endpoints =>
             {

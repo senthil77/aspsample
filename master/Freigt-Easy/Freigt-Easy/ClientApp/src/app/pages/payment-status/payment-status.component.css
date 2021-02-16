@@ -1,10 +1,18 @@
 
-
-
-
 .mt-100 {
   margin-top: 100px
 }
+
+.bg-brand
+{
+  background-color:#355b84 ;
+}
+.bg-brand-secondary
+{
+  background-color: #bacbdc;
+}
+
+
 
 .marginon-top {
   margin-top: -3px

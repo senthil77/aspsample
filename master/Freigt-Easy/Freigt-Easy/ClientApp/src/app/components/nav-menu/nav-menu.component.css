@@ -1,4 +1,4 @@
-.navbar{ position:unset; background-color:white;transition: all 0.4s; height: 65px;}
+.navbar{ position:unset; background-color:white;transition: all 0.4s; height: 65px; background-color: #2f485e; }
 .overlay,.sideMenu{position:fixed;bottom:0}
 .overlay{top:0;left:-100%;right:100%;margin:auto;background-color:rgba(0,0,0,.5);z-index:998;transition:all ease 0.2s}
 .overlay.open{left:0;right:0}
@@ -12,16 +12,18 @@
 .imgLogo
 {
     margin-bottom: 45px;
+    background-color: white;
 }
  
   .navbar .nav-link {
-    color: black;
- 
+    color: white;
+    
+    
   }
   
      .navbar .nav-link:hover,
   .navbar .nav-link:focus {
-    color: rgb(223, 152, 21);
+    color: rgb(153, 170, 224);
     text-decoration: none;
   }   
   .bg-brand
@@ -34,7 +36,7 @@
     display: block;
     width: 0px;
     height: 1px;
-    background:rgb(223, 152, 21);
+    background:white;
     transition: 0.4s
   }
   
@@ -336,9 +338,8 @@
 }
 .top_bar_contact_item {
     font-size: 12px;
-    margin-right: 105px;
-    line-height: 40px;
-    padding-right: 40px;
+   
+    padding-right: 10px;
 }
 
 @media only screen and (max-width: 991px) {

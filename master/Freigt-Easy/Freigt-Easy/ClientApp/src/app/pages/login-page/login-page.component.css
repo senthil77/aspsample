@@ -55,6 +55,7 @@
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
+ 
   }
   
   @-webkit-keyframes fadeInDown {
@@ -133,6 +134,7 @@
       -webkit-animation-delay: 0.4s;
       -moz-animation-delay: 0.4s;
       animation-delay: 0.4s;
+      background-color: #2f485e;
     }
   
     .fadeIn.second {

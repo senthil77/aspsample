@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgHttpLoaderModule } from 'ng-http-loader';
+import {AutocompleteLibModule} from 'angular-ng-autocomplete';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './components/nav-menu/nav-menu.component';
@@ -134,6 +135,7 @@ import { PaymentStatusComponent } from './pages/payment-status/payment-status.co
     HttpClientModule,
     FormsModule, 
     ReactiveFormsModule,
+    AutocompleteLibModule
   
   ],
   providers: [ApiClientService,FilterPipe,CurrencyPipe, DatePipe,FilterNestedPipe,{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

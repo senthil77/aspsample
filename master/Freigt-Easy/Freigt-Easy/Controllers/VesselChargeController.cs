@@ -243,34 +243,59 @@ namespace Freigt_Easy.Controllers
             }
             try
             {
+                if (partId == "1")
+
+                {
+                    finalSet = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x =>
+                x.IsActive == true
+              && x.Charges != null 
+             && x.StartDate >= vesselSchedule.ExpectedDeparture
+             && x.OriginPortId == vesselSchedule.OriginCity
+             && x.DestinationPortId == vesselSchedule.DestinationCity
+
+             && x.PackageId == vesselSchedule.PackageId,
 
 
-                var allSchdules = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x =>
-                    x.IsActive == true
-                  && x.Charges != null
-                  && x.PartnerId.ToString() == partId
-                 && x.StartDate >= vesselSchedule.ExpectedDeparture
-                 && x.OriginPortId == vesselSchedule.OriginCity
-                 && x.DestinationPortId == vesselSchedule.DestinationCity
 
-                 && x.PackageId == vesselSchedule.PackageId,
-                 
-
-
-                new string[]
-                 {  "Currency", "OriginPort" , "Package", "Partner","VesselSchedule", "VesselSchedule.DestinationPort",
+            new string[]
+             {  "Currency", "OriginPort" , "Package", "Partner","VesselSchedule", "VesselSchedule.DestinationPort",
                      "VesselSchedule.OriginPort", "VesselSchedule.Details", "VesselSchedule.Details.TransitPort","ChargedAt","Charges","Charges.ChargeDetails","Charges.OriginCurrency",
                      "Charges.DestinationCurrency","Charges.ChargeDetails.ChargeDetail","Charges.ChargeDetails.ChargeDetail.ChargedAt"
 
 
-                 }); ;
+             }); ;
+                }
+                else {
+
+                    finalSet = await _repository.ListAllAsyncConditionInclude<VesselCharge>(x =>
+                        x.IsActive == true
+                      && x.Charges != null
+                      && x.PartnerId.ToString() == partId
+                     && x.StartDate >= vesselSchedule.ExpectedDeparture
+                     && x.OriginPortId == vesselSchedule.OriginCity
+                     && x.DestinationPortId == vesselSchedule.DestinationCity
+
+                     && x.PackageId == vesselSchedule.PackageId,
 
 
-            
+
+                    new string[]
+                     {  "Currency", "OriginPort" , "Package", "Partner","VesselSchedule", "VesselSchedule.DestinationPort",
+                     "VesselSchedule.OriginPort", "VesselSchedule.Details", "VesselSchedule.Details.TransitPort","ChargedAt","Charges","Charges.ChargeDetails","Charges.OriginCurrency",
+                     "Charges.DestinationCurrency","Charges.ChargeDetails.ChargeDetail","Charges.ChargeDetails.ChargeDetail.ChargedAt"
+
+
+                     }); ;
+
+                }
 
 
 
-                return allSchdules;
+
+
+
+
+                return finalSet;
 
 
             }

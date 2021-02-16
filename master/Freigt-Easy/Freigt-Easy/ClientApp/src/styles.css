@@ -49,6 +49,7 @@ body {
     font-family: 'Roboto', sans-serif;;
     margin-bottom: 3px; 
     font-size: small;
+    padding-top: 5px;
   }
   
 .btn {
@@ -90,7 +91,7 @@ body {
     font-weight: 600;
     text-transform: uppercase; }
   .header h4 {
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     font-size: 24px;
     font-weight: normal; }
   .header .search-section {
@@ -409,3 +410,78 @@ td .btn .fa{
 		table.my-responsive    td:before { content: attr(data-title) }
 
   }
+
+
+  .brand-color
+  {
+   background: #355b84;
+  }
+ 
+ 
+  
+ 
+ .summary {
+   font-size: 45px;
+   color: green
+ }
+ 
+ p{
+ line-height: 1rem;
+ }
+ 
+ 
+ .transaction {
+   font-size: 13px
+ }
+ 
+ 
+ 
+ .money {
+   color: #9FA8DA
+ }
+ 
+ .summaryTitle {
+   color: #722329;
+   text-align: left;
+ 
+ 
+   font-weight: 600;
+   
+ 
+   
+ }
+ 
+ .summaryDetail{
+   color: #9FA8DA; 
+   text-align: end;
+   font-size: medium;
+   font-weight: 500;
+ 
+ }
+ 
+ 
+ 
+ 
+ .item-text-long-wrapper .item-text-long {
+   line-height: 1.15;
+   border-bottom: 1px solid #E5E5E5;
+   padding-bottom: 25px;
+   margin-bottom: 25px;
+   position: relative;
+ 
+ 
+ }
+ 
+ .item-text-long-wrapper .item-text-long .day-count {
+   font-size: 11px;
+   line-height: 0.8;
+   display: inline-block;
+   text-align: center;
+   border: 1px solid #CCC;
+   width: 50px;
+   height: 36px;
+   border-radius: 30px;
+   padding-top: 4px;
+   font-weight: 600;
+   letter-spacing: -0.5px;
+ }

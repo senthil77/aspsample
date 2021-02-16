@@ -1,5 +1,5 @@
   
-<div class="container-fluid pt-1 bg-white" >
+<div class="container-fluid p-0" >
 <div class="header section">
   <div class="container">
       <h2>Get your instant ocean freight quote</h2>
@@ -8,15 +8,84 @@
           <div class="row">
               <div class="col-sm-4">
                   <label>ORIGIN OF SHIPPING</label>
-                  <input type="text" class="form-control" placeholder="Enter Origin Port">
+      
+
+                  <div class="ng-autocomplete">
+                    <ng-autocomplete 
+                      [data]="oriCities"
+                      [searchKeyword]="keyword"
+                      (selected)='selectoriCitiesEvent($event)'
+                      (inputChanged)='onChangeSearch($event)'
+                      (inputCleared)='resetOrigin($event)'
+                      (inputFocused)='onFocused($event)'
+                      [itemTemplate]="itemTemplate"
+                      placeholder  ="Search Origin Port"
+                      [notFoundTemplate]="notFoundTemplate">   
+                                        
+                    </ng-autocomplete>
+                    
+                    <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                    </ng-template>
+                    
+                    <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                    </div>
               </div>
               <div class="col-sm-4">
                   <label>DESTINATION OF SHIPPING</label>
-                  <input type="text" class="form-control" placeholder="Enter Destination Port">
+                  
+                  <div class="ng-autocomplete">
+                    <ng-autocomplete 
+                      [data]="destCities"
+                      [searchKeyword]="keyword"
+                      (selected)='selectdestCitiesEvent($event)'
+                      (inputChanged)='onChangeSearch($event)'
+                      (inputFocused)='onFocused($event)'
+                      [itemTemplate]="itemTemplate"
+                      (inputCleared)='resetDest($event)'
+                      placeholder  ="Search Destination Port"
+                      [notFoundTemplate]="notFoundTemplate">   
+                                                
+                    </ng-autocomplete>
+                    
+                    <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                    </ng-template>
+                    
+                    <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                    </div>
+                 
               </div>
               <div class="col-sm-2">
                   <label>CONTAINERS</label>
-                  <input type="text" class="form-control" placeholder="Enter Containers">
+                   
+                  <div class="ng-autocomplete">
+                    <ng-autocomplete 
+                    [data]="pack"
+                    [searchKeyword]="keyword"
+                    (selected)='selectpackagesEvent($event)'
+                    (inputChanged)='onChangeSearch($event)'
+                    (inputFocused)='onFocused($event)'
+                    [itemTemplate]="itemTemplate"
+                
+                    placeholder  ="Search Containers"
+                    [notFoundTemplate]="notFoundTemplate">   
+                                              
+                    </ng-autocomplete>
+                    
+                    <ng-template #itemTemplate let-item>
+                    <a [innerHTML]="item.name"></a>
+                    </ng-template>
+                    
+                    <ng-template #notFoundTemplate let-notFound>
+                    <div [innerHTML]="notFound"></div>
+                    </ng-template>
+                    </div>
+                 
               </div>
               <div class="col-sm-2">
                   <button class="btn btn-primary btn-block">Search</button>

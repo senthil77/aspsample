@@ -39,6 +39,7 @@ export class LoginPageComponent implements OnInit {
         ]),
         password: new FormControl('', [Validators.required])
       });
+      console.log(this.route.snapshot.queryParams['returnUrl']);
       this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
@@ -77,7 +78,9 @@ export class LoginPageComponent implements OnInit {
         
              
 
-              this.router.navigate([this.returnUrl]);
+              this.router.navigate([this.returnUrl]).then(() => {
+                window.location.reload();
+              })
             }
             else
             {

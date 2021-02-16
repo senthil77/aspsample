@@ -53,7 +53,7 @@ export class PaymentsComponent implements OnInit {
       key: this.rzrKey,   
       name: 'FreightoGix', // company name or product name
       description: 'Booking',  // product description
-      image: '../../../assets/images/Logo.JPG', // company logo or product image
+      image: '../../../assets/img/logo.png', // company logo or product image
       order_id: val, // order_id created by you in backend
       modal: {
         // We should prevent closing of the form when esc key is pressed.
